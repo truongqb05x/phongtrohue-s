@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Khu vực — Phòng Huế</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+/* =====================================================================
+   LAYOUT CHUNG (rút gọn)
+   ===================================================================== */
+*,*::before,*::after{box-sizing:border-box}
+*{margin:0;padding:0}
+html{scroll-behavior:smooth}
+html,body{height:100%}
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img,svg{display:block;max-width:100%}
+input,button,textarea,select{font:inherit;color:inherit}
+button{background:none;border:none;cursor:pointer}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+
+:root{
+  --color-bg:#f6f6f3;--color-surface:#fff;--color-surface-alt:#fafaf7;--color-surface-sunken:#f0f0eb;
+  --color-border:#e5e5e0;--color-border-strong:#d2d2cb;--color-border-focus:#1f5f4a;
+  --color-text:#1b1b18;--color-text-secondary:#56564f;--color-text-muted:#8a8a82;--color-text-inverse:#fff;
+  --color-primary:#1f5f4a;--color-primary-hover:#174a39;--color-primary-soft:#e7f0eb;--color-primary-border:#b8d4c7;
+  --color-accent:#b45309;--color-accent-soft:#fdf2e3;
+  --color-danger:#b3261e;--color-danger-hover:#8f1e17;--color-danger-soft:#fbeae8;--color-danger-border:#e8b5b0;
+  --color-warning:#a16207;--color-warning-soft:#fdf4dc;--color-warning-border:#e8d29a;
+  --color-info:#1e5f8a;--color-info-soft:#e6f0f7;--color-info-border:#b3d0e3;
+  --color-success:#166534;--color-success-soft:#e8f5ee;--color-success-border:#b3d9c4;
+  --font-sans:'Be Vietnam Pro',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --fs-xs:.75rem;--fs-sm:.8125rem;--fs-base:.875rem;--fs-md:1rem;--fs-lg:1.125rem;--fs-xl:1.375rem;--fs-2xl:1.75rem;--fs-3xl:2.125rem;
+  --fw-regular:400;--fw-medium:500;--fw-semibold:600;--fw-bold:700;
+  --lh-tight:1.25;--lh-snug:1.4;--lh-normal:1.55;--lh-relaxed:1.7;
+  --space-1:.25rem;--space-2:.5rem;--space-3:.75rem;--space-4:1rem;--space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;--space-12:3rem;
+  --radius-xs:3px;--radius-sm:4px;--radius:6px;--radius-md:10px;--radius-lg:14px;--radius-full:999px;
+  --shadow-xs:0 1px 2px rgba(20,20,15,.04);--shadow-sm:0 1px 3px rgba(20,20,15,.06);--shadow:0 2px 8px rgba(20,20,15,.06);--shadow-md:0 6px 24px rgba(20,20,15,.10);--shadow-lg:0 12px 40px rgba(20,20,15,.14);
+  --container-max:1240px;--header-height:60px;--sidebar-width:300px;
+  --t-fast:.12s ease;--t-base:.18s ease;--t-slow:.3s ease;
+  --z-header:50;--z-modal:100;--z-toast:200;
+}
+
+body{font-family:var(--font-sans);font-size:var(--fs-base);line-height:var(--lh-normal);color:var(--color-text);background:var(--color-bg);min-height:100vh}
+h1,h2,h3,h4{font-weight:var(--fw-semibold);line-height:var(--lh-tight);color:var(--color-text);letter-spacing:-.01em}
+h1{font-size:var(--fs-2xl)}h2{font-size:var(--fs-xl)}h3{font-size:var(--fs-lg)}h4{font-size:var(--fs-md)}
+p{line-height:var(--lh-relaxed)}
+::selection{background:var(--color-primary-soft);color:var(--color-primary)}
+:focus-visible{outline:2px solid var(--color-border-focus);outline-offset:2px;border-radius:var(--radius-xs)}
+
+.app-shell{display:flex;flex-direction:column;min-height:100vh}
+.page-content{flex:1;padding:var(--space-8) 0 var(--space-12)}
+.container{width:100%;max-width:var(--container-max);margin:0 auto;padding:0 var(--space-5)}
+
+/* HEADER */
+.site-header{position:sticky;top:0;z-index:var(--z-header);background:var(--color-surface);border-bottom:1px solid var(--color-border)}
+.header-inner{display:flex;align-items:center;gap:var(--space-6);height:var(--header-height);max-width:var(--container-max);margin:0 auto;padding:0 var(--space-5)}
+.logo{display:flex;align-items:center;gap:var(--space-2);font-weight:var(--fw-bold);font-size:var(--fs-md);flex-shrink:0}
+.logo-mark{width:30px;height:30px;border-radius:var(--radius);background:var(--color-primary);color:var(--color-text-inverse);display:grid;place-items:center;font-weight:var(--fw-bold);font-size:var(--fs-sm);flex-shrink:0}
+.logo-text{display:flex;flex-direction:column;line-height:1.1}
+.logo-sub{font-size:var(--fs-xs);color:var(--color-text-muted);font-weight:var(--fw-regular)}
+.main-nav{display:flex;align-items:center;gap:var(--space-1);flex:1;min-width:0}
+.nav-link{padding:var(--space-2) var(--space-3);font-size:var(--fs-sm);font-weight:var(--fw-medium);color:var(--color-text-secondary);border-radius:var(--radius);display:inline-flex;align-items:center;gap:var(--space-2);transition:background var(--t-fast),color var(--t-fast);white-space:nowrap}
+.nav-link:hover{background:var(--color-surface-alt);color:var(--color-text)}
+.nav-link.active{color:var(--color-primary);background:var(--color-primary-soft)}
+.nav-link .icon{width:16px;height:16px;flex-shrink:0}
+.nav-link .badge-count{min-width:18px;height:18px;padding:0 5px;background:var(--color-danger);color:var(--color-text-inverse);font-size:10px;font-weight:var(--fw-semibold);border-radius:var(--radius-full);display:inline-grid;place-items:center;line-height:1}
+.header-actions{display:flex;align-items:center;gap:var(--space-1);flex-shrink:0}
+.icon-btn{position:relative;width:36px;height:36px;display:grid;place-items:center;border-radius:var(--radius);color:var(--color-text-secondary);transition:background var(--t-fast),color var(--t-fast)}
+.icon-btn:hover{background:var(--color-surface-alt);color:var(--color-text)}
+.icon-btn .icon{width:18px;height:18px}
+.icon-btn .badge-count{position:absolute;top:2px;right:2px;min-width:16px;height:16px;padding:0 4px;background:var(--color-danger);color:var(--color-text-inverse);font-size:10px;font-weight:var(--fw-semibold);border-radius:var(--radius-full);display:grid;place-items:center;line-height:1}
+.menu-toggle{display:none}
+
+/* FOOTER */
+.site-footer{background:var(--color-surface);border-top:1px solid var(--color-border);padding:var(--space-10) 0 var(--space-6);margin-top:auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:var(--space-8);margin-bottom:var(--space-8)}
+.footer-col h4{font-size:var(--fs-sm);font-weight:var(--fw-semibold);margin-bottom:var(--space-3)}
+.footer-col p,.footer-col a{font-size:var(--fs-sm);color:var(--color-text-secondary);line-height:var(--lh-relaxed)}
+.footer-col ul{display:flex;flex-direction:column;gap:var(--space-2)}
+.footer-col a:hover{color:var(--color-primary)}
+.footer-brand{display:flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-3);font-weight:var(--fw-bold);font-size:var(--fs-md)}
+.footer-bottom{padding-top:var(--space-5);border-top:1px solid var(--color-border);display:flex;justify-content:space-between;align-items:center;gap:var(--space-4);flex-wrap:wrap;font-size:var(--fs-xs);color:var(--color-text-muted)}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);padding:var(--space-3) var(--space-5);border-radius:var(--radius);font-size:var(--fs-base);font-weight:var(--fw-medium);line-height:1.2;border:1px solid transparent;cursor:pointer;transition:background var(--t-fast),border-color var(--t-fast),color var(--t-fast);white-space:nowrap;text-align:center;user-select:none}
+.btn .icon{width:16px;height:16px;flex-shrink:0}
+.btn-primary{background:var(--color-primary);color:var(--color-text-inverse)}
+.btn-primary:hover{background:var(--color-primary-hover)}
+.btn-outline{border-color:var(--color-border-strong);background:var(--color-surface);color:var(--color-text)}
+.btn-outline:hover{background:var(--color-surface-alt);border-color:var(--color-text-muted)}
+.btn-ghost{color:var(--color-text-secondary);background:transparent}
+.btn-ghost:hover{background:var(--color-surface-alt);color:var(--color-text)}
+.btn-sm{padding:var(--space-2) var(--space-3);font-size:var(--fs-sm)}
+.btn-sm .icon{width:14px;height:14px}
+.btn-block{width:100%}
+
+/* FORM */
+.input,.select{width:100%;padding:var(--space-3);border:1px solid var(--color-border-strong);border-radius:var(--radius);font-size:var(--fs-base);background:var(--color-surface);color:var(--color-text);transition:border-color var(--t-fast),box-shadow var(--t-fast)}
+.input:focus,.select:focus{outline:none;border-color:var(--color-primary);box-shadow:0 0 0 3px var(--color-primary-soft)}
+.input::placeholder{color:var(--color-text-muted)}
+.select{appearance:none;background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2356564f' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:32px;cursor:pointer}
+.input-with-icon{position:relative;display:flex;align-items:center}
+.input-with-icon .icon{position:absolute;left:var(--space-3);width:18px;height:18px;color:var(--color-text-muted);pointer-events:none}
+.input-with-icon .input{padding-left:42px}
+
+/* CARD */
+.card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);overflow:hidden}
+.card-padded{padding:var(--space-5)}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:var(--fs-xs);font-weight:var(--fw-medium);padding:2px 8px;border-radius:var(--radius-full);background:var(--color-surface-alt);color:var(--color-text-secondary);border:1px solid var(--color-border);white-space:nowrap;line-height:1.5}
+.badge .icon{width:12px;height:12px;flex-shrink:0}
+.badge-primary{background:var(--color-primary-soft);color:var(--color-primary);border-color:var(--color-primary-border)}
+.badge-success{background:var(--color-success-soft);color:var(--color-success);border-color:var(--color-success-border)}
+.badge-warning{background:var(--color-warning-soft);color:var(--color-warning);border-color:var(--color-warning-border)}
+.badge-danger{background:var(--color-danger-soft);color:var(--color-danger);border-color:var(--color-danger-border)}
+.badge-info{background:var(--color-info-soft);color:var(--color-info);border-color:var(--color-info-border)}
+.tag{display:inline-flex;align-items:center;gap:4px;font-size:var(--fs-xs);padding:2px 8px;border-radius:var(--radius-full);background:var(--color-surface-alt);color:var(--color-text-secondary);border:1px solid var(--color-border);font-weight:var(--fw-medium);white-space:nowrap}
+.tag .icon{width:12px;height:12px;flex-shrink:0}
+.chip{display:inline-flex;align-items:center;gap:var(--space-2);padding:6px 12px;border-radius:var(--radius-full);border:1px solid var(--color-border-strong);background:var(--color-surface);color:var(--color-text-secondary);font-size:var(--fs-sm);font-weight:var(--fw-medium);cursor:pointer;transition:background var(--t-fast),border-color var(--t-fast),color var(--t-fast);user-select:none;white-space:nowrap}
+.chip:hover{border-color:var(--color-text-muted);color:var(--color-text)}
+.chip.active{background:var(--color-primary);border-color:var(--color-primary);color:var(--color-text-inverse)}
+.chip .icon{width:14px;height:14px;flex-shrink:0}
+
+/* TOAST */
+.toast-container{position:fixed;bottom:var(--space-5);right:var(--space-5);z-index:var(--z-toast);display:flex;flex-direction:column;gap:var(--space-2);pointer-events:none;max-width:360px}
+.toast{background:var(--color-text);color:var(--color-text-inverse);padding:var(--space-3) var(--space-4);border-radius:var(--radius);font-size:var(--fs-sm);font-weight:var(--fw-medium);box-shadow:var(--shadow-md);display:flex;align-items:center;gap:var(--space-2);pointer-events:auto;animation:toastIn var(--t-base) ease;line-height:1.4}
+.toast .icon{width:16px;height:16px;flex-shrink:0}
+.toast-success{background:var(--color-success)}
+.toast-error{background:var(--color-danger)}
+.toast-warning{background:var(--color-warning)}
+.toast-info{background:var(--color-info)}
+.toast.leaving{opacity:0;transform:translateY(8px);transition:opacity var(--t-base),transform var(--t-base)}
+@keyframes toastIn{from{transform:translateY(8px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(20,20,15,.5);display:grid;place-items:center;padding:var(--space-4);z-index:var(--z-modal);animation:fadeIn var(--t-base);overflow-y:auto}
+.modal{background:var(--color-surface);border-radius:var(--radius-lg);max-width:720px;width:100%;max-height:90vh;overflow:auto;box-shadow:var(--shadow-lg);animation:slideUp var(--t-base) ease;margin:auto}
+.modal-lg{max-width:900px}
+.modal-header{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space-4);padding:var(--space-5) var(--space-6);border-bottom:1px solid var(--color-border);position:sticky;top:0;background:var(--color-surface);z-index:1}
+.modal-header h2{font-size:var(--fs-lg)}
+.modal-subtitle{font-size:var(--fs-sm);color:var(--color-text-muted);margin-top:2px}
+.modal-close{width:32px;height:32px;display:grid;place-items:center;border-radius:var(--radius);color:var(--color-text-muted);flex-shrink:0}
+.modal-close:hover{background:var(--color-surface-alt);color:var(--color-text)}
+.modal-body{padding:var(--space-6)}
+.modal-footer{padding:var(--space-4) var(--space-6);border-top:1px solid var(--color-border);display:flex;justify-content:flex-end;gap:var(--space-2);flex-wrap:wrap}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{transform:translateY(12px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+/* STATE */
+.state-block{text-align:center;padding:var(--space-12) var(--space-6);background:var(--color-surface);border:1px dashed var(--color-border-strong);border-radius:var(--radius-md)}
+.state-block .state-icon{width:44px;height:44px;color:var(--color-text-muted);margin:0 auto var(--space-4);opacity:.7}
+.state-block h3{font-size:var(--fs-md);margin-bottom:var(--space-2)}
+.state-block p{color:var(--color-text-muted);font-size:var(--fs-sm);margin-bottom:var(--space-5);max-width:420px;margin-left:auto;margin-right:auto}
+
+/* UTILITIES */
+.text-muted{color:var(--color-text-muted)}
+.text-secondary{color:var(--color-text-secondary)}
+.text-primary{color:var(--color-primary)}
+.text-danger{color:var(--color-danger)}
+.text-warning{color:var(--color-warning)}
+.text-success{color:var(--color-success)}
+.text-xs{font-size:var(--fs-xs)}
+.text-sm{font-size:var(--fs-sm)}
+.fw-medium{font-weight:var(--fw-medium)}
+.fw-semibold{font-weight:var(--fw-semibold)}
+.flex{display:flex}
+.flex-wrap{flex-wrap:wrap}
+.items-center{align-items:center}
+.justify-between{justify-content:space-between}
+.gap-2{gap:var(--space-2)}
+.gap-3{gap:var(--space-3)}
+.gap-4{gap:var(--space-4)}
+.mt-2{margin-top:var(--space-2)}
+.mt-3{margin-top:var(--space-3)}
+.mt-4{margin-top:var(--space-4)}
+.mb-3{margin-bottom:var(--space-3)}
+.mb-4{margin-bottom:var(--space-4)}
+.mb-5{margin-bottom:var(--space-5)}
+.hidden{display:none!important}
+
+/* =====================================================================
+   PAGE: AREAS — style riêng
+   ===================================================================== */
+
+/* Page header */
+.areas-header{
+  margin-bottom:var(--space-6);
+}
+.areas-header h1{
+  font-size:var(--fs-2xl);
+  margin-bottom:var(--space-2);
+  display:flex;
+  align-items:center;
+  gap:var(--space-3);
+}
+.areas-header h1 .icon{width:26px;height:26px;color:var(--color-primary);flex-shrink:0}
+.areas-header p{color:var(--color-text-secondary);font-size:var(--fs-md);max-width:720px}
+
+/* Intro banner */
+.areas-intro{
+  background:linear-gradient(180deg,var(--color-primary-soft) 0%,var(--color-surface) 100%);
+  border:1px solid var(--color-primary-border);
+  border-radius:var(--radius-lg);
+  padding:var(--space-5) var(--space-6);
+  margin-bottom:var(--space-8);
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:var(--space-5);
+  align-items:center;
+}
+.areas-intro-icon{
+  width:56px;height:56px;
+  border-radius:var(--radius-md);
+  background:var(--color-primary);
+  color:var(--color-text-inverse);
+  display:grid;
+  place-items:center;
+  flex-shrink:0;
+}
+.areas-intro-icon .icon{width:28px;height:28px}
+.areas-intro h2{font-size:var(--fs-lg);margin-bottom:var(--space-2)}
+.areas-intro p{font-size:var(--fs-sm);color:var(--color-text-secondary);line-height:var(--lh-relaxed)}
+
+/* Stats overview */
+.areas-stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:var(--space-3);
+  margin-bottom:var(--space-8);
+}
+.area-stat{
+  background:var(--color-surface);
+  border:1px solid var(--color-border);
+  border-radius:var(--radius-md);
+  padding:var(--space-4);
+}
+.area-stat-label{
+  font-size:var(--fs-xs);
+  color:var(--color-text-muted);
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  font-weight:var(--fw-semibold);
+  margin-bottom:var(--space-2);
+  display:block;
+}
+.area-stat-value{
+  font-size:var(--fs-2xl);
+  font-weight:var(--fw-bold);
+  color:var(--color-text);
+  letter-spacing:-.02em;
+  line-height:1;
+  display:flex;
+  align-items:baseline;
+  gap:4px;
+}
+.area-stat-unit{font-size:var(--fs-sm);font-weight:var(--fw-medium);color:var(--color-text-muted)}
+.area-stat.primary .area-stat-value{color:var(--color-primary)}
+.area-stat.danger .area-stat-value{color:var(--color-danger)}
+.area-stat.warning .area-stat-value{color:var(--color-warning)}
+.area-stat.info .area-stat-value{color:var(--color-info)}
+
+/* Toolbar */
+.areas-toolbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:var(--space-4);
+  padding:var(--space-3) var(--space-4);
+  background:var(--color-surface);
+  border:1px solid var(--color-border);
+  border-radius:var(--radius-md);
+  margin-bottom:var(--space-5);
+  flex-wrap:wrap;
+}
+.areas-toolbar .search-wrap{flex:1;min-width:220px}
+.areas-toolbar .toolbar-right{display:flex;align-items:center;gap:var(--space-3);flex-wrap:wrap}
+
+/* Area grid */
+.areas-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:var(--space-4);
+  margin-bottom:var(--space-8);
+}
+.area-card{
+  background:var(--color-surface);
+  border:1px solid var(--color-border);
+  border-radius:var(--radius-md);
+  overflow:hidden;
+  cursor:pointer;
+  transition:border-color var(--t-fast),box-shadow var(--t-fast),transform var(--t-fast);
+  display:flex;
+  flex-direction:column;
+  text-align:left;
+  position:relative;
+}
+.area-card:hover{
+  border-color:var(--color-border-strong);
+  box-shadow:var(--shadow-md);
+  transform:translateY(-2px);
+}
+.area-card:focus-visible{outline:2px solid var(--color-primary);outline-offset:2px}
+
+/* Media */
+.area-media{
+  position:relative;
+  height:140px;
+  background:linear-gradient(135deg,var(--color-surface-alt) 0%,var(--color-surface-sunken) 100%);
+  overflow:hidden;
+}
+.area-media img{
+  width:100%;height:100%;object-fit:cover;
+  position:absolute;inset:0;
+  transition:transform var(--t-slow);
+}
+.area-card:hover .area-media img{transform:scale(1.04)}
+.area-media-placeholder{
+  width:100%;height:100%;
+  display:grid;place-items:center;
+  color:var(--color-text-muted);
+  background:
+    radial-gradient(circle at 30% 30%,rgba(31,95,74,.06) 0%,transparent 50%),
+    radial-gradient(circle at 70% 70%,rgba(30,95,138,.06) 0%,transparent 50%),
+    var(--color-surface-alt);
+}
+.area-media-placeholder .icon{width:32px;height:32px;opacity:.5}
+.area-media-overlay{
+  position:absolute;
+  top:var(--space-2);
+  left:var(--space-2);
+  right:var(--space-2);
+  display:flex;
+  justify-content:space-between;
+  gap:var(--space-2);
+  z-index:1;
+}
+.area-media-bottom{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  padding:var(--space-3);
+  background:linear-gradient(180deg,transparent 0%,rgba(20,20,15,.75) 100%);
+  color:#fff;
+  z-index:1;
+}
+.area-media-bottom .area-name{
+  font-size:var(--fs-md);
+  font-weight:var(--fw-semibold);
+  line-height:1.2;
+  margin-bottom:2px;
+}
+.area-media-bottom .area-district{
+  font-size:var(--fs-xs);
+  opacity:.85;
+}
+
+/* Body */
+.area-body{
+  padding:var(--space-4);
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-3);
+  flex:1;
+}
+.area-info-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:var(--space-2);
+  font-size:var(--fs-sm);
+}
+.area-info-row .label{
+  color:var(--color-text-secondary);
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+.area-info-row .label .icon{width:14px;height:14px;color:var(--color-text-muted)}
+.area-info-row .value{
+  font-weight:var(--fw-semibold);
+  color:var(--color-text);
+}
+.area-info-row .value.range{
+  font-weight:var(--fw-medium);
+  font-size:var(--fs-xs);
+  color:var(--color-text-secondary);
+}
+.area-info-row .value.muted{color:var(--color-text-muted);font-weight:var(--fw-regular);font-style:italic}
+
+/* Progress bar for listings */
+.area-progress{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.area-progress-head{
+  display:flex;
+  justify-content:space-between;
+  font-size:var(--fs-xs);
+  color:var(--color-text-muted);
+}
+.area-progress-bar{
+  height:6px;
+  background:var(--color-surface-alt);
+  border-radius:var(--radius-full);
+  overflow:hidden;
+}
+.area-progress-fill{
+  height:100%;
+  background:var(--color-primary);
+  border-radius:var(--radius-full);
+  transition:width var(--t-slow);
+}
+
+/* Footer */
+.area-footer{
+  padding:var(--space-3) var(--space-4);
+  border-top:1px solid var(--color-border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:var(--space-2);
+  background:var(--color-surface-alt);
+  font-size:var(--fs-xs);
+  color:var(--color-text-muted);
+}
+.area-footer .streets{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  max-width:60%;
+}
+.area-footer .cta{
+  color:var(--color-primary);
+  font-weight:var(--fw-semibold);
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+}
+.area-footer .cta .icon{width:12px;height:12px}
+
+/* Risk pills */
+.risk-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  font-size:11px;
+  font-weight:var(--fw-semibold);
+  padding:3px 8px;
+  border-radius:var(--radius-full);
+  white-space:nowrap;
+  line-height:1.4;
+  backdrop-filter:blur(6px);
+}
+.risk-pill .icon{width:12px;height:12px}
+.risk-pill.risk-high{background:rgba(179,38,30,.92);color:#fff}
+.risk-pill.risk-medium{background:rgba(161,98,7,.92);color:#fff}
+.risk-pill.risk-low{background:rgba(30,95,138,.92);color:#fff}
+.risk-pill.risk-unknown{background:rgba(255,255,255,.92);color:var(--color-text-muted);border:1px solid var(--color-border)}
+.listing-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  font-size:11px;
+  font-weight:var(--fw-semibold);
+  padding:3px 8px;
+  border-radius:var(--radius-full);
+  background:rgba(255,255,255,.92);
+  color:var(--color-primary);
+  backdrop-filter:blur(6px);
+  white-space:nowrap;
+  line-height:1.4;
+}
+.listing-pill .icon{width:12px;height:12px}
+
+/* Sidebar (bổ trợ) */
+.areas-aside{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:var(--space-4);
+  margin-bottom:var(--space-8);
+}
+.aside-card{
+  background:var(--color-surface);
+  border:1px solid var(--color-border);
+  border-radius:var(--radius-md);
+  padding:var(--space-5);
+}
+.aside-card h3{
+  font-size:var(--fs-base);
+  font-weight:var(--fw-semibold);
+  margin-bottom:var(--space-4);
+  display:flex;
+  align-items:center;
+  gap:var(--space-2);
+}
+.aside-card h3 .icon{width:16px;height:16px;color:var(--color-primary);flex-shrink:0}
+
+.district-list{display:flex;flex-direction:column;gap:var(--space-3)}
+.district-item{display:flex;flex-direction:column;gap:6px}
+.district-item-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  font-size:var(--fs-sm);
+}
+.district-item-head .name{color:var(--color-text);font-weight:var(--fw-medium)}
+.district-item-head .count{color:var(--color-text-muted);font-size:var(--fs-xs);font-variant-numeric:tabular-nums}
+.district-bar{
+  height:6px;
+  background:var(--color-surface-alt);
+  border-radius:var(--radius-full);
+  overflow:hidden;
+}
+.district-bar-fill{
+  height:100%;
+  border-radius:var(--radius-full);
+  background:var(--color-primary);
+  transition:width var(--t-slow);
+}
+
+/* Guide list */
+.guide-list{
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-3);
+  font-size:var(--fs-sm);
+  color:var(--color-text-secondary);
+}
+.guide-item{display:flex;gap:var(--space-3);align-items:flex-start;line-height:1.55}
+.guide-num{
+  width:22px;height:22px;border-radius:50%;
+  background:var(--color-primary-soft);color:var(--color-primary);
+  display:grid;place-items:center;flex-shrink:0;
+  font-size:var(--fs-xs);font-weight:var(--fw-bold);
+}
+.guide-item strong{color:var(--color-text);font-weight:var(--fw-semibold)}
+
+/* Listing preview trong modal */
+.listings-preview{
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-3);
+}
+.preview-card{
+  display:grid;
+  grid-template-columns:80px 1fr;
+  gap:var(--space-3);
+  padding:var(--space-3);
+  background:var(--color-surface-alt);
+  border:1px solid var(--color-border);
+  border-radius:var(--radius);
+  cursor:pointer;
+  transition:border-color var(--t-fast),background var(--t-fast);
+}
+.preview-card:hover{border-color:var(--color-primary-border);background:var(--color-primary-soft)}
+.preview-media{
+  width:80px;height:80px;
+  border-radius:var(--radius-sm);
+  overflow:hidden;
+  background:var(--color-surface-sunken);
+  position:relative;
+  flex-shrink:0;
+}
+.preview-media img{width:100%;height:100%;object-fit:cover}
+.preview-media .media-placeholder{min-height:80px;font-size:10px}
+.preview-media .media-placeholder .icon{width:20px;height:20px}
+.preview-body{display:flex;flex-direction:column;gap:4px;min-width:0}
+.preview-title{
+  font-size:var(--fs-sm);
+  font-weight:var(--fw-semibold);
+  color:var(--color-text);
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.preview-price{font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--color-primary)}
+.preview-price.unknown{color:var(--color-text-muted);font-style:italic;font-weight:var(--fw-medium)}
+.preview-meta{
+  font-size:var(--fs-xs);
+  color:var(--color-text-muted);
+  display:flex;
+  gap:var(--space-2);
+  flex-wrap:wrap;
+}
+
+/* Modal section */
+.modal-section{margin-bottom:var(--space-5)}
+.modal-section:last-child{margin-bottom:0}
+.modal-section h4{
+  font-size:var(--fs-xs);
+  font-weight:var(--fw-semibold);
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  color:var(--color-text-muted);
+  margin-bottom:var(--space-3);
+  display:flex;
+  align-items:center;
+  gap:var(--space-2);
+}
+.modal-section h4 .icon{width:14px;height:14px}
+
+.fact-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:var(--space-3);
+}
+.fact-item{
+  padding:var(--space-3);
+  background:var(--color-surface-alt);
+  border:1px solid var(--color-border);
+  border-radius:var(--radius);
+}
+.fact-label{font-size:var(--fs-xs);color:var(--color-text-muted);margin-bottom:2px}
+.fact-value{font-size:var(--fs-sm);font-weight:var(--fw-semibold);color:var(--color-text)}
+
+/* Street list */
+.street-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+.street-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  font-size:var(--fs-xs);
+  padding:4px 10px;
+  border-radius:var(--radius-full);
+  background:var(--color-surface-alt);
+  color:var(--color-text-secondary);
+  border:1px solid var(--color-border);
+  font-weight:var(--fw-medium);
+}
+.street-chip .icon{width:12px;height:12px}
+
+/* Note */
+.note-info{
+  display:flex;
+  align-items:flex-start;
+  gap:var(--space-2);
+  padding:var(--space-3);
+  background:var(--color-info-soft);
+  border:1px solid var(--color-info-border);
+  border-radius:var(--radius);
+  font-size:var(--fs-xs);
+  color:var(--color-info);
+  line-height:1.5;
+}
+.note-info .icon{width:14px;height:14px;flex-shrink:0;margin-top:2px}
+
+/* RESPONSIVE */
+@media (max-width:1024px){
+  .areas-grid{grid-template-columns:repeat(2,1fr)}
+  .areas-stats{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:768px){
+  .container{padding:0 var(--space-4)}
+  .main-nav{display:none}
+  .menu-toggle{display:grid}
+  .header-inner{gap:var(--space-3);padding:0 var(--space-4)}
+  .logo-sub{display:none}
+  .header-actions .desktop-only{display:none}
+  .page-content{padding:var(--space-6) 0 var(--space-10)}
+  .footer-grid{grid-template-columns:1fr;gap:var(--space-6)}
+  .footer-bottom{flex-direction:column;align-items:flex-start}
+  .areas-grid{grid-template-columns:1fr}
+  .areas-aside{grid-template-columns:1fr}
+  .areas-intro{grid-template-columns:1fr;text-align:center;padding:var(--space-5)}
+  .areas-intro-icon{margin:0 auto}
+  .areas-toolbar{flex-direction:column;align-items:stretch}
+  .areas-toolbar .toolbar-right{justify-content:space-between}
+  .toast-container{left:var(--space-4);right:var(--space-4);bottom:var(--space-4);max-width:none}
+  .modal-overlay{padding:0;align-items:flex-end}
+  .modal{max-width:100%;border-radius:var(--radius-lg) var(--radius-lg) 0 0;max-height:92vh}
+  .modal-body{padding:var(--space-5)}
+}
+@media (max-width:480px){
+  :root{--fs-3xl:1.75rem;--fs-2xl:1.5rem;--fs-xl:1.25rem}
+  .areas-stats{grid-template-columns:1fr}
+  .btn{padding:var(--space-2) var(--space-4)}
+}
+</style>
+</head>
+<body>
+
+<div id="app" class="app-shell">
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#" class="logo">
+        <span class="logo-mark">PH</span>
+        <span class="logo-text">Phòng Huế<span class="logo-sub">Tổng hợp tin cho thuê</span></span>
+      </a>
+      <nav class="main-nav">
+        <a href="#" class="nav-link"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> Khám phá tin</a>
+        <a href="#" class="nav-link"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Tìm phòng</a>
+        <a href="#" class="nav-link active"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Khu vực</a>
+        <a href="#" class="nav-link"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg> Cảnh báo ngập lụt</a>
+        <a href="#" class="nav-link"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg> Tin đã lưu</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn desktop-only" aria-label="Tìm kiếm"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
+        <button class="icon-btn desktop-only" aria-label="Tin đã lưu"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></button>
+        <button class="icon-btn" aria-label="Tài khoản"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></button>
+        <button class="icon-btn menu-toggle" aria-label="Menu"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="page-content" class="page-content"></main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-brand"><span class="logo-mark">PH</span><span>Phòng Huế</span></div>
+          <p>Nền tảng tổng hợp tin cho thuê phòng trọ tại Huế từ nhiều nguồn. Giúp bạn tìm phòng nhanh, minh bạch nguồn gốc và an tâm hơn với thông tin lịch sử ngập lụt.</p>
+        </div>
+        <div class="footer-col"><h4>Khám phá</h4><ul><li><a href="#">Tin mới nhất</a></li><li><a href="#">Theo khu vực</a></li><li><a href="#">Theo giá</a></li><li><a href="#">Tin đã lưu</a></li></ul></div>
+        <div class="footer-col"><h4>Thông tin</h4><ul><li><a href="#">Về nền tảng</a></li><li><a href="#">Nguồn dữ liệu</a></li><li><a href="#">Lịch sử ngập lụt</a></li><li><a href="#">Cộng đồng</a></li></ul></div>
+        <div class="footer-col"><h4>Lưu ý</h4><p>Dữ liệu trong bản demo là dữ liệu minh họa, không phản ánh tình trạng thực tế. Vui lòng kiểm tra kỹ thông tin trước khi liên hệ thuê phòng.</p></div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Phòng Huế — Bản demo giao diện.</span>
+        <span>Dữ liệu minh họa · Không dùng cho mục đích thương mại</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<div id="toast-container" class="toast-container" aria-live="polite"></div>
+<div id="modal-root"></div>
+
+<script>
+/* =====================================================================
+   DATA
+   ===================================================================== */
+const SOURCES = {
+  fb1: { id:'fb1', name:'Nhóm Cho thuê phòng trọ Huế', type:'facebook', url:'#' },
+  fb2: { id:'fb2', name:'Phòng trọ sinh viên Huế', type:'facebook', url:'#' },
+  fb3: { id:'fb3', name:'Thuê phòng Huế - Giá rẻ', type:'facebook', url:'#' },
+  fb4: { id:'fb4', name:'Nhà trọ An Cựu - Huế', type:'facebook', url:'#' },
+  fb5: { id:'fb5', name:'Cho thuê phòng khu vực Đại học', type:'facebook', url:'#' },
+  web1: { id:'web1', name:'Nhatrohue.vn', type:'website', url:'#' }
+};
+
+const LISTINGS = [
+  { id:'L001', title:'Phòng trọ mới xây đường Nguyễn Tất Thành, gần ĐH Khoa học', excerpt:'Phòng mới xây, sạch sẽ, có gác lửng, toilet riêng.', price:1500000, area:25, address:'Nguyễn Tất Thành, Phường Kim Long', areaName:'Kim Long', roomType:'Phòng trọ', amenities:['Điều hòa','Nóng lạnh','Gác lửng','WC riêng','Chỗ để xe'], sourceId:'fb1', postedAt:'2025-01-12T09:30:00', collectedAt:'2025-01-12T10:00:00', status:'complete', image:'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&q=70', floodRisk:'low', duplicateGroup:null },
+  { id:'L002', title:'Cho thuê phòng gần ĐH Sư phạm, có điều hòa', excerpt:'Phòng rộng 20m2, có điều hòa, nóng lạnh, giường, tủ quần áo.', price:1300000, area:20, address:'Đường Lê Lợi, Phường Phú Nhuận', areaName:'Phú Nhuận', roomType:'Phòng trọ', amenities:['Điều hòa','Nóng lạnh','Wifi','Giường','Tủ'], sourceId:'fb2', postedAt:'2025-01-11T15:20:00', collectedAt:'2025-01-11T16:00:00', status:'complete', image:'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=70', floodRisk:'medium', duplicateGroup:null },
+  { id:'L003', title:'Phòng trọ giá rẻ đường Phan Chu Trinh', excerpt:'Phòng nhỏ gọn, phù hợp sinh viên. Có gác, WC chung.', price:800000, area:12, address:'Phan Chu Trinh, Phường Phú Hòa', areaName:'Phú Hòa', roomType:'Phòng trọ', amenities:['Gác','WC chung','Chỗ để xe'], sourceId:'fb3', postedAt:'2025-01-10T08:15:00', collectedAt:'2025-01-10T09:00:00', status:'partial', image:null, floodRisk:'high', duplicateGroup:null },
+  { id:'L004', title:'Phòng trọ có gác lửng đẹp, đường Nguyễn Huệ', excerpt:'Phòng mới, đẹp, có gác lửng, toilet riêng, ban công thoáng mát.', price:1800000, area:28, address:'Nguyễn Huệ, Phường Phú Nhuận', areaName:'Phú Nhuận', roomType:'Phòng trọ', amenities:['Điều hòa','Nóng lạnh','Gác lửng','WC riêng','Ban công'], sourceId:'fb1', postedAt:'2025-01-12T14:00:00', collectedAt:'2025-01-12T14:30:00', status:'complete', image:'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=70', floodRisk:'low', duplicateGroup:'D01' },
+  { id:'L005', title:'Phòng trọ mới, có gác, gần ĐH Nông Lâm', excerpt:'Phòng mới xây, có gác lửng, toilet riêng. Khu vực yên tĩnh.', price:1800000, area:28, address:'Đường Nguyễn Huệ, Phường Phú Nhuận', areaName:'Phú Nhuận', roomType:'Phòng trọ', amenities:['Điều hòa','Nóng lạnh','Gác lửng','WC riêng'], sourceId:'fb5', postedAt:'2025-01-12T16:30:00', collectedAt:'2025-01-12T17:00:00', status:'complete', image:'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=70', floodRisk:'low', duplicateGroup:'D01' },
+  { id:'L006', title:'Phòng trọ đường Trần Phú, view sông Hương', excerpt:'Phòng rộng, thoáng, view sông Hương. Có điều hòa, nóng lạnh, WC riêng.', price:2500000, area:30, address:'Trần Phú, Phường Phú Hội', areaName:'Phú Hội', roomType:'Phòng trọ', amenities:['Điều hòa','Nóng lạnh','WC riêng','Ban công'], sourceId:'web1', postedAt:'2025-01-09T10:00:00', collectedAt:'2025-01-09T11:00:00', status:'complete', image:'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=600&q=70', floodRisk:'medium', duplicateGroup:null },
+  { id:'L007', title:'Phòng trọ giá rẻ cho sinh viên ĐH Y Dược', excerpt:'Phòng nhỏ, giá rẻ, phù hợp sinh viên. WC chung, có chỗ để xe.', price:700000, area:10, address:'Đường Ngô Quyền, Phường Vĩnh Ninh', areaName:'Vĩnh Ninh', roomType:'Phòng trọ', amenities:['WC chung','Chỗ để xe'], sourceId:'fb2', postedAt:'2025-01-08T07:30:00', collectedAt:'2025-01-08T08:00:00', status:'partial', image:null, floodRisk:'low', duplicateGroup:null },
+  { id:'L008', title:'Cho thuê phòng trọ có ban công, đường Bà Triệu', excerpt:'Phòng đẹp, có ban công thoáng. Điều hòa, nóng lạnh, WC riêng.', price:1600000, area:22, address:'Bà Triệu, Phường Xuân Phú', areaName:'Xuân Phú', roomType:'Phòng trọ', amenities:['Điều hòa','Nóng lạnh','WC riêng','Ban công'], sourceId:'fb3', postedAt:'2025-01-11T11:00:00', collectedAt:'2025-01-11T12:00:00', status:'complete', image:'https://images.unsplash.com/photo-1554995207-c18c203602cb?w=600&q=70', floodRisk:'medium', duplicateGroup:null },
+  { id:'L009', title:'Phòng trọ mới, đầy đủ tiện nghi, đường Hùng Vương', excerpt:'Phòng mới 100%, đầy đủ tiện nghi: điều hòa, nóng lạnh, giường, tủ, bàn.', price:2200000, area:26, address:'Hùng Vương, Phường Phú Nhuận', areaName:'Phú Nhuận', roomType:'Phòng trọ', amenities:['Điều hòa','Nóng lạnh','WC riêng','Giường','Tủ','Bàn'], sourceId:'fb5', postedAt:'2025-01-12T08:00:00', collectedAt:'2025-01-12T08:30:00', status:'complete', image:'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600&q=70', floodRisk:'low', duplicateGroup:null },
+  { id:'L010', title:'Phòng trọ gần chợ An Cựu, có gác', excerpt:'Phòng có gác lửng, WC riêng. Gần chợ An Cựu, thuận tiện mua sắm.', price:1200000, area:18, address:'Đường An Cựu, Phường An Đông', areaName:'An Đông', roomType:'Phòng trọ', amenities:['Gác lửng','WC riêng'], sourceId:'fb4', postedAt:'2025-01-10T16:45:00', collectedAt:'2025-01-10T17:30:00', status:'partial', image:'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&q=70', floodRisk:'high', duplicateGroup:null },
+  { id:'L011', title:'Phòng trọ full nội thất đường Lý Thường Kiệt', excerpt:'Phòng full nội thất: điều hòa, nóng lạnh, giường, tủ, bàn, tủ lạnh.', price:3000000, area:32, address:'Lý Thường Kiệt, Phường Vĩnh Ninh', areaName:'Vĩnh Ninh', roomType:'Phòng trọ', amenities:['Điều hòa','Nóng lạnh','WC riêng','Giường','Tủ','Bàn','Tủ lạnh'], sourceId:'web1', postedAt:'2025-01-07T09:00:00', collectedAt:'2025-01-07T10:00:00', status:'complete', image:'https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?w=600&q=70', floodRisk:'low', duplicateGroup:null },
+  { id:'L012', title:'Phòng trọ sinh viên giá rẻ đường Tôn Đức Thắng', excerpt:'Phòng dành cho sinh viên, giá rẻ. WC chung, có chỗ để xe.', price:600000, area:9, address:'Tôn Đức Thắng, Phường Phú Hòa', areaName:'Phú Hòa', roomType:'Phòng trọ', amenities:['WC chung','Chỗ để xe'], sourceId:'fb2', postedAt:'2025-01-06T14:00:00', collectedAt:'2025-01-06T15:00:00', status:'partial', image:null, floodRisk:'medium', duplicateGroup:null },
+  { id:'L013', title:'Nhà nguyên căn cho thuê đường Nguyễn Sinh Cung', excerpt:'Nhà nguyên căn 2 tầng, 3 phòng ngủ, 2 WC. Có sân để xe.', price:5000000, area:80, address:'Nguyễn Sinh Cung, Phường Vỹ Dạ', areaName:'Vỹ Dạ', roomType:'Nhà nguyên căn', amenities:['Điều hòa','Nóng lạnh','WC riêng','Sân để xe','Phòng khách'], sourceId:'web1', postedAt:'2025-01-05T10:00:00', collectedAt:'2025-01-05T11:00:00', status:'complete', image:'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=70', floodRisk:'low', duplicateGroup:null },
+  { id:'L014', title:'Phòng trọ có điều hòa, gần ĐH Khoa học Huế', excerpt:'Phòng có điều hòa, nóng lạnh, WC riêng. Gần ĐH Khoa học, đi bộ 3 phút.', price:1400000, area:20, address:'Nguyễn Tất Thành, Phường Kim Long', areaName:'Kim Long', roomType:'Phòng trọ', amenities:['Điều hòa','Nóng lạnh','WC riêng'], sourceId:'fb1', postedAt:'2025-01-12T10:15:00', collectedAt:'2025-01-12T10:45:00', status:'complete', image:'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&q=70', floodRisk:'low', duplicateGroup:'D02' },
+  { id:'L015', title:'Phòng trọ gần ĐH Khoa học, có điều hòa, nóng lạnh', excerpt:'Phòng trọ mới, có điều hòa, nóng lạnh, WC riêng. Cách ĐH Khoa học 300m.', price:1400000, area:20, address:'Kiệt Nguyễn Tất Thành, Phường Kim Long', areaName:'Kim Long', roomType:'Phòng trọ', amenities:['Điều hòa','Nóng lạnh','WC riêng'], sourceId:'fb4', postedAt:'2025-01-12T11:00:00', collectedAt:'2025-01-12T11:30:00', status:'complete', image:'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&q=70', floodRisk:'low', duplicateGroup:'D02' },
+  { id:'L016', title:'Phòng trọ đường Điện Biên Phủ, gần trung tâm', excerpt:'Phòng rộng, thoáng, gần trung tâm. Có điều hòa, nóng lạnh. WC riêng.', price:null, area:24, address:'Điện Biên Phủ, Phường Trường An', areaName:'Trường An', roomType:'Phòng trọ', amenities:['Điều hòa','Nóng lạnh','WC riêng'], sourceId:'fb3', postedAt:'2025-01-04T09:00:00', collectedAt:'2025-01-04T10:00:00', status:'unverified', image:null, floodRisk:'high', duplicateGroup:null },
+  { id:'L017', title:'Phòng trọ mới xây, full nội thất, đường Võ Thị Sáu', excerpt:'Phòng mới xây, full nội thất, có ban công. Khu vực yên tĩnh, gần chợ.', price:2000000, area:25, address:'Võ Thị Sáu, Phường Xuân Phú', areaName:'Xuân Phú', roomType:'Phòng trọ', amenities:['Điều hòa','Nóng lạnh','WC riêng','Ban công','Giường','Tủ'], sourceId:'fb5', postedAt:'2025-01-11T14:00:00', collectedAt:'2025-01-11T14:30:00', status:'complete', image:'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&q=70', floodRisk:'low', duplicateGroup:null },
+  { id:'L018', title:'Phòng trọ cũ, giá rẻ đường Nguyễn Trãi', excerpt:'Phòng cũ, giá rẻ, phù hợp sinh viên. WC chung. Khu vực trung tâm.', price:650000, area:10, address:'Nguyễn Trãi, Phường Phú Hòa', areaName:'Phú Hòa', roomType:'Phòng trọ', amenities:['WC chung'], sourceId:'fb3', postedAt:'2024-12-20T08:00:00', collectedAt:'2024-12-20T09:00:00', status:'stale', image:null, floodRisk:'high', duplicateGroup:null },
+  { id:'L019', title:'Phòng trọ có gác, gần ĐH Sư phạm', excerpt:'Phòng có gác lửng, WC riêng. Gần ĐH Sư phạm, thuận tiện đi học.', price:1100000, area:16, address:'Lê Lợi, Phường Phú Nhuận', areaName:'Phú Nhuận', roomType:'Phòng trọ', amenities:['Gác lửng','WC riêng'], sourceId:'fb2', postedAt:'2025-01-09T15:00:00', collectedAt:'2025-01-09T16:00:00', status:'partial', image:'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&q=70', floodRisk:'medium', duplicateGroup:null },
+  { id:'L020', title:'Phòng trọ cao cấp đường Lê Huân, full nội thất', excerpt:'Phòng cao cấp, full nội thất: điều hòa, nóng lạnh, giường, tủ, bàn, tủ lạnh, máy giặt.', price:3500000, area:35, address:'Lê Huân, Phường Thuận Hòa', areaName:'Thuận Hòa', roomType:'Phòng trọ', amenities:['Điều hòa','Nóng lạnh','WC riêng','Giường','Tủ','Bàn','Tủ lạnh','Máy giặt'], sourceId:'web1', postedAt:'2025-01-10T10:00:00', collectedAt:'2025-01-10T11:00:00', status:'complete', image:'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=600&q=70', floodRisk:'low', duplicateGroup:null },
+  { id:'L021', title:'Phòng trọ gần ĐH Y Dược, có điều hòa', excerpt:'Phòng có điều hòa, nóng lạnh, WC riêng. Gần ĐH Y Dược, đi bộ 5 phút.', price:1600000, area:22, address:'Ngô Quyền, Phường Vĩnh Ninh', areaName:'Vĩnh Ninh', roomType:'Phòng trọ', amenities:['Điều hòa','Nóng lạnh','WC riêng'], sourceId:'fb1', postedAt:'2025-01-11T09:00:00', collectedAt:'2025-01-11T09:30:00', status:'complete', image:'https://images.unsplash.com/photo-1554995207-c18c203602cb?w=600&q=70', floodRisk:'low', duplicateGroup:null },
+  { id:'L022', title:'Phòng trọ đường Bến Nghé, gần chợ', excerpt:'Phòng gần chợ Bến Ngự, thuận tiện mua sắm. Có gác, WC riêng.', price:1000000, area:15, address:'Bến Nghé, Phường Phú Hội', areaName:'Phú Hội', roomType:'Phòng trọ', amenities:['Gác','WC riêng'], sourceId:'fb4', postedAt:'2025-01-08T16:00:00', collectedAt:'2025-01-08T17:00:00', status:'partial', image:null, floodRisk:'medium', duplicateGroup:null }
+];
+
+/* Metadata khu vực — mô tả, ảnh đại diện, tuyến đường chính, ghi chú */
+const AREAS_META = {
+  'Kim Long': {
+    id:'kim-long',
+    name:'Kim Long',
+    district:'TP. Huế',
+    description:'Khu vực phía Tây TP. Huế, gần ĐH Khoa học và ĐH Nông Lâm. Nhiều phòng trọ cho sinh viên, giá phải chăng. Giao thông thuận tiện qua đường Nguyễn Tất Thành.',
+    streets:['Nguyễn Tất Thành','Đường Kim Long','Kiệt Nguyễn Tất Thành'],
+    floodRisk:'low',
+    floodNote:'Thoát nước tốt, ít khi ngập. Chỉ ngập cục bộ tại một số kiệt trũng sau mưa rất lớn.',
+    image:'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&q=70',
+    highlights:['Gần ĐH Khoa học','Gần ĐH Nông Lâm','Nhiều phòng giá rẻ']
+  },
+  'Phú Nhuận': {
+    id:'phu-nhuan',
+    name:'Phú Nhuận',
+    district:'TP. Huế',
+    description:'Khu vực trung tâm, tập trung nhiều trường đại học lớn: ĐH Sư phạm, ĐH Khoa học. Nhiều phòng trọ đa dạng về giá và tiện nghi, phù hợp sinh viên và người đi làm.',
+    streets:['Nguyễn Huệ','Lê Lợi','Hùng Vương'],
+    floodRisk:'medium',
+    floodNote:'Ngập nhẹ tại một số kiệt nhỏ khi mưa lớn kéo dài. Nước rút nhanh sau 1-2 giờ.',
+    image:'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=70',
+    highlights:['Gần ĐH Sư phạm','Gần ĐH Khoa học','Trung tâm, tiện đi lại']
+  },
+  'Phú Hòa': {
+    id:'phu-hoa',
+    name:'Phú Hòa',
+    district:'TP. Huế',
+    description:'Khu vực trung tâm, gần chợ Đông Ba. Nhiều phòng trọ giá rẻ cho sinh viên. Tuy nhiên một số tuyến đường trũng có nguy cơ ngập khi mưa lớn.',
+    streets:['Phan Chu Trinh','Nguyễn Trãi','Tôn Đức Thắng'],
+    floodRisk:'high',
+    floodNote:'Ngập nặng sau mưa lớn kéo dài, nhiều nhà dân bị ảnh hưởng. Cần cân nhắc kỹ khi thuê phòng tại đây.',
+    image:'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&q=70',
+    highlights:['Gần chợ Đông Ba','Trung tâm','Giá rẻ']
+  },
+  'Vĩnh Ninh': {
+    id:'vinh-ninh',
+    name:'Vĩnh Ninh',
+    district:'TP. Huế',
+    description:'Khu vực trung tâm, gần ĐH Y Dược và ĐH Khoa học. Nhiều phòng trọ chất lượng với đầy đủ tiện nghi. Giao thông thuận tiện.',
+    streets:['Lý Thường Kiệt','Ngô Quyền','Đường Vĩnh Ninh'],
+    floodRisk:'low',
+    floodNote:'Hiếm khi ngập, chủ yếu ngập cục bộ tại một số vị trí trũng.',
+    image:'https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?w=800&q=70',
+    highlights:['Gần ĐH Y Dược','Gần ĐH Khoa học','Nhiều tiện nghi']
+  },
+  'Phú Hội': {
+    id:'phu-hoi',
+    name:'Phú Hội',
+    district:'TP. Huế',
+    description:'Khu vực ven sông Hương, nhiều phòng trọ view đẹp. Gần trung tâm, thuận tiện đi lại. Phù hợp người thích không gian thoáng mát.',
+    streets:['Trần Phú','Bến Nghé','Đường Phú Hội'],
+    floodRisk:'medium',
+    floodNote:'Ngập nhẹ khu vực gần sông Hương khi triều cường hoặc mưa lớn.',
+    image:'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&q=70',
+    highlights:['View sông Hương','Gần trung tâm','Không gian thoáng']
+  },
+  'Xuân Phú': {
+    id:'xuan-phu',
+    name:'Xuân Phú',
+    district:'TP. Huế',
+    description:'Khu vực yên tĩnh, gần chợ Bến Ngự. Nhiều phòng trọ có ban công thoáng mát. Giá thuê trung bình, phù hợp người đi làm.',
+    streets:['Bà Triệu','Võ Thị Sáu'],
+    floodRisk:'medium',
+    floodNote:'Ngập nhẹ tại một số kiệt khi mưa lớn.',
+    image:'https://images.unsplash.com/photo-1554995207-c18c203602cb?w=800&q=70',
+    highlights:['Yên tĩnh','Gần chợ Bến Ngự','Có ban công']
+  },
+  'An Đông': {
+    id:'an-dong',
+    name:'An Đông',
+    district:'TP. Huế',
+    description:'Khu vực gần chợ An Cựu, thuận tiện mua sắm. Tuy nhiên đây là một trong những khu vực có nguy cơ ngập cao tại Huế.',
+    streets:['Đường An Cựu','An Dương Vương'],
+    floodRisk:'high',
+    floodNote:'Ngập sâu khi mưa lớn, nước rút chậm. Cần kiểm tra kỹ trước khi thuê.',
+    image:'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&q=70',
+    highlights:['Gần chợ An Cựu','Thuận tiện mua sắm']
+  },
+  'Vỹ Dạ': {
+    id:'vy-da',
+    name:'Vỹ Dạ',
+    district:'TP. Huế',
+    description:'Khu vực phía Đông sông Hương, nhiều nhà nguyên căn và phòng trọ rộng rãi. Phù hợp gia đình hoặc nhóm sinh viên.',
+    streets:['Nguyễn Sinh Cung','Đường Vỹ Dạ'],
+    floodRisk:'low',
+    floodNote:'Chưa ghi nhận ngập lụt nghiêm trọng trong các đợt mưa gần đây.',
+    image:'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=70',
+    highlights:['Nhiều nhà nguyên căn','Không gian rộng','Yên tĩnh']
+  },
+  'Trường An': {
+    id:'truong-an',
+    name:'Trường An',
+    district:'TP. Huế',
+    description:'Khu vực phía Tây TP. Huế, gần trung tâm. Nhiều phòng trọ giá tốt. Tuy nhiên tuyến Điện Biên Phủ có nguy cơ ngập khi mưa lớn.',
+    streets:['Điện Biên Phủ','Đường Trường An'],
+    floodRisk:'high',
+    floodNote:'Ngập dọc tuyến Điện Biên Phủ khi mưa lớn kéo dài, giao thông gián đoạn.',
+    image:null,
+    highlights:['Gần trung tâm','Giá tốt']
+  },
+  'Thuận Hòa': {
+    id:'thuan-hoa',
+    name:'Thuận Hòa',
+    district:'TP. Huế',
+    description:'Khu vực yên tĩnh, nhiều phòng trọ cao cấp với đầy đủ nội thất. Phù hợp người đi làm, chuyên gia.',
+    streets:['Lê Huân','Đường Thuận Hòa'],
+    floodRisk:'low',
+    floodNote:'Thoát nước tốt, hầu như không ngập.',
+    image:'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=70',
+    highlights:['Yên tĩnh','Phòng cao cấp','Đầy đủ nội thất']
+  }
+};
+
+/* =====================================================================
+   HELPERS
+   ===================================================================== */
+const $ = (s, c = document) => c.querySelector(s);
+const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
+function escapeHtml(s){if(s==null)return'';return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function formatPrice(v){if(v==null)return null;if(v>=1000000){const m=v/1000000;return(m%1===0?m:m.toFixed(1).replace('.',','))+' triệu';}if(v>=1000)return Math.round(v/1000)+'k';return v+'đ';}
+function formatPriceRange(min, max){
+  if(min == null && max == null) return 'Chưa có dữ liệu';
+  if(min == null) return 'Dưới ' + formatPrice(max);
+  if(max == null) return 'Trên ' + formatPrice(min);
+  if(min === max) return formatPrice(min);
+  return formatPrice(min) + ' – ' + formatPrice(max);
+}
+function timeAgo(iso){if(!iso)return'';const d=new Date(iso);const diff=(Date.now()-d.getTime())/1000;if(diff<60)return'vừa xong';if(diff<3600)return Math.floor(diff/60)+' phút trước';if(diff<86400)return Math.floor(diff/3600)+' giờ trước';if(diff<2592000)return Math.floor(diff/86400)+' ngày trước';return d.toLocaleDateString('vi-VN');}
+
+const ICONS = {
+  search:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
+  mapPin:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
+  ruler:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3 8.7 2.7a1 1 0 0 0-1.4 0L2.7 7.3a1 1 0 0 0 0 1.4l12.6 12.6a1 1 0 0 0 1.4 0l4.6-4.6a1 1 0 0 0 0-1.4Z"/><path d="m7.5 10.5 2 2"/><path d="m10.5 7.5 2 2"/><path d="m13.5 4.5 2 2"/><path d="m4.5 13.5 2 2"/></svg>',
+  clock:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+  alert:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>',
+  waves:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg>',
+  home:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+  layers:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
+  arrowRight:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>',
+  arrowDown:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>',
+  close:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>',
+  check:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+  image:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>',
+  info:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>',
+  sortAsc:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 16 4 4 4-4"/><path d="M7 20V4"/><path d="M11 4h10"/><path d="M11 8h7"/><path d="M11 12h4"/></svg>',
+  book:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>'
+};
+
+const Toast = {
+  show(msg, type='default'){
+    const c = $('#toast-container');
+    const el = document.createElement('div');
+    el.className = 'toast' + (type!=='default'?' toast-'+type:'');
+    const iconMap = {success:ICONS.check,error:ICONS.alert,warning:ICONS.alert,info:ICONS.info,default:ICONS.check};
+    el.innerHTML = (iconMap[type]||ICONS.check)+'<span>'+escapeHtml(msg)+'</span>';
+    c.appendChild(el);
+    setTimeout(()=>{el.classList.add('leaving');setTimeout(()=>el.remove(),200);},2600);
+  },
+  success(m){this.show(m,'success')},
+  error(m){this.show(m,'error')},
+  warning(m){this.show(m,'warning')},
+  info(m){this.show(m,'info')}
+};
+
+const Modal = {
+  _current:null,
+  open(html,{size=''}={}){
+    this.close(true);
+    const root = $('#modal-root');
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+    overlay.innerHTML = `<div class="modal ${size?'modal-'+size:''}" role="dialog" aria-modal="true">${html}</div>`;
+    root.appendChild(overlay);
+    document.body.style.overflow = 'hidden';
+    overlay.addEventListener('mousedown', e => { if(e.target===overlay) this.close(); });
+    $$('[data-modal-close]', overlay).forEach(b => b.addEventListener('click', () => this.close()));
+    const focusable = overlay.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (focusable) focusable.focus();
+    this._key = e => { if (e.key==='Escape') this.close(); };
+    document.addEventListener('keydown', this._key);
+    this._current = { overlay };
+  },
+  close(){
+    if(!this._current) return;
+    this._current.overlay.remove();
+    document.body.style.overflow = '';
+    document.removeEventListener('keydown', this._key);
+    this._current = null;
+  }
+};
+
+/* =====================================================================
+   STATE
+   ===================================================================== */
+const State = {
+  query: '',
+  sort: 'listings-desc',
+  view: 'grid'
+};
+
+/* =====================================================================
+   COMPUTED DATA — tổng hợp từ LISTINGS
+   ===================================================================== */
+function buildAreaStats(){
+  const stats = {};
+
+  // Khởi tạo cho tất cả khu vực có metadata
+  Object.values(AREAS_META).forEach(a => {
+    stats[a.name] = {
+      ...a,
+      listings: [],
+      minPrice: null,
+      maxPrice: null,
+      latestPost: null,
+      hasComplete: false,
+      hasPartial: false,
+      hasUnverified: false,
+      hasStale: false
+    };
+  });
+
+  // Điền dữ liệu từ LISTINGS
+  LISTINGS.forEach(l => {
+    const area = stats[l.areaName];
+    if(!area) return;
+    area.listings.push(l);
+
+    if(l.price != null){
+      if(area.minPrice == null || l.price < area.minPrice) area.minPrice = l.price;
+      if(area.maxPrice == null || l.price > area.maxPrice) area.maxPrice = l.price;
+    }
+
+    if(!area.latestPost || new Date(l.postedAt) > new Date(area.latestPost)){
+      area.latestPost = l.postedAt;
+    }
+
+    if(l.status === 'complete') area.hasComplete = true;
+    if(l.status === 'partial') area.hasPartial = true;
+    if(l.status === 'unverified') area.hasUnverified = true;
+    if(l.status === 'stale') area.hasStale = true;
+  });
+
+  return Object.values(stats);
+}
+
+function computeStats(){
+  const areas = buildAreaStats();
+  const totalListings = LISTINGS.length;
+  const totalAreas = areas.filter(a => a.listings.length > 0).length;
+  const highRisk = areas.filter(a => a.floodRisk === 'high').length;
+  const avgPrice = (() => {
+    const prices = LISTINGS.map(l => l.price).filter(p => p != null);
+    if(prices.length === 0) return null;
+    return Math.round(prices.reduce((s,p)=>s+p,0) / prices.length);
+  })();
+
+  return { areas, totalListings, totalAreas, highRisk, avgPrice };
+}
+
+/* =====================================================================
+   RENDER
+   ===================================================================== */
+function renderAreasPage(){
+  const main = $('#page-content');
+  const { areas, totalListings, totalAreas, highRisk, avgPrice } = computeStats();
+
+  main.innerHTML = `
+    <div class="container">
+
+      <!-- Page header -->
+      <div class="areas-header">
+        <h1>${ICONS.mapPin} Khám phá theo khu vực</h1>
+        <p>Chọn khu vực phù hợp với nhu cầu của bạn. Mỗi khu vực hiển thị số lượng tin, khoảng giá và mức nguy cơ ngập lụt để bạn cân nhắc trước khi xem chi tiết.</p>
+      </div>
+
+      <!-- Intro banner -->
+      <div class="areas-intro">
+        <div class="areas-intro-icon">${ICONS.mapPin}</div>
+        <div>
+          <h2>Hiểu rõ khu vực trước khi chọn phòng</h2>
+          <p>Khu vực tại Huế có sự khác biệt rõ về giá thuê, tiện ích và tình trạng ngập lụt. Trang này giúp bạn có cái nhìn tổng quan, từ đó thu hẹp lựa chọn và tìm phòng nhanh hơn.</p>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="areas-stats">
+        <div class="area-stat primary">
+          <span class="area-stat-label">Khu vực có tin</span>
+          <div class="area-stat-value">${totalAreas}<span class="area-stat-unit">khu vực</span></div>
+        </div>
+        <div class="area-stat">
+          <span class="area-stat-label">Tổng tin cho thuê</span>
+          <div class="area-stat-value">${totalListings}<span class="area-stat-unit">tin</span></div>
+        </div>
+        <div class="area-stat danger">
+          <span class="area-stat-label">Khu vực nguy cơ ngập cao</span>
+          <div class="area-stat-value">${highRisk}<span class="area-stat-unit">khu vực</span></div>
+        </div>
+        <div class="area-stat info">
+          <span class="area-stat-label">Giá thuê trung bình</span>
+          <div class="area-stat-value" style="font-size:var(--fs-xl)">${avgPrice != null ? formatPrice(avgPrice) : '—'}</div>
+        </div>
+      </div>
+
+      <!-- Toolbar -->
+      <div class="areas-toolbar">
+        <div class="search-wrap input-with-icon">
+          ${ICONS.search}
+          <input type="search" class="input" id="area-search" placeholder="Tìm khu vực hoặc tuyến đường…" />
+        </div>
+        <div class="toolbar-right">
+          <select class="select" id="area-sort" style="width:auto;min-width:180px">
+            <option value="listings-desc">Nhiều tin nhất</option>
+            <option value="listings-asc">Ít tin nhất</option>
+            <option value="price-asc">Giá thấp nhất</option>
+            <option value="price-desc">Giá cao nhất</option>
+            <option value="risk-desc">Nguy cơ ngập cao nhất</option>
+            <option value="risk-asc">Nguy cơ ngập thấp nhất</option>
+            <option value="name">Tên A → Z</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Grid -->
+      <div class="areas-grid" id="areas-grid"></div>
+
+      <!-- Sidebar bổ trợ -->
+      <div class="areas-aside">
+        <div class="aside-card">
+          <h3>${ICONS.layers} Phân bố tin theo khu vực</h3>
+          <div class="district-list" id="distribution-list"></div>
+        </div>
+        <div class="aside-card">
+          <h3>${ICONS.book} Hướng dẫn chọn khu vực</h3>
+          <div class="guide-list">
+            <div class="guide-item">
+              <span class="guide-num">1</span>
+              <span>Xem <strong>số lượng tin</strong> và <strong>khoảng giá</strong> của từng khu vực để biết mức độ phù hợp với ngân sách.</span>
+            </div>
+            <div class="guide-item">
+              <span class="guide-num">2</span>
+              <span>Kiểm tra <strong>mức nguy cơ ngập lụt</strong> trước khi quyết định — đặc biệt quan trọng với khu vực trũng.</span>
+            </div>
+            <div class="guide-item">
+              <span class="guide-num">3</span>
+              <span>Nhấn vào khu vực để xem <strong>danh sách tin</strong> đang cho thuê tại đó và thông tin chi tiết.</span>
+            </div>
+            <div class="guide-item">
+              <span class="guide-num">4</span>
+              <span>Đối chiếu với <strong>tuyến đường cụ thể</strong> — nguy cơ ngập có thể khác nhau giữa các đường trong cùng một khu vực.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="note-info" style="margin-top:var(--space-6)">
+        ${ICONS.info}
+        <span><strong>Lưu ý:</strong> Thông tin khu vực và mức nguy cơ ngập lụt trong bản demo là dữ liệu minh họa, không phản ánh tình trạng thực tế. Mức nguy cơ được đánh giá tổng hợp và có thể không chính xác cho từng tuyến đường cụ thể.</span>
+      </div>
+
+    </div>
+  `;
+
+  renderAreasGrid();
+  renderDistribution();
+  bindAreasEvents();
+}
+
+function renderAreasGrid(){
+  const grid = $('#areas-grid');
+  if(!grid) return;
+
+  const { areas } = computeStats();
+  const query = ($('#area-search')?.value || '').toLowerCase().trim();
+  const sort = $('#area-sort')?.value || 'listings-desc';
+
+  let filtered = areas.filter(a => a.listings.length > 0); // chỉ hiện khu vực có tin
+
+  if(query){
+    filtered = filtered.filter(a => {
+      const haystack = (a.name + ' ' + a.district + ' ' + a.streets.join(' ')).toLowerCase();
+      return haystack.includes(query);
+    });
+  }
+
+  const riskOrder = { high: 0, medium: 1, low: 2, unknown: 3 };
+  filtered.sort((a,b) => {
+    switch(sort){
+      case 'listings-desc': return b.listings.length - a.listings.length;
+      case 'listings-asc': return a.listings.length - b.listings.length;
+      case 'price-asc': return (a.minPrice ?? Infinity) - (b.minPrice ?? Infinity);
+      case 'price-desc': return (b.maxPrice ?? -1) - (a.maxPrice ?? -1);
+      case 'risk-desc': return riskOrder[a.floodRisk] - riskOrder[b.floodRisk];
+      case 'risk-asc': return riskOrder[b.floodRisk] - riskOrder[a.floodRisk];
+      case 'name': return a.name.localeCompare(b.name, 'vi');
+      default: return 0;
+    }
+  });
+
+  if(filtered.length === 0){
+    grid.innerHTML = `
+      <div style="grid-column:1/-1">
+        <div class="state-block">
+          <div class="state-icon">${ICONS.search}</div>
+          <h3>Không tìm thấy khu vực phù hợp</h3>
+          <p>Thử tìm với từ khóa khác hoặc xóa ô tìm kiếm.</p>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  const maxListings = Math.max(...filtered.map(a => a.listings.length), 1);
+
+  grid.innerHTML = filtered.map(a => {
+    const riskMeta = {
+      high: { cls:'risk-high', label:'Ngập cao' },
+      medium: { cls:'risk-medium', label:'Ngập TB' },
+      low: { cls:'risk-low', label:'Ngập thấp' },
+      unknown: { cls:'risk-unknown', label:'Chưa có DL' }
+    }[a.floodRisk] || { cls:'risk-unknown', label:'Chưa có DL' };
+
+    const priceRange = formatPriceRange(a.minPrice, a.maxPrice);
+    const hasPrice = a.minPrice != null || a.maxPrice != null;
+
+    const mediaHtml = a.image
+      ? `<img src="${a.image}" alt="${escapeHtml(a.name)}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'area-media-placeholder\\'>${ICONS.image.replace(/"/g,'&quot;')}</div>'" />`
+      : `<div class="area-media-placeholder">${ICONS.mapPin}</div>`;
+
+    const progressPct = (a.listings.length / maxListings) * 100;
+
+    return `
+      <button type="button" class="area-card" data-area-id="${escapeHtml(a.id)}" aria-label="Xem khu vực ${escapeHtml(a.name)}">
+        <div class="area-media">
+          ${mediaHtml}
+          <div class="area-media-overlay">
+            <span class="risk-pill ${riskMeta.cls}">${ICONS.waves}${riskMeta.label}</span>
+            <span class="listing-pill">${ICONS.home}${a.listings.length} tin</span>
+          </div>
+          <div class="area-media-bottom">
+            <div class="area-name">${escapeHtml(a.name)}</div>
+            <div class="area-district">${escapeHtml(a.district)}</div>
+          </div>
+        </div>
+        <div class="area-body">
+          <div class="area-info-row">
+            <span class="label">${ICONS.home} Khoảng giá</span>
+            <span class="value ${hasPrice ? 'range' : 'muted'}">${hasPrice ? escapeHtml(priceRange) : 'Chưa có'}</span>
+          </div>
+          <div class="area-info-row">
+            <span class="label">${ICONS.clock} Tin mới nhất</span>
+            <span class="value range">${a.latestPost ? timeAgo(a.latestPost) : '—'}</span>
+          </div>
+          <div class="area-progress">
+            <div class="area-progress-head">
+              <span>Số lượng tin</span>
+              <span>${a.listings.length} tin</span>
+            </div>
+            <div class="area-progress-bar">
+              <div class="area-progress-fill" style="width:${progressPct}%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="area-footer">
+          <span class="streets" title="${escapeHtml(a.streets.join(', '))}">
+            ${ICONS.mapPin} ${escapeHtml(a.streets.slice(0, 2).join(' · '))}${a.streets.length > 2 ? '…' : ''}
+          </span>
+          <span class="cta">Xem ${ICONS.arrowRight}</span>
+        </div>
+      </button>
+    `;
+  }).join('');
+}
+
+function renderDistribution(){
+  const el = $('#distribution-list');
+  if(!el) return;
+
+  const { areas } = computeStats();
+  const withListings = areas.filter(a => a.listings.length > 0).sort((a,b) => b.listings.length - a.listings.length);
+  const max = Math.max(...withListings.map(a => a.listings.length), 1);
+
+  el.innerHTML = withListings.slice(0, 6).map(a => {
+    const riskFill = { high:'risk-high', medium:'risk-medium', low:'risk-low' }[a.floodRisk] || '';
+    return `
+      <div class="district-item">
+        <div class="district-item-head">
+          <span class="name">${escapeHtml(a.name)}</span>
+          <span class="count">${a.listings.length} tin</span>
+        </div>
+        <div class="district-bar">
+          <div class="district-bar-fill ${riskFill}" style="width:${(a.listings.length / max * 100).toFixed(0)}%"></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+/* =====================================================================
+   MODAL CHI TIẾT KHU VỰC
+   ===================================================================== */
+function openAreaDetail(areaId){
+  const { areas } = computeStats();
+  const area = areas.find(a => a.id === areaId);
+  if(!area) return;
+
+  const riskMeta = {
+    high: { cls:'badge-danger', label:'Nguy cơ ngập cao' },
+    medium: { cls:'badge-warning', label:'Nguy cơ ngập trung bình' },
+    low: { cls:'badge-info', label:'Nguy cơ ngập thấp' },
+    unknown: { cls:'badge', label:'Chưa có dữ liệu ngập' }
+  }[area.floodRisk] || { cls:'badge', label:'Chưa có dữ liệu' };
+
+  const priceRange = formatPriceRange(area.minPrice, area.maxPrice);
+  const hasPrice = area.minPrice != null || area.maxPrice != null;
+
+  const facts = [
+    { label:'Số tin cho thuê', value: area.listings.length + ' tin' },
+    { label:'Khoảng giá', value: hasPrice ? priceRange : 'Chưa có' },
+    { label:'Tin mới nhất', value: area.latestPost ? timeAgo(area.latestPost) : '—' },
+    { label:'Quận/Huyện', value: area.district }
+  ];
+
+  const listingsHtml = area.listings.length
+    ? area.listings.slice(0, 6).map(l => {
+        const priceText = l.price != null ? formatPrice(l.price) + '/tháng' : 'Chưa có giá';
+        const media = l.image
+          ? `<img src="${l.image}" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'media-placeholder\\'>${ICONS.image.replace(/"/g,'&quot;')}</div>'" />`
+          : `<div class="media-placeholder">${ICONS.image}</div>`;
+        return `
+          <div class="preview-card" data-listing-id="${l.id}">
+            <div class="preview-media">${media}</div>
+            <div class="preview-body">
+              <div class="preview-title">${escapeHtml(l.title)}</div>
+              <div class="preview-price ${l.price == null ? 'unknown' : ''}">${escapeHtml(priceText)}</div>
+              <div class="preview-meta">
+                <span>${l.area != null ? l.area + ' m²' : '—'}</span>
+                <span>·</span>
+                <span>${timeAgo(l.postedAt)}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('')
+    : `<div class="state-block" style="padding:var(--space-8) var(--space-4)">
+        <div class="state-icon">${ICONS.home}</div>
+        <h3>Chưa có tin cho thuê</h3>
+        <p>Khu vực này hiện chưa có tin đăng nào được tổng hợp.</p>
+      </div>`;
+
+  const html = `
+    <div class="modal-header">
+      <div>
+        <h2>${escapeHtml(area.name)}</h2>
+        <p class="modal-subtitle">${escapeHtml(area.district)} · ${area.streets.length} tuyến đường</p>
+      </div>
+      <button class="modal-close" data-modal-close aria-label="Đóng">${ICONS.close}</button>
+    </div>
+    <div class="modal-body">
+      <div class="flex flex-wrap gap-2 mb-5">
+        <span class="badge ${riskMeta.cls}">${ICONS.waves}${riskMeta.label}</span>
+        <span class="badge badge-primary">${ICONS.home}${area.listings.length} tin cho thuê</span>
+        ${hasPrice ? `<span class="badge badge-info">${ICONS.ruler}${escapeHtml(priceRange)}</span>` : ''}
+      </div>
+
+      <div class="modal-section">
+        <h4>${ICONS.info} Giới thiệu khu vực</h4>
+        <p class="text-sm text-secondary" style="line-height:var(--lh-relaxed)">${escapeHtml(area.description)}</p>
+      </div>
+
+      <div class="modal-section">
+        <h4>${ICONS.layers} Thông tin tổng quan</h4>
+        <div class="fact-grid">
+          ${facts.map(f => `
+            <div class="fact-item">
+              <div class="fact-label">${f.label}</div>
+              <div class="fact-value">${escapeHtml(f.value)}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <h4>${ICONS.mapPin} Tuyến đường chính</h4>
+        <div class="street-list">
+          ${area.streets.map(s => `<span class="street-chip">${ICONS.mapPin}${escapeHtml(s)}</span>`).join('')}
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <h4>${ICONS.waves} Tình hình ngập lụt</h4>
+        <div class="note-info" style="${area.floodRisk === 'high' ? 'background:var(--color-danger-soft);border-color:var(--color-danger-border);color:var(--color-danger)' : area.floodRisk === 'medium' ? 'background:var(--color-warning-soft);border-color:var(--color-warning-border);color:var(--color-warning)' : ''}">
+          ${ICONS.alert}
+          <span>${escapeHtml(area.floodNote)}</span>
+        </div>
+      </div>
+
+      ${area.highlights && area.highlights.length ? `
+      <div class="modal-section">
+        <h4>${ICONS.check} Điểm nổi bật</h4>
+        <div class="street-list">
+          ${area.highlights.map(h => `<span class="street-chip">${ICONS.check}${escapeHtml(h)}</span>`).join('')}
+        </div>
+      </div>` : ''}
+
+      <div class="modal-section">
+        <h4>${ICONS.home} Tin cho thuê tại khu vực (${area.listings.length})</h4>
+        <div class="listings-preview">${listingsHtml}</div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" data-modal-close>Đóng</button>
+      <button class="btn btn-primary" data-action="view-all-area-listings" data-area="${escapeHtml(area.name)}">
+        ${ICONS.search} Xem tất cả tin tại ${escapeHtml(area.name)}
+      </button>
+    </div>
+  `;
+
+  Modal.open(html, { size:'lg' });
+}
+
+/* =====================================================================
+   EVENT HANDLERS
+   ===================================================================== */
+function bindAreasEvents(){
+  const search = $('#area-search');
+  const sort = $('#area-sort');
+
+  if(search){
+    let timer;
+    search.addEventListener('input', () => {
+      clearTimeout(timer);
+      timer = setTimeout(renderAreasGrid, 200);
+    });
+  }
+  if(sort) sort.addEventListener('change', renderAreasGrid);
+}
+
+document.addEventListener('click', e => {
+  // Click area card
+  const card = e.target.closest('[data-area-id]');
+  if(card && !e.target.closest('[data-action]')){
+    openAreaDetail(card.dataset.areaId);
+    return;
+  }
+
+  // Click listing preview trong modal
+  const preview = e.target.closest('[data-listing-id]');
+  if(preview){
+    const id = preview.dataset.listingId;
+    const l = LISTINGS.find(x => x.id === id);
+    if(l) Toast.info('Mở chi tiết tin: ' + l.title.slice(0, 40) + '…');
+    return;
+  }
+
+  // Action buttons
+  const actionEl = e.target.closest('[data-action]');
+  if(actionEl){
+    const action = actionEl.dataset.action;
+    if(action === 'view-all-area-listings'){
+      const areaName = actionEl.dataset.area;
+      Modal.close();
+      Toast.info('Chuyển đến danh sách tin tại ' + areaName + ' — bản demo chưa hỗ trợ');
+    }
+  }
+});
+
+/* Mobile nav toggle */
+document.addEventListener('click', e => {
+  const t = e.target.closest('.menu-toggle');
+  if(t){
+    const nav = $('.main-nav');
+    if(nav) nav.style.display = nav.style.display === 'flex' ? '' : 'flex';
+  }
+});
+
+/* =====================================================================
+   INIT
+   ===================================================================== */
+document.addEventListener('DOMContentLoaded', () => {
+  renderAreasPage();
+});
+</script>
+</body>
+</html>

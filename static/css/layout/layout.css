@@ -1,0 +1,14 @@
+/* ==========================================================================
+   Phòng Huế - Master Layout Bundle
+   Tổng hợp tất cả các module layout cho website
+   - grid.css: Khung bao, container, lưới chia cột nội dung chính
+   - header.css: Đầu trang, thanh điều hướng, logo, menu mobile
+   - footer.css: Chân trang, các cột liên kết, bản quyền
+   - sidebar.css: Cột bên, bộ lọc nhanh, khu vực, cảnh báo ngập
+   ========================================================================== */
+
+@import './base.css';
+@import './grid.css';
+@import './header.css';
+@import './footer.css';
+@import './sidebar.css';

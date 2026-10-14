@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi tiết phòng trọ — phongtrohue-s</title>
+    <meta name="description" content="Chi tiết thông tin phòng trọ tại Huế: giá thuê, diện tích, tiện nghi, thông tin lịch sử ngập lụt và nguồn đăng gốc." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Shared Layout CSS -->
+    <link rel="stylesheet" href="../static/css/layout/base.css" />
+    <link rel="stylesheet" href="../static/css/layout/grid.css" />
+    <link rel="stylesheet" href="../static/css/layout/header.css" />
+    <link rel="stylesheet" href="../static/css/layout/footer.css" />
+    
+    <!-- Detail Page CSS -->
+    <link rel="stylesheet" href="../static/css/pages/detail.css" />
+</head>
+
+<body>
+    <div id="app">
+        <!-- Site Header -->
+        <header id="site-header" class="site-header">
+            <div class="container header-inner">
+                <a href="index.html" class="logo">
+                    <span class="logo-mark">PH</span>
+                    <span>
+                        phongtrohue-s
+                        <span class="logo-sub">Tổng hợp tin cho thuê</span>
+                    </span>
+                </a>
+                <nav class="main-nav" id="main-nav">
+                    <a href="index.html" class="nav-link">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        Khám phá tin
+                    </a>
+                    <a href="search.html" class="nav-link">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                        Tìm phòng
+                    </a>
+                    <a href="areas.html" class="nav-link">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                        Khu vực
+                    </a>
+                    <a href="ngaplut.html" class="nav-link">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg>
+                        Cảnh báo ngập lụt
+                    </a>
+                    <a href="sources.html" class="nav-link">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                        Nguồn tin
+                    </a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main id="main-content" class="main-content">
+            <div class="container">
+                <!-- Breadcrumbs -->
+                <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+                    <div class="breadcrumb-list">
+                        <span class="breadcrumb-item">
+                            <a href="index.html">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                Trang chủ
+                            </a>
+                        </span>
+                        <span class="breadcrumb-separator">/</span>
+                        <span class="breadcrumb-item">
+                            <a href="index.html">Phòng trọ Huế</a>
+                        </span>
+                        <span class="breadcrumb-separator">/</span>
+                        <span class="breadcrumb-item active" id="breadcrumb-title">Đang tải...</span>
+                    </div>
+                </nav>
+
+                <!-- Dynamic Detail Container -->
+                <div id="detail-render-root">
+                    <div class="not-found-state">
+                        <p>Đang tải thông tin phòng trọ...</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Site Footer -->
+        <footer id="site-footer" class="site-footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <p class="footer-brand">phongtrohue-s</p>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Khám phá</h4>
+                        <ul>
+                            <li><a href="index.html">Tin mới nhất</a></li>
+                            <li><a href="areas.html">Theo khu vực</a></li>
+                            <li><a href="search.html">Theo giá</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Thông tin</h4>
+                        <ul>
+                            <li><a href="index.html">Về nền tảng</a></li>
+                            <li><a href="sources.html">Nguồn dữ liệu</a></li>
+                            <li><a href="ngaplut.html">Lịch sử ngập lụt</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Lưu ý</h4>
+                        <p>Dữ liệu trong bản demo là dữ liệu minh họa, không phản ánh tình trạng thực tế. Vui lòng kiểm tra kỹ thông tin trước khi liên hệ thuê phòng.</p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <span>© 2025 phongtrohue-s — Bản demo giao diện.</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Toast container -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <!-- Data script -->
+    <script src="../static/js/data.js"></script>
+
+    <!-- Page Logic -->
+    <script>
+        /* ================= ICONS ================= */
+        const Icons = {
+            mapPin: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
+            ruler: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3 8.7 2.7a1 1 0 0 0-1.4 0L2.7 7.3a1 1 0 0 0 0 1.4l12.6 12.6a1 1 0 0 0 1.4 0l4.6-4.6a1 1 0 0 0 0-1.4Z"/><path d="m7.5 10.5 2 2"/><path d="m10.5 7.5 2 2"/><path d="m13.5 4.5 2 2"/><path d="m4.5 13.5 2 2"/></svg>',
+            home: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+            clock: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+            layers: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
+            external: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>',
+            arrowLeft: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>',
+            arrowRight: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>',
+            copy: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>',
+            alert: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>',
+            waves: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg>',
+            check: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+            image: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>',
+            shield: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/></svg>',
+            share: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>'
+        };
+
+        /* ================= FORMATTERS ================= */
+        const Format = {
+            price(val) {
+                if (val == null) return 'Chưa có giá';
+                if (val >= 1000000) {
+                    const tr = val / 1000000;
+                    return (tr % 1 === 0 ? tr : tr.toFixed(1)).replace('.', ',') + ' triệu';
+                }
+                return (val / 1000).toLocaleString('vi-VN') + 'k';
+            },
+            priceFull(val) {
+                if (val == null) return 'Chưa có giá';
+                return Number(val).toLocaleString('vi-VN') + ' đ';
+            },
+            area(val) {
+                return val != null ? val + ' m²' : 'Chưa có';
+            },
+            dateTime(iso) {
+                if (!iso) return 'Chưa rõ';
+                const d = new Date(iso);
+                return d.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' }) + ' ' +
+                    d.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+            },
+            timeAgo(iso) {
+                if (!iso) return 'Chưa rõ';
+                const now = new Date();
+                const past = new Date(iso);
+                const diffMs = now - past;
+                if (diffMs < 0) return 'Vừa xong';
+                const diffSec = Math.floor(diffMs / 1000);
+                const diffMin = Math.floor(diffSec / 60);
+                const diffHour = Math.floor(diffMin / 60);
+                const diffDay = Math.floor(diffHour / 24);
+                const diffMonth = Math.floor(diffDay / 30);
+                const diffYear = Math.floor(diffDay / 365);
+
+                if (diffMin < 1) return 'Vừa xong';
+                if (diffMin < 60) return `${diffMin} phút trước`;
+                if (diffHour < 24) return `${diffHour} giờ trước`;
+                if (diffDay === 1) return 'Hôm qua';
+                if (diffDay < 30) return `${diffDay} ngày trước`;
+                if (diffMonth < 12) return `${diffMonth} tháng trước`;
+                return `${diffYear} năm trước`;
+            }
+        };
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        function showToast(msg) {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = msg;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.2s';
+                setTimeout(() => toast.remove(), 200);
+            }, 2500);
+        }
+
+        /* ================= RENDER LOGIC ================= */
+        function renderDetailPage() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+
+            const root = document.getElementById('detail-render-root');
+            const breadcrumbTitle = document.getElementById('breadcrumb-title');
+
+            if (!id) {
+                breadcrumbTitle.textContent = 'Lỗi yêu cầu';
+                root.innerHTML = `
+                    <div class="not-found-state">
+                        <div class="icon">${Icons.alert}</div>
+                        <h2>Thiếu mã phòng trọ</h2>
+                        <p>Không tìm thấy tham số phòng cần xem. Vui lòng quay lại danh sách để chọn phòng.</p>
+                        <a href="index.html" class="btn btn-primary">${Icons.arrowLeft} Quay về trang chủ</a>
+                    </div>
+                `;
+                return;
+            }
+
+            const allListings = (typeof LISTINGS !== "undefined" ? LISTINGS : (window.LISTINGS || []));
+            const allSources = (typeof SOURCES !== "undefined" ? SOURCES : (window.SOURCES || {}));
+            const listing = allListings.find(l => l.id === id);
+
+            if (!listing) {
+                breadcrumbTitle.textContent = 'Không tìm thấy phòng';
+                root.innerHTML = `
+                    <div class="not-found-state">
+                        <div class="icon">${Icons.alert}</div>
+                        <h2>Phòng trọ không tồn tại hoặc đã hết hạn</h2>
+                        <p>Mã tin [${escapeHtml(id)}] không có trong hệ thống hoặc đã được gỡ bỏ.</p>
+                        <a href="index.html" class="btn btn-primary">${Icons.arrowLeft} Xem danh sách phòng khác</a>
+                    </div>
+                `;
+                return;
+            }
+
+            // Update Page Title & Breadcrumb
+            document.title = `${listing.title} — phongtrohue-s`;
+            breadcrumbTitle.textContent = listing.title;
+
+            const source = allSources[listing.sourceId];
+            const duplicateGroup = listing.duplicateGroup
+                ? allListings.filter(l => l.duplicateGroup === listing.duplicateGroup && l.id !== listing.id)
+                : [];
+
+            // Flood details
+            const floodRisk = listing.floodRisk || 'low';
+            let floodTitle = 'Khu vực ít ngập';
+            let floodPillClass = 'risk-low';
+            let floodText = 'Khu vực này có cốt nền tương đối cao hoặc nằm ở vị trí cao ráo. Vào các đợt mưa lũ lịch sử tại Huế, tuyến đường ít ghi nhận ngập úng nghiêm trọng.';
+            let floodAdvice = 'Khuyên dùng cho người cần an tâm về đồ đạc, xe cộ trong mùa mưa bão miền Trung (tháng 10 - tháng 12).';
+
+            if (floodRisk === 'medium') {
+                floodTitle = 'Ngập cục bộ khi mưa lớn kéo dài';
+                floodPillClass = 'risk-medium';
+                floodText = 'Một số đoạn kiệt/hẻm thấp hoặc điểm trũng có thể ngập từ 10 - 30cm khi có mưa to liên tục hoặc triều cường sông Hương dâng cao.';
+                floodAdvice = 'Nên chủ động hỏi chủ trọ về mức nước ngập kiệt trong mùa lụt gần nhất và vị trí để xe an toàn.';
+            } else if (floodRisk === 'high') {
+                floodTitle = 'Khu vực trũng thấp — Cảnh báo ngập lụt';
+                floodPillClass = 'risk-high';
+                floodText = 'Khu vực này nằm gần các lưu vực thoát nước hoặc vùng trũng truyền thống của Huế. Trong các đợt lũ lớn (như 2020, 2023), mực nước có thể tràn vào nhà hoặc chia cắt ngõ vào.';
+                floodAdvice = 'Bắt buộc kiểm tra kỹ nền phòng cao hay thấp, có gác lửng tránh lụt không, và chỗ gửi xe máy dự phòng khi lũ về.';
+            }
+
+            // Related listings (same area or price range)
+            const related = allListings
+                .filter(l => l.id !== listing.id && (l.areaName === listing.areaName || Math.abs((l.price || 0) - (listing.price || 0)) <= 500000))
+                .slice(0, 3);
+
+            root.innerHTML = `
+                <div class="detail-layout">
+                    <!-- Cột Nội Dung Chính -->
+                    <div class="detail-main">
+                        <!-- Hero Media -->
+                        <div class="detail-media-wrap">
+                            <div class="media-badges-overlay">
+                                <span class="media-badge badge-source">
+                                    ${Icons.layers} ${escapeHtml(source ? source.name : 'Nguồn tin')}
+                                </span>
+                                ${listing.status === 'complete' ? `
+                                    <span class="media-badge badge-status-verified">
+                                        ${Icons.check} Đầy đủ thông tin
+                                    </span>
+                                ` : ''}
+                            </div>
+                            <div class="detail-media-hero">
+                                ${listing.image ? `
+                                    <img src="${listing.image}" alt="${escapeHtml(listing.title)}" onerror="this.parentElement.innerHTML='<div class=\\'media-placeholder-detail\\'>${Icons.image}<div>Không thể tải hình ảnh</div></div>'" />
+                                ` : `
+                                    <div class="media-placeholder-detail">
+                                        ${Icons.image}
+                                        <div>Bài đăng không đính kèm hình ảnh</div>
+                                    </div>
+                                `}
+                            </div>
+                        </div>
+
+                        <!-- Header Card -->
+                        <div class="detail-header-card">
+                            <h1 class="detail-title">${escapeHtml(listing.title)}</h1>
+                            
+                            <div class="detail-meta-row">
+                                <span class="detail-meta-item">
+                                    ${Icons.mapPin} ${escapeHtml(listing.address || 'Khu vực Huế')}
+                                </span>
+                                <span class="detail-meta-item" title="${Format.dateTime(listing.postedAt)}">
+                                    ${Icons.clock} Đăng ${Format.timeAgo(listing.postedAt)}
+                                </span>
+                                <span class="detail-meta-item">
+                                    ${Icons.layers} Nguồn: <strong>${escapeHtml(source ? source.name : 'Cộng đồng')}</strong>
+                                </span>
+                            </div>
+
+                            <!-- Fact Grid -->
+                            <div class="facts-grid">
+                                <div class="fact-box highlight">
+                                    <span class="fact-label">Giá thuê niêm yết</span>
+                                    <span class="fact-value">${listing.price != null ? Format.priceFull(listing.price) : 'Thỏa thuận'}</span>
+                                </div>
+                                <div class="fact-box">
+                                    <span class="fact-label">Diện tích</span>
+                                    <span class="fact-value">${Format.area(listing.area)}</span>
+                                </div>
+                                <div class="fact-box">
+                                    <span class="fact-label">Loại phòng</span>
+                                    <span class="fact-value">${escapeHtml(listing.roomType || 'Phòng trọ')}</span>
+                                </div>
+                                <div class="fact-box">
+                                    <span class="fact-label">Khu vực</span>
+                                    <span class="fact-value">${escapeHtml(listing.areaName || 'Huế')}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mô tả chi tiết -->
+                        <div class="detail-card">
+                            <h2 class="card-heading">
+                                ${Icons.home} Mô tả chi tiết từ chủ phòng
+                            </h2>
+                            <div class="description-body">${escapeHtml(listing.excerpt)}</div>
+                        </div>
+
+                        <!-- Tiện nghi & Dịch vụ -->
+                        ${listing.amenities && listing.amenities.length ? `
+                            <div class="detail-card">
+                                <h2 class="card-heading">
+                                    ${Icons.check} Tiện nghi & Tiện ích đi kèm
+                                </h2>
+                                <div class="amenities-list">
+                                    ${listing.amenities.map(a => `
+                                        <div class="amenity-item">
+                                            ${Icons.check}
+                                            <span>${escapeHtml(a)}</span>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        <!-- Cảnh báo & Đánh giá ngập lụt -->
+                        <div class="detail-card flood-alert-card ${floodPillClass}">
+                            <h2 class="card-heading">
+                                ${Icons.waves} Đánh giá nguy cơ ngập lụt tại vị trí này
+                            </h2>
+                            <div>
+                                <span class="flood-status-pill ${floodPillClass}">
+                                    ${Icons.waves} ${floodTitle}
+                                </span>
+                                <p class="flood-info-text">${floodText}</p>
+                                <div class="flood-advice">
+                                    <strong>💡 Lời khuyên khi xem phòng:</strong> ${floodAdvice}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tin trùng lặp / Đối chiếu nguồn -->
+                        ${duplicateGroup.length ? `
+                            <div class="detail-card duplicates-card" id="duplicates">
+                                <div class="duplicates-header">
+                                    ${Icons.copy}
+                                    <span>Hệ thống phát hiện ${duplicateGroup.length} tin đăng tương tự (nghi vấn cùng một phòng)</span>
+                                </div>
+                                <p style="font-size:var(--fs-xs);color:var(--color-text-secondary);margin-bottom:var(--space-4);">
+                                    Có thể chủ nhà hoặc môi giới đã đăng tin này lên nhiều nhóm Facebook khác nhau với mức giá hoặc mô tả khác biệt:
+                                </p>
+                                <div class="duplicates-list">
+                                    ${duplicateGroup.map(d => {
+                                        const dSource = (window.SOURCES || {})[d.sourceId];
+                                        return `
+                                            <div class="duplicate-item">
+                                                <div class="duplicate-info">
+                                                    <h5>${escapeHtml(d.title)}</h5>
+                                                    <div class="duplicate-meta">
+                                                        Nguồn: ${escapeHtml(dSource ? dSource.name : 'Nhóm khác')} • Đăng: ${Format.timeAgo(d.postedAt)}
+                                                    </div>
+                                                </div>
+                                                <div style="display:flex;align-items:center;gap:var(--space-3)">
+                                                    <span class="duplicate-price">${Format.price(d.price)}</span>
+                                                    <a href="detail.html?id=${d.id}" class="btn btn-outline btn-sm">Xem đối chiếu</a>
+                                                </div>
+                                            </div>
+                                        `;
+                                    }).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+
+                    <!-- Cột Sidebar Cố Định -->
+                    <aside class="detail-sidebar">
+                        <div class="sidebar-action-card">
+                            <div class="price-sidebar-block">
+                                <div class="price-sidebar-label">Giá thuê hàng tháng</div>
+                                <div class="price-sidebar-amount">
+                                    ${listing.price != null ? Format.priceFull(listing.price) : 'Thỏa thuận'}
+                                </div>
+                                <div class="price-sidebar-unit">Không bao gồm chi phí điện, nước</div>
+                            </div>
+
+                            <div class="sidebar-btn-group">
+                                ${source && source.url && source.url !== '#' ? `
+                                    <a href="${source.url}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-full">
+                                        ${Icons.external} Mở bài đăng gốc trên ${escapeHtml(source.type === 'facebook' ? 'Facebook' : 'Website')}
+                                    </a>
+                                ` : `
+                                    <button type="button" class="btn btn-primary btn-full" onclick="showToast('Bản demo: Bài đăng được tổng hợp từ ${escapeHtml(source ? source.name : 'nhóm mạng xã hội')}')">
+                                        ${Icons.external} Xem bài đăng gốc (${escapeHtml(source ? source.name : 'Mạng xã hội')})
+                                    </button>
+                                `}
+
+                                <button type="button" class="btn btn-outline btn-full" id="btn-copy-link">
+                                    ${Icons.share} Sao chép liên kết phòng này
+                                </button>
+                                
+                                <a href="index.html" class="btn btn-ghost btn-full">
+                                    ${Icons.arrowLeft} Quay về danh sách tìm phòng
+                                </a>
+                            </div>
+
+                            <!-- Nguồn & Xác thực -->
+                            <div class="source-info-box">
+                                <div class="source-row">
+                                    <span>Nguồn thu thập:</span>
+                                    <strong>${escapeHtml(source ? source.name : 'Cộng đồng')}</strong>
+                                </div>
+                                <div class="source-row">
+                                    <span>Thời điểm đăng:</span>
+                                    <span>${Format.dateTime(listing.postedAt)}</span>
+                                </div>
+                                <div class="source-row">
+                                    <span>Lần quét gần nhất:</span>
+                                    <span>${Format.dateTime(listing.collectedAt)}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Safety Tips -->
+                        <div class="safety-box">
+                            <div class="safety-title">
+                                ${Icons.shield} Lưu ý an toàn khi thuê phòng
+                            </div>
+                            <ul class="safety-list">
+                                <li>
+                                    ${Icons.check}
+                                    <span>Luôn đến tận nơi xem phòng thực tế và kiểm tra công tơ điện nước.</span>
+                                </li>
+                                <li>
+                                    ${Icons.check}
+                                    <span>Tuyệt đối không chuyển cọc trước khi gặp mặt chủ trọ trực tiếp.</span>
+                                </li>
+                                <li>
+                                    ${Icons.check}
+                                    <span>Hỏi rõ quy định khóa cổng, giờ giấc và người quen đến chơi.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+                </div>
+
+                <!-- Related Listings Row -->
+                ${related.length ? `
+                    <section class="related-section">
+                        <h3 class="related-title">Phòng trọ khác có thể bạn quan tâm</h3>
+                        <div class="related-grid">
+                            ${related.map(r => `
+                                <a href="detail.html?id=${r.id}" class="related-card">
+                                    <div class="related-thumb">
+                                        ${r.image ? `
+                                            <img src="${r.image}" alt="${escapeHtml(r.title)}" loading="lazy" />
+                                        ` : `
+                                            <div class="media-placeholder-detail" style="font-size:var(--fs-xs)">${Icons.image}</div>
+                                        `}
+                                    </div>
+                                    <div class="related-body">
+                                        <div class="related-card-price">${Format.price(r.price)}/tháng</div>
+                                        <h4 class="related-card-title">${escapeHtml(r.title)}</h4>
+                                        <div class="related-card-meta">
+                                            ${Icons.mapPin} ${escapeHtml(r.areaName || 'Huế')} • ${Format.area(r.area)}
+                                        </div>
+                                    </div>
+                                </a>
+                            `).join('')}
+                        </div>
+                    </section>
+                ` : ''}
+            `;
+
+            // Attach copy link event
+            const copyBtn = document.getElementById('btn-copy-link');
+            if (copyBtn) {
+                copyBtn.addEventListener('click', () => {
+                    navigator.clipboard.writeText(window.location.href)
+                        .then(() => showToast('Đã sao chép liên kết phòng vào bộ nhớ tạm!'))
+                        .catch(() => showToast('Sao chép: ' + window.location.href));
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderDetailPage();
+        });
+    </script>
+</body>
+
+</html>

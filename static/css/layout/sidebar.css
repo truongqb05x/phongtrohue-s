@@ -1,0 +1,206 @@
+/* ==========================================================================
+   Phòng Huế - Layout: Sidebar
+   Chứa style cho thanh bên (sidebar), các khối widget lọc, khu vực và cảnh báo ngập
+   ========================================================================== */
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5, 1.25rem);
+}
+
+.sidebar-card {
+    background: var(--color-surface, #ffffff);
+    border: 1px solid var(--color-border, #e5e5e0);
+    border-radius: var(--radius-md, 10px);
+    padding: var(--space-5, 1.25rem);
+}
+
+.sidebar-card:last-child {
+    margin-bottom: 0;
+}
+
+.sidebar-card h3 {
+    font-size: var(--fs-base, 0.875rem);
+    font-weight: 600;
+    margin-bottom: var(--space-3, 0.75rem);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2, 0.5rem);
+}
+
+.sidebar-card h3 .icon {
+    width: 16px;
+    height: 16px;
+    color: var(--color-primary, #1f5f4a);
+    flex-shrink: 0;
+}
+
+.filter-group {
+    margin-bottom: var(--space-4, 1rem);
+}
+
+.filter-group:last-child {
+    margin-bottom: 0;
+}
+
+.filter-label {
+    font-size: var(--fs-xs, 0.75rem);
+    font-weight: 600;
+    color: var(--color-text-muted, #8a8a82);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-2, 0.5rem);
+    display: block;
+}
+
+.filter-options {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.filter-option {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2, 0.5rem);
+    padding: 6px var(--space-2, 0.5rem);
+    border-radius: var(--radius-sm, 4px);
+    font-size: var(--fs-sm, 0.8125rem);
+    color: var(--color-text-secondary, #56564f);
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.filter-option:hover {
+    background: var(--color-surface-alt, #fafaf7);
+    color: var(--color-text, #1b1b18);
+}
+
+.filter-option input {
+    accent-color: var(--color-primary, #1f5f4a);
+    cursor: pointer;
+}
+
+.filter-option .count {
+    margin-left: auto;
+    font-size: var(--fs-xs, 0.75rem);
+    color: var(--color-text-muted, #8a8a82);
+}
+
+/* Danh sách khu vực trong sidebar */
+.area-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2, 0.5rem);
+}
+
+.area-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3, 0.75rem);
+    padding: var(--space-3, 0.75rem);
+    border-radius: var(--radius, 6px);
+    border: 1px solid var(--color-border, #e5e5e0);
+    background: var(--color-surface, #ffffff);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    text-align: left;
+    width: 100%;
+}
+
+.area-item:hover {
+    border-color: var(--color-primary, #1f5f4a);
+    background: var(--color-primary-soft, #e7f0eb);
+}
+
+.area-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm, 4px);
+    background: var(--color-primary-soft, #e7f0eb);
+    color: var(--color-primary, #1f5f4a);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+
+.area-icon .icon {
+    width: 16px;
+    height: 16px;
+}
+
+.area-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.area-name {
+    font-size: var(--fs-sm, 0.8125rem);
+    font-weight: 600;
+    color: var(--color-text, #1b1b18);
+}
+
+.area-count {
+    font-size: var(--fs-xs, 0.75rem);
+    color: var(--color-text-muted, #8a8a82);
+}
+
+.area-flood {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+/* Thẻ thông tin cảnh báo ngập lụt */
+.flood-card .flood-demo-note {
+    font-size: var(--fs-xs, 0.75rem);
+    color: var(--color-warning, #a16207);
+    background: var(--color-warning-soft, #fdf4dc);
+    padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+    border-radius: var(--radius-sm, 4px);
+    margin-bottom: var(--space-3, 0.75rem);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2, 0.5rem);
+    line-height: 1.4;
+}
+
+.flood-card .flood-demo-note .icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.flood-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2, 0.5rem);
+}
+
+.flood-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2, 0.5rem);
+    font-size: var(--fs-sm, 0.8125rem);
+    padding: var(--space-2, 0.5rem) 0;
+    border-bottom: 1px dashed var(--color-border, #e5e5e0);
+}
+
+.flood-item:last-child {
+    border-bottom: none;
+}
+
+.flood-item .street {
+    color: var(--color-text, #1b1b18);
+    font-weight: 500;
+}
+
+.flood-item .level {
+    font-size: var(--fs-xs, 0.75rem);
+    font-weight: 600;
+}

@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nguồn tin — Phòng Huế</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+/* =====================================================================
+   LAYOUT CHUNG (rút gọn)
+   ===================================================================== */
+*,*::before,*::after{box-sizing:border-box}
+*{margin:0;padding:0}
+html{scroll-behavior:smooth}
+html,body{height:100%}
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img,svg{display:block;max-width:100%}
+input,button,textarea,select{font:inherit;color:inherit}
+button{background:none;border:none;cursor:pointer}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+
+:root{
+  --color-bg:#f6f6f3;--color-surface:#fff;--color-surface-alt:#fafaf7;--color-surface-sunken:#f0f0eb;
+  --color-border:#e5e5e0;--color-border-strong:#d2d2cb;--color-border-focus:#1f5f4a;
+  --color-text:#1b1b18;--color-text-secondary:#56564f;--color-text-muted:#8a8a82;--color-text-inverse:#fff;
+  --color-primary:#1f5f4a;--color-primary-hover:#174a39;--color-primary-soft:#e7f0eb;--color-primary-border:#b8d4c7;
+  --color-accent:#b45309;--color-accent-soft:#fdf2e3;
+  --color-danger:#b3261e;--color-danger-hover:#8f1e17;--color-danger-soft:#fbeae8;--color-danger-border:#e8b5b0;
+  --color-warning:#a16207;--color-warning-soft:#fdf4dc;--color-warning-border:#e8d29a;
+  --color-info:#1e5f8a;--color-info-soft:#e6f0f7;--color-info-border:#b3d0e3;
+  --color-success:#166534;--color-success-soft:#e8f5ee;--color-success-border:#b3d9c4;
+  --font-sans:'Be Vietnam Pro',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --fs-xs:.75rem;--fs-sm:.8125rem;--fs-base:.875rem;--fs-md:1rem;--fs-lg:1.125rem;--fs-xl:1.375rem;--fs-2xl:1.75rem;--fs-3xl:2.125rem;
+  --fw-regular:400;--fw-medium:500;--fw-semibold:600;--fw-bold:700;
+  --lh-tight:1.25;--lh-snug:1.4;--lh-normal:1.55;--lh-relaxed:1.7;
+  --space-1:.25rem;--space-2:.5rem;--space-3:.75rem;--space-4:1rem;--space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;--space-12:3rem;
+  --radius-xs:3px;--radius-sm:4px;--radius:6px;--radius-md:10px;--radius-lg:14px;--radius-full:999px;
+  --shadow-xs:0 1px 2px rgba(20,20,15,.04);--shadow-sm:0 1px 3px rgba(20,20,15,.06);--shadow:0 2px 8px rgba(20,20,15,.06);--shadow-md:0 6px 24px rgba(20,20,15,.10);--shadow-lg:0 12px 40px rgba(20,20,15,.14);
+  --container-max:1240px;--header-height:60px;--sidebar-width:320px;
+  --t-fast:.12s ease;--t-base:.18s ease;--t-slow:.3s ease;
+  --z-header:50;--z-modal:100;--z-toast:200;
+}
+
+body{font-family:var(--font-sans);font-size:var(--fs-base);line-height:var(--lh-normal);color:var(--color-text);background:var(--color-bg);min-height:100vh}
+h1,h2,h3,h4{font-weight:var(--fw-semibold);line-height:var(--lh-tight);color:var(--color-text);letter-spacing:-.01em}
+h1{font-size:var(--fs-2xl)}h2{font-size:var(--fs-xl)}h3{font-size:var(--fs-lg)}h4{font-size:var(--fs-md)}
+p{line-height:var(--lh-relaxed)}
+::selection{background:var(--color-primary-soft);color:var(--color-primary)}
+:focus-visible{outline:2px solid var(--color-border-focus);outline-offset:2px;border-radius:var(--radius-xs)}
+
+.app-shell{display:flex;flex-direction:column;min-height:100vh}
+.page-content{flex:1;padding:var(--space-8) 0 var(--space-12)}
+.container{width:100%;max-width:var(--container-max);margin:0 auto;padding:0 var(--space-5)}
+
+/* HEADER */
+.site-header{position:sticky;top:0;z-index:var(--z-header);background:var(--color-surface);border-bottom:1px solid var(--color-border)}
+.header-inner{display:flex;align-items:center;gap:var(--space-6);height:var(--header-height);max-width:var(--container-max);margin:0 auto;padding:0 var(--space-5)}
+.logo{display:flex;align-items:center;gap:var(--space-2);font-weight:var(--fw-bold);font-size:var(--fs-md);flex-shrink:0}
+.logo-mark{width:30px;height:30px;border-radius:var(--radius);background:var(--color-primary);color:var(--color-text-inverse);display:grid;place-items:center;font-weight:var(--fw-bold);font-size:var(--fs-sm);flex-shrink:0}
+.logo-text{display:flex;flex-direction:column;line-height:1.1}
+.logo-sub{font-size:var(--fs-xs);color:var(--color-text-muted);font-weight:var(--fw-regular)}
+.main-nav{display:flex;align-items:center;gap:var(--space-1);flex:1;min-width:0}
+.nav-link{padding:var(--space-2) var(--space-3);font-size:var(--fs-sm);font-weight:var(--fw-medium);color:var(--color-text-secondary);border-radius:var(--radius);display:inline-flex;align-items:center;gap:var(--space-2);transition:background var(--t-fast),color var(--t-fast);white-space:nowrap}
+.nav-link:hover{background:var(--color-surface-alt);color:var(--color-text)}
+.nav-link.active{color:var(--color-primary);background:var(--color-primary-soft)}
+.nav-link .icon{width:16px;height:16px;flex-shrink:0}
+.nav-link .badge-count{min-width:18px;height:18px;padding:0 5px;background:var(--color-danger);color:var(--color-text-inverse);font-size:10px;font-weight:var(--fw-semibold);border-radius:var(--radius-full);display:inline-grid;place-items:center;line-height:1}
+.header-actions{display:flex;align-items:center;gap:var(--space-1);flex-shrink:0}
+.icon-btn{position:relative;width:36px;height:36px;display:grid;place-items:center;border-radius:var(--radius);color:var(--color-text-secondary);transition:background var(--t-fast),color var(--t-fast)}
+.icon-btn:hover{background:var(--color-surface-alt);color:var(--color-text)}
+.icon-btn .icon{width:18px;height:18px}
+.icon-btn .badge-count{position:absolute;top:2px;right:2px;min-width:16px;height:16px;padding:0 4px;background:var(--color-danger);color:var(--color-text-inverse);font-size:10px;font-weight:var(--fw-semibold);border-radius:var(--radius-full);display:grid;place-items:center;line-height:1}
+.menu-toggle{display:none}
+
+/* FOOTER */
+.site-footer{background:var(--color-surface);border-top:1px solid var(--color-border);padding:var(--space-10) 0 var(--space-6);margin-top:auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:var(--space-8);margin-bottom:var(--space-8)}
+.footer-col h4{font-size:var(--fs-sm);font-weight:var(--fw-semibold);margin-bottom:var(--space-3)}
+.footer-col p,.footer-col a{font-size:var(--fs-sm);color:var(--color-text-secondary);line-height:var(--lh-relaxed)}
+.footer-col ul{display:flex;flex-direction:column;gap:var(--space-2)}
+.footer-col a:hover{color:var(--color-primary)}
+.footer-brand{display:flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-3);font-weight:var(--fw-bold);font-size:var(--fs-md)}
+.footer-bottom{padding-top:var(--space-5);border-top:1px solid var(--color-border);display:flex;justify-content:space-between;align-items:center;gap:var(--space-4);flex-wrap:wrap;font-size:var(--fs-xs);color:var(--color-text-muted)}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);padding:var(--space-3) var(--space-5);border-radius:var(--radius);font-size:var(--fs-base);font-weight:var(--fw-medium);line-height:1.2;border:1px solid transparent;cursor:pointer;transition:background var(--t-fast),border-color var(--t-fast),color var(--t-fast);white-space:nowrap;text-align:center;user-select:none}
+.btn .icon{width:16px;height:16px;flex-shrink:0}
+.btn-primary{background:var(--color-primary);color:var(--color-text-inverse)}
+.btn-primary:hover{background:var(--color-primary-hover)}
+.btn-outline{border-color:var(--color-border-strong);background:var(--color-surface);color:var(--color-text)}
+.btn-outline:hover{background:var(--color-surface-alt);border-color:var(--color-text-muted)}
+.btn-ghost{color:var(--color-text-secondary);background:transparent}
+.btn-ghost:hover{background:var(--color-surface-alt);color:var(--color-text)}
+.btn-sm{padding:var(--space-2) var(--space-3);font-size:var(--fs-sm)}
+.btn-sm .icon{width:14px;height:14px}
+.btn-block{width:100%}
+
+/* FORM */
+.input,.select{width:100%;padding:var(--space-3);border:1px solid var(--color-border-strong);border-radius:var(--radius);font-size:var(--fs-base);background:var(--color-surface);color:var(--color-text);transition:border-color var(--t-fast),box-shadow var(--t-fast)}
+.input:focus,.select:focus{outline:none;border-color:var(--color-primary);box-shadow:0 0 0 3px var(--color-primary-soft)}
+.input::placeholder{color:var(--color-text-muted)}
+.select{appearance:none;background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2356564f' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:32px;cursor:pointer}
+.input-with-icon{position:relative;display:flex;align-items:center}
+.input-with-icon .icon{position:absolute;left:var(--space-3);width:18px;height:18px;color:var(--color-text-muted);pointer-events:none}
+.input-with-icon .input{padding-left:42px}
+
+/* CARD */
+.card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);overflow:hidden}
+.card-padded{padding:var(--space-5)}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:var(--fs-xs);font-weight:var(--fw-medium);padding:2px 8px;border-radius:var(--radius-full);background:var(--color-surface-alt);color:var(--color-text-secondary);border:1px solid var(--color-border);white-space:nowrap;line-height:1.5}
+.badge .icon{width:12px;height:12px;flex-shrink:0}
+.badge-primary{background:var(--color-primary-soft);color:var(--color-primary);border-color:var(--color-primary-border)}
+.badge-success{background:var(--color-success-soft);color:var(--color-success);border-color:var(--color-success-border)}
+.badge-warning{background:var(--color-warning-soft);color:var(--color-warning);border-color:var(--color-warning-border)}
+.badge-danger{background:var(--color-danger-soft);color:var(--color-danger);border-color:var(--color-danger-border)}
+.badge-info{background:var(--color-info-soft);color:var(--color-info);border-color:var(--color-info-border)}
+.tag{display:inline-flex;align-items:center;gap:4px;font-size:var(--fs-xs);padding:2px 8px;border-radius:var(--radius-full);background:var(--color-surface-alt);color:var(--color-text-secondary);border:1px solid var(--color-border);font-weight:var(--fw-medium);white-space:nowrap}
+.tag .icon{width:12px;height:12px;flex-shrink:0}
+.chip{display:inline-flex;align-items:center;gap:var(--space-2);padding:6px 12px;border-radius:var(--radius-full);border:1px solid var(--color-border-strong);background:var(--color-surface);color:var(--color-text-secondary);font-size:var(--fs-sm);font-weight:var(--fw-medium);cursor:pointer;transition:background var(--t-fast),border-color var(--t-fast),color var(--t-fast);user-select:none;white-space:nowrap}
+.chip:hover{border-color:var(--color-text-muted);color:var(--color-text)}
+.chip.active{background:var(--color-primary);border-color:var(--color-primary);color:var(--color-text-inverse)}
+.chip .icon{width:14px;height:14px;flex-shrink:0}
+
+/* TOAST */
+.toast-container{position:fixed;bottom:var(--space-5);right:var(--space-5);z-index:var(--z-toast);display:flex;flex-direction:column;gap:var(--space-2);pointer-events:none;max-width:360px}
+.toast{background:var(--color-text);color:var(--color-text-inverse);padding:var(--space-3) var(--space-4);border-radius:var(--radius);font-size:var(--fs-sm);font-weight:var(--fw-medium);box-shadow:var(--shadow-md);display:flex;align-items:center;gap:var(--space-2);pointer-events:auto;animation:toastIn var(--t-base) ease;line-height:1.4}
+.toast .icon{width:16px;height:16px;flex-shrink:0}
+.toast-success{background:var(--color-success)}
+.toast-error{background:var(--color-danger)}
+.toast-warning{background:var(--color-warning)}
+.toast-info{background:var(--color-info)}
+.toast.leaving{opacity:0;transform:translateY(8px);transition:opacity var(--t-base),transform var(--t-base)}
+@keyframes toastIn{from{transform:translateY(8px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(20,20,15,.5);display:grid;place-items:center;padding:var(--space-4);z-index:var(--z-modal);animation:fadeIn var(--t-base);overflow-y:auto}
+.modal{background:var(--color-surface);border-radius:var(--radius-lg);max-width:720px;width:100%;max-height:90vh;overflow:auto;box-shadow:var(--shadow-lg);animation:slideUp var(--t-base) ease;margin:auto}
+.modal-lg{max-width:900px}
+.modal-header{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space-4);padding:var(--space-5) var(--space-6);border-bottom:1px solid var(--color-border);position:sticky;top:0;background:var(--color-surface);z-index:1}
+.modal-header h2{font-size:var(--fs-lg)}
+.modal-subtitle{font-size:var(--fs-sm);color:var(--color-text-muted);margin-top:2px}
+.modal-close{width:32px;height:32px;display:grid;place-items:center;border-radius:var(--radius);color:var(--color-text-muted);flex-shrink:0}
+.modal-close:hover{background:var(--color-surface-alt);color:var(--color-text)}
+.modal-body{padding:var(--space-6)}
+.modal-footer{padding:var(--space-4) var(--space-6);border-top:1px solid var(--color-border);display:flex;justify-content:flex-end;gap:var(--space-2);flex-wrap:wrap}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{transform:translateY(12px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+/* STATE */
+.state-block{text-align:center;padding:var(--space-12) var(--space-6);background:var(--color-surface);border:1px dashed var(--color-border-strong);border-radius:var(--radius-md)}
+.state-block .state-icon{width:44px;height:44px;color:var(--color-text-muted);margin:0 auto var(--space-4);opacity:.7}
+.state-block h3{font-size:var(--fs-md);margin-bottom:var(--space-2)}
+.state-block p{color:var(--color-text-muted);font-size:var(--fs-sm);margin-bottom:var(--space-5);max-width:420px;margin-left:auto;margin-right:auto}
+
+/* UTILITIES */
+.text-muted{color:var(--color-text-muted)}
+.text-secondary{color:var(--color-text-secondary)}
+.text-primary{color:var(--color-primary)}
+.text-danger{color:var(--color-danger)}
+.text-warning{color:var(--color-warning)}
+.text-success{color:var(--color-success)}
+.text-xs{font-size:var(--fs-xs)}
+.text-sm{font-size:var(--fs-sm)}
+.fw-medium{font-weight:var(--fw-medium)}
+.fw-semibold{font-weight:var(--fw-semibold)}
+.flex{display:flex}
+.flex-wrap{flex-wrap:wrap}
+.items-center{align-items:center}
+.justify-between{justify-content:space-between}
+.gap-2{gap:var(--space-2)}
+.gap-3{gap:var(--space-3)}
+.gap-4{gap:var(--space-4)}
+.mt-2{margin-top:var(--space-2)}
+.mt-3{margin-top:var(--space-3)}
+.mt-4{margin-top:var(--space-4)}
+.mb-3{margin-bottom:var(--space-3)}
+.mb-4{margin-bottom:var(--space-4)}
+.mb-5{margin-bottom:var(--space-5)}
+.hidden{display:none!important}
+
+/* =====================================================================
+   PAGE: SOURCES
+   ===================================================================== */
+
+/* Page header */
+.sources-header{margin-bottom:var(--space-6)}
+.sources-header h1{
+  font-size:var(--fs-2xl);
+  margin-bottom:var(--space-2);
+  display:flex;
+  align-items:center;
+  gap:var(--space-3);
+}
+.sources-header h1 .icon{width:26px;height:26px;color:var(--color-primary);flex-shrink:0}
+.sources-header p{color:var(--color-text-secondary);font-size:var(--fs-md);max-width:760px}
+
+/* Intro banner */
+.sources-intro{
+  background:linear-gradient(180deg,var(--color-primary-soft) 0%,var(--color-surface) 100%);
+  border:1px solid var(--color-primary-border);
+  border-radius:var(--radius-lg);
+  padding:var(--space-6);
+  margin-bottom:var(--space-8);
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:var(--space-5);
+  align-items:start;
+}
+.sources-intro-icon{
+  width:56px;height:56px;
+  border-radius:var(--radius-md);
+  background:var(--color-primary);
+  color:var(--color-text-inverse);
+  display:grid;
+  place-items:center;
+  flex-shrink:0;
+}
+.sources-intro-icon .icon{width:28px;height:28px}
+.sources-intro h2{font-size:var(--fs-lg);margin-bottom:var(--space-2)}
+.sources-intro p{font-size:var(--fs-sm);color:var(--color-text-secondary);line-height:var(--lh-relaxed)}
+.sources-intro ul{
+  margin-top:var(--space-3);
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  font-size:var(--fs-sm);
+  color:var(--color-text-secondary);
+}
+.sources-intro li{
+  display:flex;
+  align-items:flex-start;
+  gap:var(--space-2);
+}
+.sources-intro li .icon{width:14px;height:14px;color:var(--color-primary);flex-shrink:0;margin-top:3px}
+
+/* Stats overview */
+.sources-stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:var(--space-3);
+  margin-bottom:var(--space-8);
+}
+.source-stat{
+  background:var(--color-surface);
+  border:1px solid var(--color-border);
+  border-radius:var(--radius-md);
+  padding:var(--space-4);
+}
+.source-stat-label{
+  font-size:var(--fs-xs);
+  color:var(--color-text-muted);
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  font-weight:var(--fw-semibold);
+  margin-bottom:var(--space-2);
+  display:block;
+}
+.source-stat-value{
+  font-size:var(--fs-2xl);
+  font-weight:var(--fw-bold);
+  color:var(--color-text);
+  letter-spacing:-.02em;
+  line-height:1;
+  display:flex;
+  align-items:baseline;
+  gap:4px;
+}
+.source-stat-unit{font-size:var(--fs-sm);font-weight:var(--fw-medium);color:var(--color-text-muted)}
+.source-stat.primary .source-stat-value{color:var(--color-primary)}
+.source-stat.success .source-stat-value{color:var(--color-success)}
+.source-stat.warning .source-stat-value{color:var(--color-warning)}
+.source-stat.info .source-stat-value{color:var(--color-info)}
+
+/* Toolbar */
+.sources-toolbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:var(--space-4);
+  padding:var(--space-3) var(--space-4);
+  background:var(--color-surface);
+  border:1px solid var(--color-border);
+  border-radius:var(--radius-md);
+  margin-bottom:var(--space-5);
+  flex-wrap:wrap;
+}
+.sources-toolbar .search-wrap{flex:1;min-width:220px}
+.sources-toolbar .toolbar-right{display:flex;align-items:center;gap:var(--space-3);flex-wrap:wrap}
+
+/* Source list */
+.sources-list{
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-3);
+  margin-bottom:var(--space-8);
+}
+
+.source-item{
+  background:var(--color-surface);
+  border:1px solid var(--color-border);
+  border-radius:var(--radius-md);
+  padding:var(--space-5);
+  display:grid;
+  grid-template-columns:56px 1fr auto;
+  gap:var(--space-4);
+  align-items:start;
+  transition:border-color var(--t-fast),box-shadow var(--t-fast);
+}
+.source-item:hover{
+  border-color:var(--color-border-strong);
+  box-shadow:var(--shadow-sm);
+}
+
+.source-logo{
+  width:56px;height:56px;
+  border-radius:var(--radius-md);
+  display:grid;
+  place-items:center;
+  font-weight:var(--fw-bold);
+  font-size:var(--fs-lg);
+  color:var(--color-text-inverse);
+  flex-shrink:0;
+  letter-spacing:-.02em;
+}
+.source-logo.facebook{background:#1877f2}
+.source-logo.website{background:var(--color-primary)}
+.source-logo.forum{background:#7c3aed}
+.source-logo.other{background:var(--color-text-secondary)}
+
+.source-body{
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-3);
+  min-width:0;
+}
+.source-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:var(--space-3);
+  flex-wrap:wrap;
+}
+.source-name{
+  font-size:var(--fs-md);
+  font-weight:var(--fw-semibold);
+  color:var(--color-text);
+  line-height:1.3;
+}
+.source-type{
+  font-size:var(--fs-xs);
+  color:var(--color-text-muted);
+  margin-top:2px;
+}
+.source-desc{
+  font-size:var(--fs-sm);
+  color:var(--color-text-secondary);
+  line-height:var(--lh-relaxed);
+}
+.source-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:var(--space-3);
+  font-size:var(--fs-sm);
+  color:var(--color-text-secondary);
+}
+.source-meta-item{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+}
+.source-meta-item .icon{width:14px;height:14px;color:var(--color-text-muted);flex-shrink:0}
+.source-meta-item strong{color:var(--color-text);font-weight:var(--fw-semibold)}
+
+.source-badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+
+.source-actions{
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-2);
+  align-items:stretch;
+  flex-shrink:0;
+  min-width:140px;
+}
+.source-actions .btn{width:100%}
+
+/* Reliability indicator */
+.reliability{
+  display:flex;
+  align-items:center;
+  gap:var(--space-2);
+  font-size:var(--fs-sm);
+}
+.reliability-label{
+  color:var(--color-text-muted);
+  font-size:var(--fs-xs);
+}
+.reliability-dots{
+  display:inline-flex;
+  gap:3px;
+}
+.reliability-dot{
+  width:10px;height:10px;
+  border-radius:50%;
+  background:var(--color-border);
+  flex-shrink:0;
+}
+.reliability-dot.filled-high{background:var(--color-success)}
+.reliability-dot.filled-medium{background:var(--color-warning)}
+.reliability-dot.filled-low{background:var(--color-danger)}
+.reliability-value{
+  font-weight:var(--fw-semibold);
+  font-size:var(--fs-xs);
+}
+.reliability-value.high{color:var(--color-success)}
+.reliability-value.medium{color:var(--color-warning)}
+.reliability-value.low{color:var(--color-danger)}
+
+/* Status pill */
+.status-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  font-size:var(--fs-xs);
+  font-weight:var(--fw-semibold);
+  padding:3px 9px;
+  border-radius:var(--radius-full);
+  white-space:nowrap;
+  line-height:1.4;
+}
+.status-pill .status-dot{
+  width:6px;height:6px;border-radius:50%;flex-shrink:0;
+}
+.status-pill.active{background:var(--color-success-soft);color:var(--color-success)}
+.status-pill.active .status-dot{background:var(--color-success);box-shadow:0 0 0 2px rgba(22,101,52,.2)}
+.status-pill.paused{background:var(--color-surface-alt);color:var(--color-text-muted);border:1px solid var(--color-border)}
+.status-pill.paused .status-dot{background:var(--color-text-muted)}
+.status-pill.issue{background:var(--color-danger-soft);color:var(--color-danger)}
+.status-pill.issue .status-dot{background:var(--color-danger)}
+
+/* Async section — 2 cột */
+.sources-aside{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:var(--space-5);
+  margin-bottom:var(--space-8);
+}
+.aside-card{
+  background:var(--color-surface);
+  border:1px solid var(--color-border);
+  border-radius:var(--radius-md);
+  padding:var(--space-5);
+}
+.aside-card h3{
+  font-size:var(--fs-base);
+  font-weight:var(--fw-semibold);
+  margin-bottom:var(--space-4);
+  display:flex;
+  align-items:center;
+  gap:var(--space-2);
+}
+.aside-card h3 .icon{width:16px;height:16px;color:var(--color-primary);flex-shrink:0}
+
+/* Pipeline steps */
+.pipeline{
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-3);
+}
+.pipeline-step{
+  display:flex;
+  gap:var(--space-3);
+  align-items:flex-start;
+}
+.pipeline-num{
+  width:26px;height:26px;
+  border-radius:50%;
+  background:var(--color-primary-soft);
+  color:var(--color-primary);
+  display:grid;
+  place-items:center;
+  font-size:var(--fs-xs);
+  font-weight:var(--fw-bold);
+  flex-shrink:0;
+}
+.pipeline-content{
+  font-size:var(--fs-sm);
+  color:var(--color-text-secondary);
+  line-height:1.55;
+}
+.pipeline-content strong{
+  color:var(--color-text);
+  font-weight:var(--fw-semibold);
+  display:block;
+  margin-bottom:2px;
+}
+
+/* Status legend */
+.legend-list{
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-3);
+  font-size:var(--fs-sm);
+}
+.legend-item{
+  display:flex;
+  gap:var(--space-3);
+  align-items:flex-start;
+}
+.legend-item .badge,
+.legend-item .status-pill{margin-top:1px;flex-shrink:0}
+.legend-desc{color:var(--color-text-secondary);line-height:1.55}
+.legend-desc strong{color:var(--color-text);font-weight:var(--fw-semibold);display:block;margin-bottom:2px}
+
+/* Disclaimer */
+.disclaimer-box{
+  padding:var(--space-4);
+  background:var(--color-surface-alt);
+  border:1px solid var(--color-border);
+  border-radius:var(--radius);
+  font-size:var(--fs-xs);
+  color:var(--color-text-secondary);
+  line-height:1.6;
+}
+.disclaimer-box strong{color:var(--color-text);font-weight:var(--fw-semibold)}
+.disclaimer-box ul{
+  margin-top:var(--space-2);
+  padding-left:var(--space-4);
+  list-style:disc;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+
+/* Modal source detail */
+.source-detail-head{
+  display:flex;
+  gap:var(--space-4);
+  align-items:center;
+  margin-bottom:var(--space-5);
+}
+.source-detail-head .source-logo{
+  width:64px;height:64px;
+  font-size:var(--fs-xl);
+}
+.source-detail-head h2{
+  font-size:var(--fs-lg);
+  margin-bottom:2px;
+}
+.source-detail-head p{
+  font-size:var(--fs-sm);
+  color:var(--color-text-muted);
+}
+
+.modal-section{margin-bottom:var(--space-5)}
+.modal-section:last-child{margin-bottom:0}
+.modal-section h4{
+  font-size:var(--fs-xs);
+  font-weight:var(--fw-semibold);
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  color:var(--color-text-muted);
+  margin-bottom:var(--space-3);
+  display:flex;
+  align-items:center;
+  gap:var(--space-2);
+}
+.modal-section h4 .icon{width:14px;height:14px}
+
+.fact-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:var(--space-3);
+}
+.fact-item{
+  padding:var(--space-3);
+  background:var(--color-surface-alt);
+  border:1px solid var(--color-border);
+  border-radius:var(--radius);
+}
+.fact-label{font-size:var(--fs-xs);color:var(--color-text-muted);margin-bottom:2px}
+.fact-value{font-size:var(--fs-sm);font-weight:var(--fw-semibold);color:var(--color-text)}
+
+/* Sample listings in modal */
+.sample-list{
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-2);
+}
+.sample-item{
+  padding:var(--space-3);
+  background:var(--color-surface-alt);
+  border:1px solid var(--color-border);
+  border-radius:var(--radius);
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+.sample-title{
+  font-size:var(--fs-sm);
+  font-weight:var(--fw-medium);
+  color:var(--color-text);
+  line-height:1.4;
+}
+.sample-meta{
+  font-size:var(--fs-xs);
+  color:var(--color-text-muted);
+  display:flex;
+  gap:var(--space-3);
+  flex-wrap:wrap;
+}
+
+/* RESPONSIVE */
+@media (max-width:1024px){
+  .sources-stats{grid-template-columns:repeat(2,1fr)}
+  .sources-aside{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:768px){
+  .container{padding:0 var(--space-4)}
+  .main-nav{display:none}
+  .menu-toggle{display:grid}
+  .header-inner{gap:var(--space-3);padding:0 var(--space-4)}
+  .logo-sub{display:none}
+  .header-actions .desktop-only{display:none}
+  .page-content{padding:var(--space-6) 0 var(--space-10)}
+  .footer-grid{grid-template-columns:1fr;gap:var(--space-6)}
+  .footer-bottom{flex-direction:column;align-items:flex-start}
+  .sources-stats{grid-template-columns:1fr}
+  .sources-intro{grid-template-columns:1fr;text-align:center;padding:var(--space-5)}
+  .sources-intro-icon{margin:0 auto}
+  .sources-toolbar{flex-direction:column;align-items:stretch}
+  .source-item{grid-template-columns:1fr;gap:var(--space-3)}
+  .source-logo{width:44px;height:44px;font-size:var(--fs-md)}
+  .source-actions{min-width:0;flex-direction:row}
+  .source-actions .btn{flex:1}
+  .toast-container{left:var(--space-4);right:var(--space-4);bottom:var(--space-4);max-width:none}
+  .modal-overlay{padding:0;align-items:flex-end}
+  .modal{max-width:100%;border-radius:var(--radius-lg) var(--radius-lg) 0 0;max-height:92vh}
+  .modal-body{padding:var(--space-5)}
+}
+@media (max-width:480px){
+  :root{--fs-3xl:1.75rem;--fs-2xl:1.5rem;--fs-xl:1.25rem}
+  .btn{padding:var(--space-2) var(--space-4)}
+}
+</style>
+</head>
+<body>
+
+<div id="app" class="app-shell">
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#" class="logo">
+        <span class="logo-mark">PH</span>
+        <span class="logo-text">Phòng Huế<span class="logo-sub">Tổng hợp tin cho thuê</span></span>
+      </a>
+      <nav class="main-nav">
+        <a href="#" class="nav-link"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> Khám phá tin</a>
+        <a href="#" class="nav-link"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Tìm phòng</a>
+        <a href="#" class="nav-link"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Khu vực</a>
+        <a href="#" class="nav-link"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg> Cảnh báo ngập lụt</a>
+        <a href="#" class="nav-link"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg> Tin đã lưu</a>
+        <a href="#" class="nav-link active"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg> Nguồn tin</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn desktop-only" aria-label="Tìm kiếm"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
+        <button class="icon-btn desktop-only" aria-label="Tin đã lưu"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></button>
+        <button class="icon-btn" aria-label="Tài khoản"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></button>
+        <button class="icon-btn menu-toggle" aria-label="Menu"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="page-content" class="page-content"></main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-brand"><span class="logo-mark">PH</span><span>Phòng Huế</span></div>
+          <p>Nền tảng tổng hợp tin cho thuê phòng trọ tại Huế từ nhiều nguồn. Giúp bạn tìm phòng nhanh, minh bạch nguồn gốc và an tâm hơn với thông tin lịch sử ngập lụt.</p>
+        </div>
+        <div class="footer-col"><h4>Khám phá</h4><ul><li><a href="#">Tin mới nhất</a></li><li><a href="#">Theo khu vực</a></li><li><a href="#">Theo giá</a></li><li><a href="#">Tin đã lưu</a></li></ul></div>
+        <div class="footer-col"><h4>Thông tin</h4><ul><li><a href="#">Về nền tảng</a></li><li><a href="#">Nguồn dữ liệu</a></li><li><a href="#">Lịch sử ngập lụt</a></li><li><a href="#">Cộng đồng</a></li></ul></div>
+        <div class="footer-col"><h4>Lưu ý</h4><p>Dữ liệu trong bản demo là dữ liệu minh họa, không phản ánh tình trạng thực tế. Vui lòng kiểm tra kỹ thông tin trước khi liên hệ thuê phòng.</p></div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Phòng Huế — Bản demo giao diện.</span>
+        <span>Dữ liệu minh họa · Không dùng cho mục đích thương mại</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<div id="toast-container" class="toast-container" aria-live="polite"></div>
+<div id="modal-root"></div>
+
+<script>
+/* =====================================================================
+   DATA — Sources metadata + listings để đếm
+   ===================================================================== */
+const SOURCES = [
+  {
+    id: 'fb1',
+    name: 'Nhóm Cho thuê phòng trọ Huế',
+    type: 'facebook',
+    typeLabel: 'Nhóm Facebook',
+    url: '#',
+    description: 'Nhóm Facebook lớn nhất về cho thuê phòng trọ tại Huế. Thành viên đăng tin trực tiếp, không qua kiểm duyệt. Nội dung đa dạng, chất lượng không đồng đều.',
+    memberCount: 45000,
+    reliability: 'medium',
+    status: 'active',
+    lastSync: '2025-01-12T10:00:00',
+    syncFrequency: '15 phút / lần',
+    totalCollected: 1240,
+    collectedToday: 12,
+    duplicateRate: '18%'
+  },
+  {
+    id: 'fb2',
+    name: 'Phòng trọ sinh viên Huế',
+    type: 'facebook',
+    typeLabel: 'Nhóm Facebook',
+    url: '#',
+    description: 'Nhóm tập trung vào phòng trọ cho sinh viên tại Huế. Nhiều tin giá rẻ, gần các trường đại học. Một số tin thiếu thông tin chi tiết.',
+    memberCount: 28000,
+    reliability: 'medium',
+    status: 'active',
+    lastSync: '2025-01-12T10:00:00',
+    syncFrequency: '15 phút / lần',
+    totalCollected: 860,
+    collectedToday: 8,
+    duplicateRate: '22%'
+  },
+  {
+    id: 'fb3',
+    name: 'Thuê phòng Huế - Giá rẻ',
+    type: 'facebook',
+    typeLabel: 'Nhóm Facebook',
+    url: '#',
+    description: 'Nhóm chuyên về phòng trọ giá rẻ. Nhiều tin thiếu giá hoặc địa chỉ cụ thể. Cần kiểm tra kỹ trước khi liên hệ.',
+    memberCount: 18000,
+    reliability: 'low',
+    status: 'active',
+    lastSync: '2025-01-12T09:45:00',
+    syncFrequency: '30 phút / lần',
+    totalCollected: 420,
+    collectedToday: 5,
+    duplicateRate: '31%'
+  },
+  {
+    id: 'fb4',
+    name: 'Nhà trọ An Cựu - Huế',
+    type: 'facebook',
+    typeLabel: 'Nhóm Facebook',
+    url: '#',
+    description: 'Nhóm khu vực quanh chợ An Cựu. Lượng tin ít nhưng tập trung vào khu vực cụ thể, giúp người tìm phòng có nhu cầu tại đây.',
+    memberCount: 8500,
+    reliability: 'medium',
+    status: 'active',
+    lastSync: '2025-01-12T09:50:00',
+    syncFrequency: '30 phút / lần',
+    totalCollected: 210,
+    collectedToday: 3,
+    duplicateRate: '15%'
+  },
+  {
+    id: 'fb5',
+    name: 'Cho thuê phòng khu vực Đại học',
+    type: 'facebook',
+    typeLabel: 'Nhóm Facebook',
+    url: '#',
+    description: 'Nhóm tập trung vào khu vực gần các trường đại học lớn: ĐH Khoa học, ĐH Sư phạm, ĐH Nông Lâm. Tin thường có thông tin đầy đủ hơn.',
+    memberCount: 22000,
+    reliability: 'medium',
+    status: 'active',
+    lastSync: '2025-01-12T10:00:00',
+    syncFrequency: '15 phút / lần',
+    totalCollected: 680,
+    collectedToday: 7,
+    duplicateRate: '19%'
+  },
+  {
+    id: 'web1',
+    name: 'Nhatrohue.vn',
+    type: 'website',
+    typeLabel: 'Website đăng tin',
+    url: '#',
+    description: 'Website đăng tin cho thuê phòng trọ truyền thống. Tin thường có cấu trúc rõ ràng, đầy đủ thông tin hơn so với nhóm Facebook.',
+    memberCount: null,
+    reliability: 'high',
+    status: 'active',
+    lastSync: '2025-01-12T08:00:00',
+    syncFrequency: '2 giờ / lần',
+    totalCollected: 380,
+    collectedToday: 4,
+    duplicateRate: '8%'
+  },
+  {
+    id: 'fb6',
+    name: 'Phòng trọ Huế giá tốt',
+    type: 'facebook',
+    typeLabel: 'Nhóm Facebook',
+    url: '#',
+    description: 'Nhóm nhỏ, hoạt động không đều. Tạm dừng thu thập do chất lượng dữ liệu thấp và tỷ lệ trùng lặp cao.',
+    memberCount: 6200,
+    reliability: 'low',
+    status: 'paused',
+    lastSync: '2024-12-28T15:30:00',
+    syncFrequency: 'Đã tạm dừng',
+    totalCollected: 95,
+    collectedToday: 0,
+    duplicateRate: '42%'
+  },
+  {
+    id: 'forum1',
+    name: 'Diễn đàn sinh viên Huế',
+    type: 'forum',
+    typeLabel: 'Diễn đàn',
+    url: '#',
+    description: 'Diễn đàn sinh viên có mục cho thuê phòng. Đang gặp lỗi kết nối, tạm thời không thu thập được dữ liệu mới.',
+    memberCount: 15000,
+    reliability: 'medium',
+    status: 'issue',
+    lastSync: '2025-01-08T11:20:00',
+    syncFrequency: '1 giờ / lần',
+    totalCollected: 145,
+    collectedToday: 0,
+    duplicateRate: '12%',
+    issueNote: 'Lỗi kết nối từ 08/01/2025. Đang kiểm tra.'
+  }
+];
+
+/* Đếm số tin thực tế trong LISTINGS demo (để hiển thị "có trong demo") */
+const DEMO_LISTING_COUNTS = {
+  fb1: 3,
+  fb2: 3,
+  fb3: 4,
+  fb4: 3,
+  fb5: 2,
+  web1: 4,
+  fb6: 0,
+  forum1: 0
+};
+
+/* =====================================================================
+   HELPERS
+   ===================================================================== */
+const $ = (s, c = document) => c.querySelector(s);
+const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
+function escapeHtml(s){if(s==null)return'';return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function formatNumber(v){if(v==null)return'—';return new Intl.NumberFormat('vi-VN').format(v);}
+function timeAgo(iso){if(!iso)return'';const d=new Date(iso);const diff=(Date.now()-d.getTime())/1000;if(diff<60)return'vừa xong';if(diff<3600)return Math.floor(diff/60)+' phút trước';if(diff<86400)return Math.floor(diff/3600)+' giờ trước';if(diff<2592000)return Math.floor(diff/86400)+' ngày trước';return d.toLocaleDateString('vi-VN');}
+function formatDateTime(iso){if(!iso)return'—';const d=new Date(iso);return d.toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric'})+' '+d.toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'});}
+
+const ICONS = {
+  search:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
+  layers:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
+  external:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>',
+  clock:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+  alert:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>',
+  info:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>',
+  check:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+  close:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>',
+  refresh:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>',
+  users:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  home:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+  copy:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>',
+  arrowRight:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>',
+  settings:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>',
+  filter:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>',
+  book:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>',
+  shield:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>',
+  link:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>'
+};
+
+const Toast = {
+  show(msg, type='default'){
+    const c = $('#toast-container');
+    const el = document.createElement('div');
+    el.className = 'toast' + (type!=='default'?' toast-'+type:'');
+    const iconMap = {success:ICONS.check,error:ICONS.alert,warning:ICONS.alert,info:ICONS.info,default:ICONS.check};
+    el.innerHTML = (iconMap[type]||ICONS.check)+'<span>'+escapeHtml(msg)+'</span>';
+    c.appendChild(el);
+    setTimeout(()=>{el.classList.add('leaving');setTimeout(()=>el.remove(),200);},2600);
+  },
+  success(m){this.show(m,'success')},
+  error(m){this.show(m,'error')},
+  warning(m){this.show(m,'warning')},
+  info(m){this.show(m,'info')}
+};
+
+const Modal = {
+  _current:null,
+  open(html,{size=''}={}){
+    this.close(true);
+    const root = $('#modal-root');
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+    overlay.innerHTML = `<div class="modal ${size?'modal-'+size:''}" role="dialog" aria-modal="true">${html}</div>`;
+    root.appendChild(overlay);
+    document.body.style.overflow = 'hidden';
+    overlay.addEventListener('mousedown', e => { if(e.target===overlay) this.close(); });
+    $$('[data-modal-close]', overlay).forEach(b => b.addEventListener('click', () => this.close()));
+    const focusable = overlay.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (focusable) focusable.focus();
+    this._key = e => { if (e.key==='Escape') this.close(); };
+    document.addEventListener('keydown', this._key);
+    this._current = { overlay };
+  },
+  close(){
+    if(!this._current) return;
+    this._current.overlay.remove();
+    document.body.style.overflow = '';
+    document.removeEventListener('keydown', this._key);
+    this._current = null;
+  }
+};
+
+/* =====================================================================
+   STATE
+   ===================================================================== */
+const State = {
+  query: '',
+  type: 'all',
+  status: 'all',
+  reliability: 'all',
+  sort: 'name'
+};
+
+/* =====================================================================
+   LOGIC
+   ===================================================================== */
+function getSourceTypeLabel(type){
+  return {
+    facebook: 'Nhóm Facebook',
+    website: 'Website đăng tin',
+    forum: 'Diễn đàn',
+    other: 'Khác'
+  }[type] || 'Khác';
+}
+
+function getReliabilityMeta(level){
+  return {
+    high: { label: 'Cao', cls: 'high', value: '3/3' },
+    medium: { label: 'Trung bình', cls: 'medium', value: '2/3' },
+    low: { label: 'Thấp', cls: 'low', value: '1/3' }
+  }[level] || { label: 'Chưa rõ', cls: 'low', value: '—' };
+}
+
+function getStatusMeta(status){
+  return {
+    active: { label: 'Đang hoạt động', cls: 'active' },
+    paused: { label: 'Tạm dừng', cls: 'paused' },
+    issue: { label: 'Có vấn đề', cls: 'issue' }
+  }[status] || { label: 'Không rõ', cls: 'paused' };
+}
+
+function getSourceInitials(name){
+  // Lấy chữ cái đầu của 2-3 từ
+  const words = name.split(' ').filter(w => w.length > 0);
+  if(words.length === 0) return '?';
+  if(words.length === 1) return words[0].charAt(0).toUpperCase();
+  return (words[0].charAt(0) + words[1].charAt(0)).toUpperCase();
+}
+
+function computeStats(){
+  const total = SOURCES.length;
+  const active = SOURCES.filter(s => s.status === 'active').length;
+  const totalCollected = SOURCES.reduce((sum, s) => sum + s.totalCollected, 0);
+  const collectedToday = SOURCES.reduce((sum, s) => sum + s.collectedToday, 0);
+  const demoListings = Object.values(DEMO_LISTING_COUNTS).reduce((s, v) => s + v, 0);
+  return { total, active, totalCollected, collectedToday, demoListings };
+}
+
+function filterSources(){
+  let result = [...SOURCES];
+
+  if(State.query.trim()){
+    const q = State.query.toLowerCase().trim();
+    result = result.filter(s =>
+      s.name.toLowerCase().includes(q) ||
+      s.description.toLowerCase().includes(q)
+    );
+  }
+
+  if(State.type !== 'all'){
+    result = result.filter(s => s.type === State.type);
+  }
+
+  if(State.status !== 'all'){
+    result = result.filter(s => s.status === State.status);
+  }
+
+  if(State.reliability !== 'all'){
+    result = result.filter(s => s.reliability === State.reliability);
+  }
+
+  switch(State.sort){
+    case 'name':
+      result.sort((a,b) => a.name.localeCompare(b.name, 'vi'));
+      break;
+    case 'collected-desc':
+      result.sort((a,b) => b.totalCollected - a.totalCollected);
+      break;
+    case 'today-desc':
+      result.sort((a,b) => b.collectedToday - a.collectedToday);
+      break;
+    case 'sync-desc':
+      result.sort((a,b) => new Date(b.lastSync) - new Date(a.lastSync));
+      break;
+    case 'reliability-desc': {
+      const order = { high: 0, medium: 1, low: 2 };
+      result.sort((a,b) => order[a.reliability] - order[b.reliability]);
+      break;
+    }
+  }
+
+  return result;
+}
+
+/* =====================================================================
+   RENDER
+   ===================================================================== */
+function renderSourcesPage(){
+  const main = $('#page-content');
+  const stats = computeStats();
+
+  main.innerHTML = `
+    <div class="container">
+
+      <div class="sources-header">
+        <h1>${ICONS.layers} Nguồn tin &amp; độ tin cậy</h1>
+        <p>Minh bạch nguồn gốc dữ liệu là ưu tiên của Phòng Huế. Trang này liệt kê các nguồn chúng tôi thu thập, tần suất cập nhật, mức độ tin cậy và trạng thái hoạt động của từng nguồn.</p>
+      </div>
+
+      <!-- Intro -->
+      <div class="sources-intro">
+        <div class="sources-intro-icon">${ICONS.shield}</div>
+        <div>
+          <h2>Vì sao minh bạch nguồn tin quan trọng?</h2>
+          <p>Dữ liệu cho thuê phòng trọ tại Huế phần lớn đến từ các nhóm Facebook và website đăng tin, nơi thông tin không được kiểm duyệt tập trung. Chúng tôi không tự tạo ra tin — chúng tôi tổng hợp và chuẩn hóa. Vì vậy, mỗi tin đều phải ghi rõ nguồn gốc và mức độ tin cậy để bạn tự đánh giá.</p>
+          <ul>
+            <li>${ICONS.check}<span><strong>Không tự tạo tin:</strong> mọi tin đều có nguồn gốc cụ thể.</span></li>
+            <li>${ICONS.check}<span><strong>Không tự xác minh:</strong> chúng tôi không tuyên bố "đã xác thực" nếu chưa có cơ chế kiểm chứng.</span></li>
+            <li>${ICONS.check}<span><strong>Ghi rõ trạng thái:</strong> mỗi tin được gắn nhãn về mức độ đầy đủ của dữ liệu.</span></li>
+            <li>${ICONS.check}<span><strong>Cập nhật liên tục:</strong> nguồn được theo dõi và ghi nhận thời gian thu thập.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="sources-stats">
+        <div class="source-stat primary">
+          <span class="source-stat-label">Tổng nguồn theo dõi</span>
+          <div class="source-stat-value">${stats.total}<span class="source-stat-unit">nguồn</span></div>
+        </div>
+        <div class="source-stat success">
+          <span class="source-stat-label">Đang hoạt động</span>
+          <div class="source-stat-value">${stats.active}<span class="source-stat-unit">nguồn</span></div>
+        </div>
+        <div class="source-stat info">
+          <span class="source-stat-label">Tin đã thu thập</span>
+          <div class="source-stat-value">${formatNumber(stats.totalCollected)}</div>
+        </div>
+        <div class="source-stat warning">
+          <span class="source-stat-label">Thu thập hôm nay</span>
+          <div class="source-stat-value">${stats.collectedToday}<span class="source-stat-unit">tin</span></div>
+        </div>
+      </div>
+
+      <!-- Toolbar -->
+      <div class="sources-toolbar">
+        <div class="search-wrap input-with-icon">
+          ${ICONS.search}
+          <input type="search" class="input" id="source-search" placeholder="Tìm nguồn tin…" value="${escapeHtml(State.query)}" />
+        </div>
+        <div class="toolbar-right">
+          <select class="select" id="source-type-filter" style="width:auto;min-width:150px">
+            <option value="all">Tất cả loại</option>
+            <option value="facebook">Nhóm Facebook</option>
+            <option value="website">Website</option>
+            <option value="forum">Diễn đàn</option>
+          </select>
+          <select class="select" id="source-status-filter" style="width:auto;min-width:140px">
+            <option value="all">Mọi trạng thái</option>
+            <option value="active">Đang hoạt động</option>
+            <option value="paused">Tạm dừng</option>
+            <option value="issue">Có vấn đề</option>
+          </select>
+          <select class="select" id="source-sort" style="width:auto;min-width:170px">
+            <option value="name">Tên A → Z</option>
+            <option value="collected-desc">Nhiều tin nhất</option>
+            <option value="today-desc">Mới thu thập hôm nay</option>
+            <option value="sync-desc">Đồng bộ gần nhất</option>
+            <option value="reliability-desc">Độ tin cậy cao</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Sources list -->
+      <div class="sources-list" id="sources-list"></div>
+
+      <!-- Aside: pipeline + legend + disclaimer -->
+      <div class="sources-aside">
+        <div class="aside-card">
+          <h3>${ICONS.settings} Quy trình thu thập &amp; chuẩn hóa</h3>
+          <div class="pipeline">
+            <div class="pipeline-step">
+              <span class="pipeline-num">1</span>
+              <div class="pipeline-content">
+                <strong>Thu thập tự động</strong>
+                Hệ thống định kỳ quét các nhóm Facebook và website đăng tin để lấy bài viết mới.
+              </div>
+            </div>
+            <div class="pipeline-step">
+              <span class="pipeline-num">2</span>
+              <div class="pipeline-content">
+                <strong>Trích xuất thông tin</strong>
+                Giá thuê, diện tích, địa chỉ, tiện nghi được trích xuất từ nội dung bài viết khi có thể.
+              </div>
+            </div>
+            <div class="pipeline-step">
+              <span class="pipeline-num">3</span>
+              <div class="pipeline-content">
+                <strong>Chuẩn hóa dữ liệu</strong>
+                Giá được chuẩn hóa về đơn vị triệu VNĐ, địa chỉ về dạng thống nhất, loại hình về danh mục cố định.
+              </div>
+            </div>
+            <div class="pipeline-step">
+              <span class="pipeline-num">4</span>
+              <div class="pipeline-content">
+                <strong>Phát hiện trùng lặp</strong>
+                Các bài đăng có nội dung tương tự được đánh dấu "có thể trùng tin" để người dùng cân nhắc.
+              </div>
+            </div>
+            <div class="pipeline-step">
+              <span class="pipeline-num">5</span>
+              <div class="pipeline-content">
+                <strong>Gắn nhãn trạng thái</strong>
+                Mỗi tin được gắn nhãn: đủ thông tin, thiếu thông tin, chưa xác thực hoặc có thể đã cũ.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="aside-card">
+          <h3>${ICONS.shield} Giải thích nhãn trạng thái</h3>
+          <div class="legend-list">
+            <div class="legend-item">
+              <span class="badge badge-success">${ICONS.check} Đủ thông tin</span>
+              <div class="legend-desc">
+                <strong>Đủ thông tin cơ bản</strong>
+                Bài đăng có giá thuê và địa chỉ/khu vực rõ ràng.
+              </div>
+            </div>
+            <div class="legend-item">
+              <span class="badge badge-warning">${ICONS.info} Thiếu thông tin</span>
+              <div class="legend-desc">
+                <strong>Thiếu một số dữ liệu</strong>
+                Có thể thiếu giá, diện tích hoặc địa chỉ cụ thể. Cần liên hệ để xác nhận.
+              </div>
+            </div>
+            <div class="legend-item">
+              <span class="badge badge-info">${ICONS.info} Chưa xác thực</span>
+              <div class="legend-desc">
+                <strong>Thông tin chưa kiểm chứng</strong>
+                Nội dung có dấu hiệu bất thường hoặc thiếu căn cứ để xác minh.
+              </div>
+            </div>
+            <div class="legend-item">
+              <span class="badge badge-danger">${ICONS.alert} Có thể đã cũ</span>
+              <div class="legend-desc">
+                <strong>Tin có thể đã cũ</strong>
+                Bài đăng đã lâu không được cập nhật hoặc có dấu hiệu hết hạn.
+              </div>
+            </div>
+            <div class="legend-item">
+              <span class="badge badge-warning">${ICONS.copy} Có thể trùng tin</span>
+              <div class="legend-desc">
+                <strong>Nghi ngờ trùng lặp</strong>
+                Có bài đăng khác có nội dung tương tự. Không khẳng định là cùng một phòng.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Disclaimer -->
+      <div class="disclaimer-box">
+        <strong>${ICONS.alert} Lưu ý quan trọng</strong>
+        <ul>
+          <li>Mức độ tin cậy của nguồn phản ánh <em>chất lượng trung bình</em> của dữ liệu từ nguồn đó, không đảm bảo mọi tin từ nguồn đều chính xác.</li>
+          <li>Phòng Huế <strong>không xác minh</strong> từng bài đăng cụ thể. Nhãn "đủ thông tin" chỉ có nghĩa là bài đăng có đủ trường dữ liệu cơ bản, không phải đã được kiểm chứng thực tế.</li>
+          <li>Số liệu thu thập trong bản demo là dữ liệu minh họa, không phản ánh hoạt động thực tế của hệ thống.</li>
+          <li>Luôn kiểm tra thực tế và liên hệ trực tiếp với chủ trọ trước khi đặt cọc hoặc ký hợp đồng.</li>
+        </ul>
+      </div>
+
+    </div>
+  `;
+
+  renderSourcesList();
+  bindSourcesEvents();
+}
+
+function renderSourcesList(){
+  const list = $('#sources-list');
+  if(!list) return;
+
+  const filtered = filterSources();
+
+  if(filtered.length === 0){
+    list.innerHTML = `
+      <div class="state-block">
+        <div class="state-icon">${ICONS.search}</div>
+        <h3>Không tìm thấy nguồn tin phù hợp</h3>
+        <p>Thử thay đổi bộ lọc hoặc xóa ô tìm kiếm để xem tất cả nguồn.</p>
+      </div>
+    `;
+    return;
+  }
+
+  list.innerHTML = filtered.map(renderSourceItem).join('');
+}
+
+function renderSourceItem(s){
+  const rel = getReliabilityMeta(s.reliability);
+  const status = getStatusMeta(s.status);
+  const typeLabel = getSourceTypeLabel(s.type);
+  const initials = getSourceInitials(s.name);
+  const demoCount = DEMO_LISTING_COUNTS[s.id] || 0;
+
+  // Reliability dots
+  const filledCount = s.reliability === 'high' ? 3 : s.reliability === 'medium' ? 2 : 1;
+  const dots = Array.from({length: 3}).map((_, i) =>
+    `<span class="reliability-dot ${i < filledCount ? 'filled-' + rel.cls : ''}"></span>`
+  ).join('');
+
+  return `
+    <article class="source-item" data-source-id="${s.id}">
+      <div class="source-logo ${s.type}" aria-hidden="true">${escapeHtml(initials)}</div>
+      <div class="source-body">
+        <div class="source-head">
+          <div>
+            <div class="source-name">${escapeHtml(s.name)}</div>
+            <div class="source-type">${escapeHtml(typeLabel)}${s.memberCount ? ' · ' + formatNumber(s.memberCount) + ' thành viên' : ''}</div>
+          </div>
+          <div class="source-badges">
+            <span class="status-pill ${status.cls}">
+              <span class="status-dot"></span>${status.label}
+            </span>
+          </div>
+        </div>
+
+        <p class="source-desc">${escapeHtml(s.description)}</p>
+
+        <div class="source-meta">
+          <span class="source-meta-item">
+            ${ICONS.home}<span>Đã thu thập: <strong>${formatNumber(s.totalCollected)}</strong> tin</span>
+          </span>
+          <span class="source-meta-item">
+            ${ICONS.clock}<span>Hôm nay: <strong>${s.collectedToday}</strong> tin</span>
+          </span>
+          <span class="source-meta-item">
+            ${ICONS.refresh}<span>Đồng bộ: <strong>${timeAgo(s.lastSync)}</strong></span>
+          </span>
+          <span class="source-meta-item">
+            ${ICONS.copy}<span>Tỷ lệ trùng: <strong>${escapeHtml(s.duplicateRate)}</strong></span>
+          </span>
+        </div>
+
+        <div class="flex flex-wrap gap-3 items-center">
+          <div class="reliability">
+            <span class="reliability-label">Độ tin cậy:</span>
+            <span class="reliability-dots">${dots}</span>
+            <span class="reliability-value ${rel.cls}">${rel.label} (${rel.value})</span>
+          </div>
+          ${demoCount > 0 ? `<span class="tag">${ICONS.check}${demoCount} tin trong demo</span>` : ''}
+          ${s.issueNote ? `<span class="badge badge-danger">${ICONS.alert}${escapeHtml(s.issueNote)}</span>` : ''}
+        </div>
+      </div>
+      <div class="source-actions">
+        <button class="btn btn-outline btn-sm" data-action="view-source" data-id="${s.id}">
+          ${ICONS.info} Chi tiết
+        </button>
+        ${s.url && s.url !== '#' ? `<a href="${s.url}" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">
+          ${ICONS.external} Mở nguồn
+        </a>` : `<button class="btn btn-ghost btn-sm" data-action="open-source-demo" data-id="${s.id}">
+          ${ICONS.external} Mở nguồn
+        </button>`}
+      </div>
+    </article>
+  `;
+}
+
+/* =====================================================================
+   MODAL CHI TIẾT NGUỒN
+   ===================================================================== */
+function openSourceDetail(sourceId){
+  const s = SOURCES.find(x => x.id === sourceId);
+  if(!s) return;
+
+  const rel = getReliabilityMeta(s.reliability);
+  const status = getStatusMeta(s.status);
+  const typeLabel = getSourceTypeLabel(s.type);
+  const initials = getSourceInitials(s.name);
+  const demoCount = DEMO_LISTING_COUNTS[s.id] || 0;
+
+  const filledCount = s.reliability === 'high' ? 3 : s.reliability === 'medium' ? 2 : 1;
+  const dots = Array.from({length: 3}).map((_, i) =>
+    `<span class="reliability-dot ${i < filledCount ? 'filled-' + rel.cls : ''}"></span>`
+  ).join('');
+
+  const facts = [
+    { label: 'Loại nguồn', value: typeLabel },
+    { label: 'Thành viên', value: s.memberCount ? formatNumber(s.memberCount) : '—' },
+    { label: 'Tổng tin thu thập', value: formatNumber(s.totalCollected) + ' tin' },
+    { label: 'Thu thập hôm nay', value: s.collectedToday + ' tin' },
+    { label: 'Tần suất đồng bộ', value: s.syncFrequency },
+    { label: 'Đồng bộ gần nhất', value: formatDateTime(s.lastSync) },
+    { label: 'Tỷ lệ trùng lặp', value: s.duplicateRate },
+    { label: 'Tin trong demo', value: demoCount + ' tin' }
+  ];
+
+  const html = `
+    <div class="modal-header">
+      <div style="flex:1">
+        <div class="source-detail-head">
+          <div class="source-logo ${s.type}" aria-hidden="true">${escapeHtml(initials)}</div>
+          <div style="flex:1;min-width:0">
+            <h2>${escapeHtml(s.name)}</h2>
+            <p>${escapeHtml(typeLabel)}${s.memberCount ? ' · ' + formatNumber(s.memberCount) + ' thành viên' : ''}</p>
+          </div>
+        </div>
+      </div>
+      <button class="modal-close" data-modal-close aria-label="Đóng">${ICONS.close}</button>
+    </div>
+    <div class="modal-body">
+      <div class="flex flex-wrap gap-2 mb-5">
+        <span class="status-pill ${status.cls}"><span class="status-dot"></span>${status.label}</span>
+        <span class="badge badge-primary">${ICONS.shield}Độ tin cậy: ${rel.label}</span>
+        <span class="badge">${ICONS.layers}${typeLabel}</span>
+      </div>
+
+      <div class="modal-section">
+        <h4>${ICONS.info} Mô tả nguồn</h4>
+        <p class="text-sm text-secondary" style="line-height:var(--lh-relaxed)">${escapeHtml(s.description)}</p>
+      </div>
+
+      <div class="modal-section">
+        <h4>${ICONS.layers} Thông tin thu thập</h4>
+        <div class="fact-grid">
+          ${facts.map(f => `
+            <div class="fact-item">
+              <div class="fact-label">${f.label}</div>
+              <div class="fact-value">${escapeHtml(f.value)}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <h4>${ICONS.shield} Đánh giá độ tin cậy</h4>
+        <div class="flex flex-wrap gap-3 items-center mb-3">
+          <span class="reliability-label">Mức độ:</span>
+          <span class="reliability-dots">${dots}</span>
+          <span class="reliability-value ${rel.cls}">${rel.label} (${rel.value})</span>
+        </div>
+        <div class="disclaimer-box">
+          <strong>${ICONS.info} Độ tin cậy được đánh giá dựa trên:</strong>
+          <ul>
+            <li>Tỷ lệ bài đăng có đầy đủ thông tin cơ bản (giá, địa chỉ, diện tích).</li>
+            <li>Tỷ lệ bài đăng bị trùng lặp hoặc đăng lại nhiều lần.</li>
+            <li>Mức độ ổn định của nguồn và tần suất cập nhật.</li>
+            <li>Phản hồi từ cộng đồng người dùng (nếu có).</li>
+          </ul>
+          <p style="margin-top:var(--space-2)">Đây là đánh giá tổng quan, <strong>không đảm bảo</strong> mọi tin từ nguồn đều chính xác.</p>
+        </div>
+      </div>
+
+      ${s.issueNote ? `
+        <div class="modal-section">
+          <h4>${ICONS.alert} Vấn đề hiện tại</h4>
+          <div class="badge badge-danger" style="white-space:normal;text-align:left;line-height:1.5;padding:var(--space-3)">
+            ${ICONS.alert} ${escapeHtml(s.issueNote)}
+          </div>
+        </div>
+      ` : ''}
+
+      ${demoCount > 0 ? `
+        <div class="modal-section">
+          <h4>${ICONS.home} Tin từ nguồn này trong bản demo (${demoCount})</h4>
+          <div class="sample-list">
+            ${Array.from({length: demoCount}).map((_, i) => `
+              <div class="sample-item">
+                <div class="sample-title">Tin mẫu #${i + 1} từ ${escapeHtml(s.name)}</div>
+                <div class="sample-meta">
+                  <span>${ICONS.clock} Được tổng hợp trong demo</span>
+                  <span>${ICONS.home} Thuộc nhóm tin minh họa</span>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      ` : ''}
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" data-modal-close>Đóng</button>
+      <button class="btn btn-outline" data-action="view-source-listings" data-id="${s.id}">
+        ${ICONS.search} Xem tin từ nguồn này
+      </button>
+      ${s.url && s.url !== '#' ? `<a href="${s.url}" target="_blank" rel="noopener" class="btn btn-primary">
+        ${ICONS.external} Mở nguồn gốc
+      </a>` : `<button class="btn btn-primary" data-action="open-source-demo" data-id="${s.id}">
+        ${ICONS.external} Mở nguồn gốc (demo)
+      </button>`}
+    </div>
+  `;
+
+  Modal.open(html, { size: 'lg' });
+}
+
+/* =====================================================================
+   EVENTS
+   ===================================================================== */
+function bindSourcesEvents(){
+  const search = $('#source-search');
+  const typeFilter = $('#source-type-filter');
+  const statusFilter = $('#source-status-filter');
+  const sort = $('#source-sort');
+
+  if(search){
+    let timer;
+    search.addEventListener('input', e => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        State.query = e.target.value;
+        renderSourcesList();
+      }, 200);
+    });
+  }
+
+  if(typeFilter){
+    typeFilter.value = State.type;
+    typeFilter.addEventListener('change', e => {
+      State.type = e.target.value;
+      renderSourcesList();
+    });
+  }
+
+  if(statusFilter){
+    statusFilter.value = State.status;
+    statusFilter.addEventListener('change', e => {
+      State.status = e.target.value;
+      renderSourcesList();
+    });
+  }
+
+  if(sort){
+    sort.value = State.sort;
+    sort.addEventListener('change', e => {
+      State.sort = e.target.value;
+      renderSourcesList();
+    });
+  }
+}
+
+document.addEventListener('click', e => {
+  const actionEl = e.target.closest('[data-action]');
+  if(actionEl){
+    const action = actionEl.dataset.action;
+    const id = actionEl.dataset.id;
+
+    if(action === 'view-source'){
+      openSourceDetail(id);
+      return;
+    }
+    if(action === 'open-source-demo'){
+      Toast.info('Mở nguồn gốc — bản demo chưa hỗ trợ liên kết thực tế');
+      return;
+    }
+    if(action === 'view-source-listings'){
+      Modal.close();
+      Toast.info('Chuyển đến danh sách tin từ nguồn — bản demo chưa hỗ trợ');
+      return;
+    }
+  }
+
+  // Click source item (không phải button) -> mở chi tiết
+  const item = e.target.closest('[data-source-id]');
+  if(item && !e.target.closest('[data-action]') && !e.target.closest('a')){
+    openSourceDetail(item.dataset.sourceId);
+  }
+});
+
+/* Mobile nav toggle */
+document.addEventListener('click', e => {
+  const t = e.target.closest('.menu-toggle');
+  if(t){
+    const nav = $('.main-nav');
+    if(nav) nav.style.display = nav.style.display === 'flex' ? '' : 'flex';
+  }
+});
+
+/* =====================================================================
+   INIT
+   ===================================================================== */
+document.addEventListener('DOMContentLoaded', () => {
+  renderSourcesPage();
+});
+</script>
+</body>
+</html>

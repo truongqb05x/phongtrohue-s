@@ -1,0 +1,2271 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phòng Huế — Tổng hợp tin cho thuê phòng trọ tại Huế</title>
+    <meta name="description"
+        content="Nền tảng tổng hợp tin cho thuê phòng trọ tại Huế từ nhiều nguồn. Tìm phòng nhanh, lọc theo giá, khu vực và xem lịch sử ngập lụt." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+    <!-- Layout CSS (Được tách thành các module trong static/css/layout/) -->
+    <link rel="stylesheet" href="../static/css/layout/base.css" />
+    <link rel="stylesheet" href="../static/css/layout/grid.css" />
+    <link rel="stylesheet" href="../static/css/layout/header.css" />
+    <link rel="stylesheet" href="../static/css/layout/footer.css" />
+    <link rel="stylesheet" href="../static/css/layout/sidebar.css" />
+
+    <style>
+        /* ================= HERO / SEARCH ================= */
+        .hero {
+            margin-bottom: var(--space-8);
+        }
+
+        .hero-title {
+            font-size: var(--fs-3xl);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--space-2);
+        }
+
+        .hero-subtitle {
+            color: var(--color-text-secondary);
+            font-size: var(--fs-md);
+            max-width: 640px;
+            margin-bottom: var(--space-6);
+        }
+
+        .search-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-5);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-bar {
+            display: flex;
+            gap: var(--space-2);
+            align-items: stretch;
+        }
+
+        .search-input-wrap {
+            flex: 1;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input-wrap .icon {
+            position: absolute;
+            left: var(--space-3);
+            width: 18px;
+            height: 18px;
+            color: var(--color-text-muted);
+            pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: var(--space-3) var(--space-3) var(--space-3) 42px;
+            border: 1px solid var(--color-border-strong);
+            border-radius: var(--radius);
+            font-size: var(--fs-base);
+            background: var(--color-surface);
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px var(--color-primary-soft);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-5);
+            border-radius: var(--radius);
+            font-size: var(--fs-base);
+            font-weight: 500;
+            border: 1px solid transparent;
+            transition: background 0.15s, border-color 0.15s, color 0.15s;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .btn .icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-hover);
+        }
+
+        .btn-outline {
+            border-color: var(--color-border-strong);
+            background: var(--color-surface);
+            color: var(--color-text);
+        }
+
+        .btn-outline:hover {
+            background: var(--color-surface-alt);
+            border-color: var(--color-text-muted);
+        }
+
+        .btn-ghost {
+            color: var(--color-text-secondary);
+        }
+
+        .btn-ghost:hover {
+            background: var(--color-surface-alt);
+            color: var(--color-text);
+        }
+
+        .btn-sm {
+            padding: var(--space-2) var(--space-3);
+            font-size: var(--fs-sm);
+        }
+
+        /* Quick filters */
+        .quick-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+            margin-top: var(--space-4);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: 6px 12px;
+            border-radius: 999px;
+            border: 1px solid var(--color-border-strong);
+            background: var(--color-surface);
+            color: var(--color-text-secondary);
+            font-size: var(--fs-sm);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s;
+            user-select: none;
+        }
+
+        .chip:hover {
+            border-color: var(--color-text-muted);
+            color: var(--color-text);
+        }
+
+        .chip.active {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            color: #fff;
+        }
+
+        .chip .icon {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* ================= LISTING TOOLBAR ================= */
+        .list-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-4);
+            padding: var(--space-3) var(--space-4);
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-4);
+            flex-wrap: wrap;
+        }
+
+        .result-count {
+            font-size: var(--fs-sm);
+            color: var(--color-text-secondary);
+        }
+
+        .result-count strong {
+            color: var(--color-text);
+            font-weight: 600;
+        }
+
+        .sort-control {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: var(--fs-sm);
+            color: var(--color-text-secondary);
+        }
+
+        .select {
+            padding: 6px 30px 6px 12px;
+            border: 1px solid var(--color-border-strong);
+            border-radius: var(--radius);
+            background: var(--color-surface) url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2356564f' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 10px center;
+            font-size: var(--fs-sm);
+            font-weight: 500;
+            color: var(--color-text);
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .select:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px var(--color-primary-soft);
+        }
+
+        /* ================= LISTING CARD ================= */
+        .listing-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+
+        .listing-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: border-color 0.15s, box-shadow 0.15s;
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+
+        .listing-card:hover {
+            border-color: var(--color-border-strong);
+            box-shadow: var(--shadow);
+        }
+
+        .media-placeholder {
+            width: 100%;
+            height: 100%;
+            min-height: 160px;
+            display: grid;
+            place-items: center;
+            color: var(--color-text-muted);
+            font-size: var(--fs-xs);
+            text-align: center;
+            padding: var(--space-4);
+            background:
+                linear-gradient(135deg, var(--color-surface-alt) 0%, #f0f0eb 100%);
+        }
+
+        .media-placeholder .icon {
+            width: 28px;
+            height: 28px;
+            margin: 0 auto var(--space-2);
+            opacity: 0.5;
+        }
+
+        .listing-body {
+            padding: var(--space-4) var(--space-5);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+            min-width: 0;
+        }
+
+        .listing-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: var(--space-3);
+        }
+
+        .listing-title {
+            font-size: var(--fs-md);
+            font-weight: 600;
+            color: var(--color-text);
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .listing-title:hover {
+            color: var(--color-primary);
+        }
+
+
+
+        .listing-price {
+            font-size: var(--fs-lg);
+            font-weight: 700;
+            color: var(--color-primary);
+            letter-spacing: -0.01em;
+        }
+
+        .listing-price .unit {
+            font-size: var(--fs-sm);
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            margin-left: 2px;
+        }
+
+        .listing-price.unknown {
+            color: var(--color-text-muted);
+            font-size: var(--fs-md);
+            font-weight: 500;
+            font-style: italic;
+        }
+
+        .listing-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+            font-size: var(--fs-sm);
+            color: var(--color-text-secondary);
+        }
+
+        .listing-meta .meta-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .listing-meta .icon {
+            width: 14px;
+            height: 14px;
+            color: var(--color-text-muted);
+            flex-shrink: 0;
+        }
+
+        .listing-excerpt {
+            font-size: var(--fs-sm);
+            color: var(--color-text-secondary);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .listing-excerpt.expanded {
+            -webkit-line-clamp: unset;
+        }
+
+        .listing-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: var(--fs-xs);
+            padding: 2px 8px;
+            border-radius: 999px;
+            background: var(--color-surface-alt);
+            color: var(--color-text-secondary);
+            border: 1px solid var(--color-border);
+            font-weight: 500;
+        }
+
+        .tag .icon {
+            width: 12px;
+            height: 12px;
+        }
+
+        .listing-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-3);
+            flex-wrap: wrap;
+            margin-top: auto;
+            padding-top: var(--space-2);
+            border-top: 1px dashed var(--color-border);
+        }
+
+        .source-info {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: var(--fs-xs);
+            color: var(--color-text-muted);
+            min-width: 0;
+        }
+
+        .source-info .source-name {
+            color: var(--color-text-secondary);
+            font-weight: 500;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 180px;
+        }
+
+        .listing-footer .meta-time {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: var(--fs-xs);
+            color: var(--color-text-muted);
+            white-space: nowrap;
+        }
+
+        .listing-footer .meta-time .icon {
+            width: 12px;
+            height: 12px;
+            flex-shrink: 0;
+            color: var(--color-text-muted);
+        }
+
+        .listing-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            flex-wrap: wrap;
+        }
+
+        .link-btn {
+            font-size: var(--fs-sm);
+            font-weight: 500;
+            color: var(--color-primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 6px;
+            border-radius: var(--radius-sm);
+        }
+
+        .link-btn:hover {
+            background: var(--color-primary-soft);
+        }
+
+        .link-btn .icon {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* ================= DUPLICATE NOTICE ================= */
+        .duplicate-notice {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-3);
+            background: var(--color-warning-soft);
+            border-left: 3px solid var(--color-warning);
+            border-radius: var(--radius-sm);
+            font-size: var(--fs-xs);
+            color: var(--color-warning);
+            font-weight: 500;
+        }
+
+        .duplicate-notice .icon {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+
+        .duplicate-notice button {
+            color: var(--color-warning);
+            font-weight: 600;
+            text-decoration: underline;
+            margin-left: auto;
+            font-size: var(--fs-xs);
+        }
+
+        /* ================= FLOOD BADGE ================= */
+        .flood-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+
+        .flood-badge .icon {
+            width: 12px;
+            height: 12px;
+        }
+
+        .flood-high {
+            background: #fbe4e0;
+            color: #9b2c1f;
+        }
+
+        .flood-medium {
+            background: var(--color-warning-soft);
+            color: var(--color-warning);
+        }
+
+        .flood-low {
+            background: var(--color-info-soft);
+            color: var(--color-info);
+        }
+
+        /* ================= EMPTY / LOADING / ERROR ================= */
+        .empty-state {
+            text-align: center;
+            padding: var(--space-12) var(--space-6);
+            background: var(--color-surface);
+            border: 1px dashed var(--color-border-strong);
+            border-radius: var(--radius-md);
+        }
+
+        .empty-state .icon {
+            width: 40px;
+            height: 40px;
+            color: var(--color-text-muted);
+            margin: 0 auto var(--space-4);
+            opacity: 0.6;
+        }
+
+        .empty-state h3 {
+            font-size: var(--fs-md);
+            margin-bottom: var(--space-2);
+        }
+
+        .empty-state p {
+            color: var(--color-text-muted);
+            font-size: var(--fs-sm);
+            margin-bottom: var(--space-5);
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .skeleton-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+
+        .skeleton-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+
+
+
+        .skeleton-body {
+            padding: var(--space-4) var(--space-5);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+        }
+
+        .skeleton-line {
+            height: 12px;
+            background: linear-gradient(90deg, #eee 0%, #f5f5f5 50%, #eee 100%);
+            background-size: 200% 100%;
+            animation: shimmer 1.4s infinite;
+            border-radius: 4px;
+        }
+
+        .skeleton-line.w-40 {
+            width: 40%;
+        }
+
+        .skeleton-line.w-60 {
+            width: 60%;
+        }
+
+        .skeleton-line.w-80 {
+            width: 80%;
+        }
+
+        .skeleton-line.h-20 {
+            height: 20px;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        /* ================= TOAST ================= */
+        .toast-container {
+            position: fixed;
+            bottom: var(--space-5);
+            right: var(--space-5);
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+            pointer-events: none;
+        }
+
+        .toast {
+            background: var(--color-text);
+            color: #fff;
+            padding: var(--space-3) var(--space-4);
+            border-radius: var(--radius);
+            font-size: var(--fs-sm);
+            font-weight: 500;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            pointer-events: auto;
+            animation: toastIn 0.2s ease;
+            max-width: 340px;
+        }
+
+        .toast .icon {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        .toast.success {
+            background: var(--color-success);
+        }
+
+        .toast.error {
+            background: var(--color-danger);
+        }
+
+        @keyframes toastIn {
+            from {
+                transform: translateY(8px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: var(--fs-2xl);
+            }
+
+            .hero-subtitle {
+                font-size: var(--fs-base);
+            }
+
+            .search-bar {
+                flex-direction: column;
+            }
+
+            .search-bar .btn {
+                width: 100%;
+            }
+
+            .listing-card {
+                grid-template-columns: 1fr;
+            }
+
+            .skeleton-card {
+                grid-template-columns: 1fr;
+            }
+
+            .toast-container {
+                left: var(--space-4);
+                right: var(--space-4);
+                bottom: var(--space-4);
+            }
+
+            .toast {
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <header id="site-header" class="site-header">
+            <div class="container header-inner">
+                <a href="#" class="logo" data-action="go-home">
+                    <span class="logo-mark">PH</span>
+                    <span>
+                        Phòng Huế
+                        <span class="logo-sub">Tổng hợp tin cho thuê</span>
+                    </span>
+                </a>
+                <nav class="main-nav" id="main-nav">
+                    <a href="#" class="nav-link active" data-action="go-home">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        Khám phá tin
+                    </a>
+                    <a href="#" class="nav-link" data-action="nav-placeholder" data-nav="Tìm phòng">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                        Tìm phòng
+                    </a>
+                    <a href="#" class="nav-link" data-action="nav-placeholder" data-nav="Khu vực">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                        Khu vực
+                    </a>
+                    <a href="#" class="nav-link" data-action="nav-placeholder" data-nav="Cảnh báo ngập lụt">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg>
+                        Cảnh báo ngập lụt
+                    </a>
+                    <a href="#" class="nav-link" data-action="nav-placeholder" data-nav="Nguồn tin">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                        Nguồn tin
+                    </a>
+                </nav>
+            </div>
+        </header>
+                <main id="main-content" class="main-content">
+            <div class="container">
+                <section class="hero">
+                    <h1 class="hero-title">Tìm phòng trọ tại Huế, tổng hợp từ nhiều nguồn</h1>
+                    <p class="hero-subtitle">Khám phá tin cho thuê phòng từ các nhóm Facebook và trang đăng tin, được chuẩn hóa và hiển thị tập trung. Lọc theo giá, khu vực, tiện nghi và xem thông tin lịch sử ngập lụt.</p>
+
+                    <div class="search-card">
+                        <div class="search-bar">
+                            <div class="search-input-wrap">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                                <input type="search" id="search-input" class="search-input"
+                                    placeholder="Tìm theo từ khóa, đường, khu vực, tiện nghi…" />
+                            </div>
+                            <button type="button" class="btn btn-primary" data-action="do-search">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Tìm kiếm
+                            </button>
+                        </div>
+                        <div class="quick-filters" id="quick-filters">
+                            <button type="button" class="chip" data-action="toggle-quick" data-quick="under-1">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3 8.7 2.7a1 1 0 0 0-1.4 0L2.7 7.3a1 1 0 0 0 0 1.4l12.6 12.6a1 1 0 0 0 1.4 0l4.6-4.6a1 1 0 0 0 0-1.4Z"/><path d="m7.5 10.5 2 2"/><path d="m10.5 7.5 2 2"/><path d="m13.5 4.5 2 2"/><path d="m4.5 13.5 2 2"/></svg> Dưới 1 triệu
+                            </button>
+                            <button type="button" class="chip" data-action="toggle-quick" data-quick="1-2">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3 8.7 2.7a1 1 0 0 0-1.4 0L2.7 7.3a1 1 0 0 0 0 1.4l12.6 12.6a1 1 0 0 0 1.4 0l4.6-4.6a1 1 0 0 0 0-1.4Z"/><path d="m7.5 10.5 2 2"/><path d="m10.5 7.5 2 2"/><path d="m13.5 4.5 2 2"/><path d="m4.5 13.5 2 2"/></svg> 1 – 2 triệu
+                            </button>
+                            <button type="button" class="chip" data-action="toggle-quick" data-quick="2-3">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3 8.7 2.7a1 1 0 0 0-1.4 0L2.7 7.3a1 1 0 0 0 0 1.4l12.6 12.6a1 1 0 0 0 1.4 0l4.6-4.6a1 1 0 0 0 0-1.4Z"/><path d="m7.5 10.5 2 2"/><path d="m10.5 7.5 2 2"/><path d="m13.5 4.5 2 2"/><path d="m4.5 13.5 2 2"/></svg> 2 – 3 triệu
+                            </button>
+                            <button type="button" class="chip" data-action="toggle-quick" data-quick="ac">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 12 20 0"/><path d="m12 2 0 20"/><path d="m4.93 4.93 14.14 14.14"/><path d="m19.07 4.93-14.14 14.14"/></svg> Có điều hòa
+                            </button>
+                            <button type="button" class="chip" data-action="toggle-quick" data-quick="gac">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M3 17h6v-4h6V9h6V5h-6v4H9v4H3"/></svg> Có gác
+                            </button>
+                            <button type="button" class="chip" data-action="toggle-quick" data-quick="wc-rieng">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><line x1="10" x2="8" y1="5" y2="7"/><line x1="2" x2="22" y1="12" y2="12"/><line x1="7" x2="7" y1="19" y2="21"/><line x1="17" x2="17" y1="19" y2="21"/></svg> WC riêng
+                            </button>
+                            <button type="button" class="chip" data-action="toggle-quick" data-quick="near-uni">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg> Gần trường ĐH
+                            </button>
+                            <button type="button" class="chip" data-action="toggle-quick" data-quick="new">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Tin mới
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="content-grid">
+                    <div class="listing-column">
+                        <div class="list-toolbar">
+                            <div class="result-count">
+                                <strong id="result-count-val">22</strong> tin phù hợp
+                                <span id="result-query-suffix"></span>
+                            </div>
+                            <div class="sort-control">
+                                <span>Sắp xếp:</span>
+                                <select class="select" id="sort-select">
+                                    <option value="newest" selected>Mới nhất</option>
+                                    <option value="relevance">Phù hợp nhất</option>
+                                    <option value="price-asc">Giá thấp → cao</option>
+                                    <option value="price-desc">Giá cao → thấp</option>
+                                    <option value="oldest">Cũ nhất</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="listings-container">
+<div class="listing-list">
+    <article class="listing-card" data-id="L005">
+    <div class="listing-body">
+      <div class="listing-top">
+        <a href="detail.html?id=L005" class="listing-title" data-action="open-detail" data-id="L005">Phòng trọ mới, có gác, gần ĐH Nông Lâm</a>
+      </div>
+      <div class="listing-price">1,8 triệu<span class="unit">/tháng</span></div>
+      <div class="listing-meta"><span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Đường Nguyễn Huệ, Phường Phú Nhuận</span><span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3 8.7 2.7a1 1 0 0 0-1.4 0L2.7 7.3a1 1 0 0 0 0 1.4l12.6 12.6a1 1 0 0 0 1.4 0l4.6-4.6a1 1 0 0 0 0-1.4Z"/><path d="m7.5 10.5 2 2"/><path d="m10.5 7.5 2 2"/><path d="m13.5 4.5 2 2"/><path d="m4.5 13.5 2 2"/></svg>28 m²</span><span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Phòng trọ</span></div>
+      <p class="listing-excerpt" data-excerpt>Phòng mới xây, có gác lửng, toilet riêng. Khu vực yên tĩnh, gần ĐH Nông Lâm. Điện 3.5k, nước 15k. Có chỗ để xe.</p>
+      <div class="listing-tags"><span class="tag">Điều hòa</span><span class="tag">Nóng lạnh</span><span class="tag">Gác lửng</span><span class="tag">WC riêng</span></div>
+      <div class="duplicate-notice">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+    <span>Có 1 tin tương tự có thể cùng một phòng</span>
+    <button type="button" data-action="view-duplicates" data-id="L005">Xem</button>
+  </div>
+      <div class="listing-footer">
+        <div class="source-info">
+          <span class="tag" title="Nguồn đăng"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>Cho thuê phòng khu vực Đại học</span>
+          <span class="meta-time" data-posted-at="2025-01-12T16:30:00" title="Thời gian đăng: 12/01/2025 16:30"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> <span class="time-text"></span></span>
+        </div>
+        <div class="listing-actions">
+          <a href="detail.html?id=L005" class="link-btn" data-action="open-detail" data-id="L005">
+            Chi tiết <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </article><article class="listing-card" data-id="L004">
+    <div class="listing-body">
+      <div class="listing-top">
+        <a href="detail.html?id=L004" class="listing-title" data-action="open-detail" data-id="L004">Phòng trọ có gác lửng đẹp, đường Nguyễn Huệ</a>
+      </div>
+      <div class="listing-price">1,8 triệu<span class="unit">/tháng</span></div>
+      <div class="listing-meta"><span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Nguyễn Huệ, Phường Phú Nhuận</span><span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3 8.7 2.7a1 1 0 0 0-1.4 0L2.7 7.3a1 1 0 0 0 0 1.4l12.6 12.6a1 1 0 0 0 1.4 0l4.6-4.6a1 1 0 0 0 0-1.4Z"/><path d="m7.5 10.5 2 2"/><path d="m10.5 7.5 2 2"/><path d="m13.5 4.5 2 2"/><path d="m4.5 13.5 2 2"/></svg>28 m²</span><span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Phòng trọ</span></div>
+      <p class="listing-excerpt" data-excerpt>Phòng mới, đẹp, có gác lửng, toilet riêng, ban công thoáng mát. Gần trung tâm, thuận tiện đi lại. Điện 3.5k, nước 15k.</p>
+      <div class="listing-tags"><span class="tag">Điều hòa</span><span class="tag">Nóng lạnh</span><span class="tag">Gác lửng</span><span class="tag">WC riêng</span></div>
+      <div class="duplicate-notice">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+    <span>Có 1 tin tương tự có thể cùng một phòng</span>
+    <button type="button" data-action="view-duplicates" data-id="L004">Xem</button>
+  </div>
+      <div class="listing-footer">
+        <div class="source-info">
+          <span class="tag" title="Nguồn đăng"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>Nhóm Cho thuê phòng trọ Huế</span>
+          <span class="meta-time" data-posted-at="2025-01-12T14:00:00" title="Thời gian đăng: 12/01/2025 14:00"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> <span class="time-text"></span></span>
+        </div>
+        <div class="listing-actions">
+          <a href="detail.html?id=L004" class="link-btn" data-action="open-detail" data-id="L004">
+            Chi tiết <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </article><article class="listing-card" data-id="L015">
+    <div class="listing-body">
+      <div class="listing-top">
+        <a href="detail.html?id=L015" class="listing-title" data-action="open-detail" data-id="L015">Phòng trọ gần ĐH Khoa học, có điều hòa, nóng lạnh</a>
+      </div>
+      <div class="listing-price">1,4 triệu<span class="unit">/tháng</span></div>
+      <div class="listing-meta"><span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Kiệt Nguyễn Tất Thành, Phường Kim Long</span><span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3 8.7 2.7a1 1 0 0 0-1.4 0L2.7 7.3a1 1 0 0 0 0 1.4l12.6 12.6a1 1 0 0 0 1.4 0l4.6-4.6a1 1 0 0 0 0-1.4Z"/><path d="m7.5 10.5 2 2"/><path d="m10.5 7.5 2 2"/><path d="m13.5 4.5 2 2"/><path d="m4.5 13.5 2 2"/></svg>20 m²</span><span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Phòng trọ</span></div>
+      <p class="listing-excerpt" data-excerpt>Phòng trọ mới, có điều hòa, nóng lạnh, WC riêng. Cách ĐH Khoa học 300m. Điện 3.5k, nước 15k.</p>
+      <div class="listing-tags"><span class="tag">Điều hòa</span><span class="tag">Nóng lạnh</span><span class="tag">WC riêng</span></div>
+      <div class="duplicate-notice">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+    <span>Có 1 tin tương tự có thể cùng một phòng</span>
+    <button type="button" data-action="view-duplicates" data-id="L015">Xem</button>
+  </div>
+      <div class="listing-footer">
+        <div class="source-info">
+          <span class="tag" title="Nguồn đăng"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>Nhà trọ An Cựu - Huế</span>
+          <span class="meta-time" data-posted-at="2025-01-12T11:00:00" title="Thời gian đăng: 12/01/2025 11:00"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> <span class="time-text"></span></span>
+        </div>
+        <div class="listing-actions">
+          <a href="detail.html?id=L015" class="link-btn" data-action="open-detail" data-id="L015">
+            Chi tiết <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </article><article class="listing-card" data-id="L014">
+    <div class="listing-body">
+      <div class="listing-top">
+        <a href="detail.html?id=L014" class="listing-title" data-action="open-detail" data-id="L014">Phòng trọ có điều hòa, gần ĐH Khoa học Huế</a>
+      </div>
+      <div class="listing-price">1,4 triệu<span class="unit">/tháng</span></div>
+      <div class="listing-meta"><span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Nguyễn Tất Thành, Phường Kim Long</span><span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3 8.7 2.7a1 1 0 0 0-1.4 0L2.7 7.3a1 1 0 0 0 0 1.4l12.6 12.6a1 1 0 0 0 1.4 0l4.6-4.6a1 1 0 0 0 0-1.4Z"/><path d="m7.5 10.5 2 2"/><path d="m10.5 7.5 2 2"/><path d="m13.5 4.5 2 2"/><path d="m4.5 13.5 2 2"/></svg>20 m²</span><span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Phòng trọ</span></div>
+      <p class="listing-excerpt" data-excerpt>Phòng có điều hòa, nóng lạnh, WC riêng. Gần ĐH Khoa học, đi bộ 3 phút. Khu vực an ninh, yên tĩnh.</p>
+      <div class="listing-tags"><span class="tag">Điều hòa</span><span class="tag">Nóng lạnh</span><span class="tag">WC riêng</span></div>
+      <div class="duplicate-notice">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+    <span>Có 1 tin tương tự có thể cùng một phòng</span>
+    <button type="button" data-action="view-duplicates" data-id="L014">Xem</button>
+  </div>
+      <div class="listing-footer">
+        <div class="source-info">
+          <span class="tag" title="Nguồn đăng"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>Nhóm Cho thuê phòng trọ Huế</span>
+          <span class="meta-time" data-posted-at="2025-01-12T10:15:00" title="Thời gian đăng: 12/01/2025 10:15"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> <span class="time-text"></span></span>
+        </div>
+        <div class="listing-actions">
+          <a href="detail.html?id=L014" class="link-btn" data-action="open-detail" data-id="L014">
+            Chi tiết <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </article><article class="listing-card" data-id="L001">
+    <div class="listing-body">
+      <div class="listing-top">
+        <a href="detail.html?id=L001" class="listing-title" data-action="open-detail" data-id="L001">Phòng trọ mới xây đường Nguyễn Tất Thành, gần ĐH Khoa học</a>
+      </div>
+      <div class="listing-price">1,5 triệu<span class="unit">/tháng</span></div>
+      <div class="listing-meta"><span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Nguyễn Tất Thành, Phường Kim Long</span><span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3 8.7 2.7a1 1 0 0 0-1.4 0L2.7 7.3a1 1 0 0 0 0 1.4l12.6 12.6a1 1 0 0 0 1.4 0l4.6-4.6a1 1 0 0 0 0-1.4Z"/><path d="m7.5 10.5 2 2"/><path d="m10.5 7.5 2 2"/><path d="m13.5 4.5 2 2"/><path d="m4.5 13.5 2 2"/></svg>25 m²</span><span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Phòng trọ</span></div>
+      <p class="listing-excerpt" data-excerpt>Phòng mới xây, sạch sẽ, có gác lửng, toilet riêng. Khu vực an ninh, gần trường ĐH Khoa học và chợ. Điện 3.5k, nước 15k/khối. Có chỗ để xe máy.</p>
+      <div class="listing-tags"><span class="tag">Điều hòa</span><span class="tag">Nóng lạnh</span><span class="tag">Gác lửng</span><span class="tag">WC riêng</span></div>
+      
+      <div class="listing-footer">
+        <div class="source-info">
+          <span class="tag" title="Nguồn đăng"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>Nhóm Cho thuê phòng trọ Huế</span>
+          <span class="meta-time" data-posted-at="2025-01-12T09:30:00" title="Thời gian đăng: 12/01/2025 09:30"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> <span class="time-text"></span></span>
+        </div>
+        <div class="listing-actions">
+          <a href="detail.html?id=L001" class="link-btn" data-action="open-detail" data-id="L001">
+            Chi tiết <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </article><article class="listing-card" data-id="L009">
+    <div class="listing-body">
+      <div class="listing-top">
+        <a href="detail.html?id=L009" class="listing-title" data-action="open-detail" data-id="L009">Phòng trọ mới, đầy đủ tiện nghi, đường Hùng Vương</a>
+      </div>
+      <div class="listing-price">2,2 triệu<span class="unit">/tháng</span></div>
+      <div class="listing-meta"><span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Hùng Vương, Phường Phú Nhuận</span><span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3 8.7 2.7a1 1 0 0 0-1.4 0L2.7 7.3a1 1 0 0 0 0 1.4l12.6 12.6a1 1 0 0 0 1.4 0l4.6-4.6a1 1 0 0 0 0-1.4Z"/><path d="m7.5 10.5 2 2"/><path d="m10.5 7.5 2 2"/><path d="m13.5 4.5 2 2"/><path d="m4.5 13.5 2 2"/></svg>26 m²</span><span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Phòng trọ</span></div>
+      <p class="listing-excerpt" data-excerpt>Phòng mới 100%, đầy đủ tiện nghi: điều hòa, nóng lạnh, giường, tủ, bàn làm việc. WC riêng. Gần ĐH Khoa học Huế.</p>
+      <div class="listing-tags"><span class="tag">Điều hòa</span><span class="tag">Nóng lạnh</span><span class="tag">WC riêng</span><span class="tag">Giường</span></div>
+      
+      <div class="listing-footer">
+        <div class="source-info">
+          <span class="tag" title="Nguồn đăng"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>Cho thuê phòng khu vực Đại học</span>
+          <span class="meta-time" data-posted-at="2025-01-12T08:00:00" title="Thời gian đăng: 12/01/2025 08:00"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> <span class="time-text"></span></span>
+        </div>
+        <div class="listing-actions">
+          <a href="detail.html?id=L009" class="link-btn" data-action="open-detail" data-id="L009">
+            Chi tiết <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </article><article class="listing-card" data-id="L002">
+    <div class="listing-body">
+      <div class="listing-top">
+        <a href="detail.html?id=L002" class="listing-title" data-action="open-detail" data-id="L002">Cho thuê phòng gần ĐH Sư phạm, có điều hòa</a>
+      </div>
+      <div class="listing-price">1,3 triệu<span class="unit">/tháng</span></div>
+      <div class="listing-meta"><span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Đường Lê Lợi, Phường Phú Nhuận</span><span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3 8.7 2.7a1 1 0 0 0-1.4 0L2.7 7.3a1 1 0 0 0 0 1.4l12.6 12.6a1 1 0 0 0 1.4 0l4.6-4.6a1 1 0 0 0 0-1.4Z"/><path d="m7.5 10.5 2 2"/><path d="m10.5 7.5 2 2"/><path d="m13.5 4.5 2 2"/><path d="m4.5 13.5 2 2"/></svg>20 m²</span><span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Phòng trọ</span></div>
+      <p class="listing-excerpt" data-excerpt>Phòng rộng 20m2, có điều hòa, nóng lạnh, giường, tủ quần áo. Điện 4k, nước 20k/khối. Miễn phí wifi. Gần trường ĐH Sư phạm và ĐH Khoa học.</p>
+      <div class="listing-tags"><span class="tag">Điều hòa</span><span class="tag">Nóng lạnh</span><span class="tag">Wifi</span><span class="tag">Giường</span></div>
+      
+      <div class="listing-footer">
+        <div class="source-info">
+          <span class="tag" title="Nguồn đăng"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>Phòng trọ sinh viên Huế</span>
+          <span class="meta-time" data-posted-at="2025-01-11T15:20:00" title="Thời gian đăng: 11/01/2025 15:20"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> <span class="time-text"></span></span>
+        </div>
+        <div class="listing-actions">
+          <a href="detail.html?id=L002" class="link-btn" data-action="open-detail" data-id="L002">
+            Chi tiết <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </article><article class="listing-card" data-id="L017">
+    <div class="listing-body">
+      <div class="listing-top">
+        <a href="detail.html?id=L017" class="listing-title" data-action="open-detail" data-id="L017">Phòng trọ mới xây, full nội thất, đường Võ Thị Sáu</a>
+      </div>
+      <div class="listing-price">2 triệu<span class="unit">/tháng</span></div>
+      <div class="listing-meta"><span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Võ Thị Sáu, Phường Xuân Phú</span><span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3 8.7 2.7a1 1 0 0 0-1.4 0L2.7 7.3a1 1 0 0 0 0 1.4l12.6 12.6a1 1 0 0 0 1.4 0l4.6-4.6a1 1 0 0 0 0-1.4Z"/><path d="m7.5 10.5 2 2"/><path d="m10.5 7.5 2 2"/><path d="m13.5 4.5 2 2"/><path d="m4.5 13.5 2 2"/></svg>25 m²</span><span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Phòng trọ</span></div>
+      <p class="listing-excerpt" data-excerpt>Phòng mới xây, full nội thất, có ban công. Khu vực yên tĩnh, gần chợ. Điện 3.5k, nước 15k.</p>
+      <div class="listing-tags"><span class="tag">Điều hòa</span><span class="tag">Nóng lạnh</span><span class="tag">WC riêng</span><span class="tag">Ban công</span></div>
+      
+      <div class="listing-footer">
+        <div class="source-info">
+          <span class="tag" title="Nguồn đăng"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>Cho thuê phòng khu vực Đại học</span>
+          <span class="meta-time" data-posted-at="2025-01-11T14:00:00" title="Thời gian đăng: 11/01/2025 14:00"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> <span class="time-text"></span></span>
+        </div>
+        <div class="listing-actions">
+          <a href="detail.html?id=L017" class="link-btn" data-action="open-detail" data-id="L017">
+            Chi tiết <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>
+  </div>
+  <div style="text-align:center;margin-top:var(--space-6)">
+    <button type="button" class="btn btn-outline" data-action="load-more">
+      Tải thêm tin (14 tin còn lại)
+    </button>
+  </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-column">
+<aside class="sidebar">
+    <div class="sidebar-card">
+      <h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>Bộ lọc</h3>
+
+      <div class="filter-group">
+        <span class="filter-label">Loại hình</span>
+        <div class="filter-options">
+          
+            <label class="filter-option">
+              <input type="checkbox" data-filter="roomType" value="Nhà nguyên căn"  />
+              <span>Nhà nguyên căn</span>
+              <span class="count">1</span>
+            </label>
+          
+            <label class="filter-option">
+              <input type="checkbox" data-filter="roomType" value="Phòng trọ"  />
+              <span>Phòng trọ</span>
+              <span class="count">21</span>
+            </label>
+          
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <span class="filter-label">Khoảng giá</span>
+        <div class="filter-options">
+          
+            <label class="filter-option">
+              <input type="checkbox" data-filter="priceRange" value="under-1"  />
+              <span>Dưới 1 triệu</span>
+              <span class="count">4</span>
+            </label>
+          
+            <label class="filter-option">
+              <input type="checkbox" data-filter="priceRange" value="1-2"  />
+              <span>1 – 2 triệu</span>
+              <span class="count">11</span>
+            </label>
+          
+            <label class="filter-option">
+              <input type="checkbox" data-filter="priceRange" value="2-3"  />
+              <span>2 – 3 triệu</span>
+              <span class="count">3</span>
+            </label>
+          
+            <label class="filter-option">
+              <input type="checkbox" data-filter="priceRange" value="above-3"  />
+              <span>Trên 3 triệu</span>
+              <span class="count">3</span>
+            </label>
+          
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <span class="filter-label">Khu vực</span>
+        <div class="filter-options">
+          
+            <label class="filter-option">
+              <input type="checkbox" data-filter="area" value="Kim Long"  />
+              <span>Kim Long</span>
+              <span class="count">3</span>
+            </label>
+          
+            <label class="filter-option">
+              <input type="checkbox" data-filter="area" value="Phú Nhuận"  />
+              <span>Phú Nhuận</span>
+              <span class="count">5</span>
+            </label>
+          
+            <label class="filter-option">
+              <input type="checkbox" data-filter="area" value="Phú Hòa"  />
+              <span>Phú Hòa</span>
+              <span class="count">3</span>
+            </label>
+          
+            <label class="filter-option">
+              <input type="checkbox" data-filter="area" value="Vĩnh Ninh"  />
+              <span>Vĩnh Ninh</span>
+              <span class="count">3</span>
+            </label>
+          
+            <label class="filter-option">
+              <input type="checkbox" data-filter="area" value="Phú Hội"  />
+              <span>Phú Hội</span>
+              <span class="count">2</span>
+            </label>
+          
+            <label class="filter-option">
+              <input type="checkbox" data-filter="area" value="Xuân Phú"  />
+              <span>Xuân Phú</span>
+              <span class="count">2</span>
+            </label>
+          
+            <label class="filter-option">
+              <input type="checkbox" data-filter="area" value="An Đông"  />
+              <span>An Đông</span>
+              <span class="count">1</span>
+            </label>
+          
+            <label class="filter-option">
+              <input type="checkbox" data-filter="area" value="Vỹ Dạ"  />
+              <span>Vỹ Dạ</span>
+              <span class="count">1</span>
+            </label>
+          
+            <label class="filter-option">
+              <input type="checkbox" data-filter="area" value="Trường An"  />
+              <span>Trường An</span>
+              <span class="count">1</span>
+            </label>
+          
+            <label class="filter-option">
+              <input type="checkbox" data-filter="area" value="Thuận Hòa"  />
+              <span>Thuận Hòa</span>
+              <span class="count">1</span>
+            </label>
+          
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-outline btn-sm" data-action="clear-filters" style="width:100%;margin-top:var(--space-3)">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> Xóa tất cả bộ lọc
+      </button>
+    </div>
+
+    <div class="sidebar-card">
+      <h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Khám phá theo khu vực</h3>
+      <div class="area-list">
+        <button type="button" class="area-item" data-action="filter-area" data-area="Kim Long">
+    <span class="area-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+    <span class="area-info">
+      <span class="area-name">Kim Long</span>
+      <span class="area-count">3 tin đăng</span>
+    </span>
+    <span class="area-flood flood-low">Ngập thấp</span>
+  </button><button type="button" class="area-item" data-action="filter-area" data-area="Phú Nhuận">
+    <span class="area-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+    <span class="area-info">
+      <span class="area-name">Phú Nhuận</span>
+      <span class="area-count">5 tin đăng</span>
+    </span>
+    <span class="area-flood flood-medium">Ngập TB</span>
+  </button><button type="button" class="area-item" data-action="filter-area" data-area="Phú Hòa">
+    <span class="area-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+    <span class="area-info">
+      <span class="area-name">Phú Hòa</span>
+      <span class="area-count">3 tin đăng</span>
+    </span>
+    <span class="area-flood flood-high">Ngập cao</span>
+  </button><button type="button" class="area-item" data-action="filter-area" data-area="Vĩnh Ninh">
+    <span class="area-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+    <span class="area-info">
+      <span class="area-name">Vĩnh Ninh</span>
+      <span class="area-count">3 tin đăng</span>
+    </span>
+    <span class="area-flood flood-low">Ngập thấp</span>
+  </button><button type="button" class="area-item" data-action="filter-area" data-area="Phú Hội">
+    <span class="area-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+    <span class="area-info">
+      <span class="area-name">Phú Hội</span>
+      <span class="area-count">2 tin đăng</span>
+    </span>
+    <span class="area-flood flood-medium">Ngập TB</span>
+  </button><button type="button" class="area-item" data-action="filter-area" data-area="Xuân Phú">
+    <span class="area-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+    <span class="area-info">
+      <span class="area-name">Xuân Phú</span>
+      <span class="area-count">2 tin đăng</span>
+    </span>
+    <span class="area-flood flood-medium">Ngập TB</span>
+  </button>
+      </div>
+    </div>
+
+    <div class="sidebar-card flood-card">
+      <h3><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg>Lịch sử ngập lụt</h3>
+      <div class="flood-demo-note">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+        <span>Dữ liệu minh họa cho bản demo. Không dùng để đánh giá thực tế.</span>
+      </div>
+      <div class="flood-list">
+        <div class="flood-item">
+            <span class="street">Đường Phan Chu Trinh</span>
+            <span class="level flood-badge flood-high">Cao</span>
+          </div><div class="flood-item">
+            <span class="street">Đường Nguyễn Trãi</span>
+            <span class="level flood-badge flood-high">Cao</span>
+          </div><div class="flood-item">
+            <span class="street">Đường An Cựu</span>
+            <span class="level flood-badge flood-high">Cao</span>
+          </div><div class="flood-item">
+            <span class="street">Đường Điện Biên Phủ</span>
+            <span class="level flood-badge flood-medium">TB</span>
+          </div><div class="flood-item">
+            <span class="street">Đường Bến Nghé</span>
+            <span class="level flood-badge flood-medium">TB</span>
+          </div>
+      </div>
+    </div>
+  </aside>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer id="site-footer" class="site-footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <p class="footer-brand">phongtrohue-s</p>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Khám phá</h4>
+                        <ul>
+                            <li><a href="#" data-action="go-home">Tin mới nhất</a></li>
+                            <li><a href="#" data-action="nav-placeholder" data-nav="Theo khu vực">Theo khu vực</a></li>
+                            <li><a href="#" data-action="nav-placeholder" data-nav="Theo giá">Theo giá</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Thông tin</h4>
+                        <ul>
+                            <li><a href="#" data-action="nav-placeholder" data-nav="Về nền tảng">Về nền tảng</a></li>
+                            <li><a href="#" data-action="nav-placeholder" data-nav="Nguồn dữ liệu">Nguồn dữ liệu</a></li>
+                            <li><a href="#" data-action="nav-placeholder" data-nav="Lịch sử ngập lụt">Lịch sử ngập lụt</a></li>
+                            <li><a href="#" data-action="nav-placeholder" data-nav="Cộng đồng">Cộng đồng</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Lưu ý</h4>
+                        <p>Dữ liệu trong bản demo là dữ liệu minh họa, không phản ánh tình trạng thực tế. Vui lòng kiểm tra kỹ thông tin trước khi liên hệ thuê phòng.</p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <span>© 2025 phongtrohue-s — Bản demo giao diện.</span>
+                    <span>Lượt truy cập: <span id="visit-count">1</span></span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <script>
+        /* =====================================================================
+           ICONS — inline SVG helper
+           ===================================================================== */
+        const Icons = {
+            search: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
+            mapPin: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
+            ruler: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3 8.7 2.7a1 1 0 0 0-1.4 0L2.7 7.3a1 1 0 0 0 0 1.4l12.6 12.6a1 1 0 0 0 1.4 0l4.6-4.6a1 1 0 0 0 0-1.4Z"/><path d="m7.5 10.5 2 2"/><path d="m10.5 7.5 2 2"/><path d="m13.5 4.5 2 2"/><path d="m4.5 13.5 2 2"/></svg>',
+            bed: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>',
+
+            external: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>',
+            arrowRight: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>',
+            clock: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+            alert: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>',
+            waves: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg>',
+            home: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+            layers: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
+            bell: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>',
+            close: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>',
+            filter: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>',
+            image: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>',
+            snow: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 12 20 0"/><path d="m12 2 0 20"/><path d="m4.93 4.93 14.14 14.14"/><path d="m19.07 4.93-14.14 14.14"/></svg>',
+            bath: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><line x1="10" x2="8" y1="5" y2="7"/><line x1="2" x2="22" y1="12" y2="12"/><line x1="7" x2="7" y1="19" y2="21"/><line x1="17" x2="17" y1="19" y2="21"/></svg>',
+            stairs: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M3 17h6v-4h6V9h6V5h-6v4H9v4H3"/></svg>',
+            school: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>',
+            check: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+            copy: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>'
+        };
+
+        /* =====================================================================
+           DATA — listings (demo, tách riêng để dễ thay API)
+           ===================================================================== */
+        const SOURCES = {
+            fb1: { id: 'fb1', name: 'Nhóm Cho thuê phòng trọ Huế', type: 'facebook', url: '#' },
+            fb2: { id: 'fb2', name: 'Phòng trọ sinh viên Huế', type: 'facebook', url: '#' },
+            fb3: { id: 'fb3', name: 'Thuê phòng Huế - Giá rẻ', type: 'facebook', url: '#' },
+            fb4: { id: 'fb4', name: 'Nhà trọ An Cựu - Huế', type: 'facebook', url: '#' },
+            fb5: { id: 'fb5', name: 'Cho thuê phòng khu vực Đại học', type: 'facebook', url: '#' },
+            web1: { id: 'web1', name: 'Nhatrohue.vn', type: 'website', url: '#' }
+        };
+
+        const LISTINGS = [
+            {
+                id: 'L001',
+                title: 'Phòng trọ mới xây đường Nguyễn Tất Thành, gần ĐH Khoa học',
+                excerpt: 'Phòng mới xây, sạch sẽ, có gác lửng, toilet riêng. Khu vực an ninh, gần trường ĐH Khoa học và chợ. Điện 3.5k, nước 15k/khối. Có chỗ để xe máy.',
+                price: 1500000,
+                area: 25,
+                address: 'Nguyễn Tất Thành, Phường Kim Long',
+                areaName: 'Kim Long',
+                roomType: 'Phòng trọ',
+                amenities: ['Điều hòa', 'Nóng lạnh', 'Gác lửng', 'WC riêng', 'Chỗ để xe'],
+                sourceId: 'fb1',
+                postedAt: '2025-01-12T09:30:00',
+                collectedAt: '2025-01-12T10:00:00',
+                status: 'complete',
+                image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&q=70',
+                floodRisk: 'low',
+                duplicateGroup: null
+            },
+            {
+                id: 'L002',
+                title: 'Cho thuê phòng gần ĐH Sư phạm, có điều hòa',
+                excerpt: 'Phòng rộng 20m2, có điều hòa, nóng lạnh, giường, tủ quần áo. Điện 4k, nước 20k/khối. Miễn phí wifi. Gần trường ĐH Sư phạm và ĐH Khoa học.',
+                price: 1300000,
+                area: 20,
+                address: 'Đường Lê Lợi, Phường Phú Nhuận',
+                areaName: 'Phú Nhuận',
+                roomType: 'Phòng trọ',
+                amenities: ['Điều hòa', 'Nóng lạnh', 'Wifi', 'Giường', 'Tủ'],
+                sourceId: 'fb2',
+                postedAt: '2025-01-11T15:20:00',
+                collectedAt: '2025-01-11T16:00:00',
+                status: 'complete',
+                image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=70',
+                floodRisk: 'medium',
+                duplicateGroup: null
+            },
+            {
+                id: 'L003',
+                title: 'Phòng trọ giá rẻ đường Phan Chu Trinh',
+                excerpt: 'Phòng nhỏ gọn, phù hợp sinh viên. Có gác, WC chung. Điện 3k, nước 10k. Khu vực trung tâm, gần chợ Đông Ba.',
+                price: 800000,
+                area: 12,
+                address: 'Phan Chu Trinh, Phường Phú Hòa',
+                areaName: 'Phú Hòa',
+                roomType: 'Phòng trọ',
+                amenities: ['Gác', 'WC chung', 'Chỗ để xe'],
+                sourceId: 'fb3',
+                postedAt: '2025-01-10T08:15:00',
+                collectedAt: '2025-01-10T09:00:00',
+                status: 'partial',
+                image: null,
+                floodRisk: 'high',
+                duplicateGroup: null
+            },
+            {
+                id: 'L004',
+                title: 'Phòng trọ có gác lửng đẹp, đường Nguyễn Huệ',
+                excerpt: 'Phòng mới, đẹp, có gác lửng, toilet riêng, ban công thoáng mát. Gần trung tâm, thuận tiện đi lại. Điện 3.5k, nước 15k.',
+                price: 1800000,
+                area: 28,
+                address: 'Nguyễn Huệ, Phường Phú Nhuận',
+                areaName: 'Phú Nhuận',
+                roomType: 'Phòng trọ',
+                amenities: ['Điều hòa', 'Nóng lạnh', 'Gác lửng', 'WC riêng', 'Ban công'],
+                sourceId: 'fb1',
+                postedAt: '2025-01-12T14:00:00',
+                collectedAt: '2025-01-12T14:30:00',
+                status: 'complete',
+                image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=70',
+                floodRisk: 'low',
+                duplicateGroup: 'D01'
+            },
+            {
+                id: 'L005',
+                title: 'Phòng trọ mới, có gác, gần ĐH Nông Lâm',
+                excerpt: 'Phòng mới xây, có gác lửng, toilet riêng. Khu vực yên tĩnh, gần ĐH Nông Lâm. Điện 3.5k, nước 15k. Có chỗ để xe.',
+                price: 1800000,
+                area: 28,
+                address: 'Đường Nguyễn Huệ, Phường Phú Nhuận',
+                areaName: 'Phú Nhuận',
+                roomType: 'Phòng trọ',
+                amenities: ['Điều hòa', 'Nóng lạnh', 'Gác lửng', 'WC riêng'],
+                sourceId: 'fb5',
+                postedAt: '2025-01-12T16:30:00',
+                collectedAt: '2025-01-12T17:00:00',
+                status: 'complete',
+                image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=70',
+                floodRisk: 'low',
+                duplicateGroup: 'D01'
+            },
+            {
+                id: 'L006',
+                title: 'Phòng trọ đường Trần Phú, view sông Hương',
+                excerpt: 'Phòng rộng, thoáng, view sông Hương. Có điều hòa, nóng lạnh, WC riêng. Khu vực trung tâm, gần ĐH Khoa học.',
+                price: 2500000,
+                area: 30,
+                address: 'Trần Phú, Phường Phú Hội',
+                areaName: 'Phú Hội',
+                roomType: 'Phòng trọ',
+                amenities: ['Điều hòa', 'Nóng lạnh', 'WC riêng', 'Ban công'],
+                sourceId: 'web1',
+                postedAt: '2025-01-09T10:00:00',
+                collectedAt: '2025-01-09T11:00:00',
+                status: 'complete',
+                image: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=600&q=70',
+                floodRisk: 'medium',
+                duplicateGroup: null
+            },
+            {
+                id: 'L007',
+                title: 'Phòng trọ giá rẻ cho sinh viên ĐH Y Dược',
+                excerpt: 'Phòng nhỏ, giá rẻ, phù hợp sinh viên. WC chung, có chỗ để xe. Gần ĐH Y Dược, đi bộ 5 phút.',
+                price: 700000,
+                area: 10,
+                address: 'Đường Ngô Quyền, Phường Vĩnh Ninh',
+                areaName: 'Vĩnh Ninh',
+                roomType: 'Phòng trọ',
+                amenities: ['WC chung', 'Chỗ để xe'],
+                sourceId: 'fb2',
+                postedAt: '2025-01-08T07:30:00',
+                collectedAt: '2025-01-08T08:00:00',
+                status: 'partial',
+                image: null,
+                floodRisk: 'low',
+                duplicateGroup: null
+            },
+            {
+                id: 'L008',
+                title: 'Cho thuê phòng trọ có ban công, đường Bà Triệu',
+                excerpt: 'Phòng đẹp, có ban công thoáng. Điều hòa, nóng lạnh, WC riêng. Khu vực an ninh, gần chợ Bến Ngự.',
+                price: 1600000,
+                area: 22,
+                address: 'Bà Triệu, Phường Xuân Phú',
+                areaName: 'Xuân Phú',
+                roomType: 'Phòng trọ',
+                amenities: ['Điều hòa', 'Nóng lạnh', 'WC riêng', 'Ban công'],
+                sourceId: 'fb3',
+                postedAt: '2025-01-11T11:00:00',
+                collectedAt: '2025-01-11T12:00:00',
+                status: 'complete',
+                image: 'https://images.unsplash.com/photo-1554995207-c18c203602cb?w=600&q=70',
+                floodRisk: 'medium',
+                duplicateGroup: null
+            },
+            {
+                id: 'L009',
+                title: 'Phòng trọ mới, đầy đủ tiện nghi, đường Hùng Vương',
+                excerpt: 'Phòng mới 100%, đầy đủ tiện nghi: điều hòa, nóng lạnh, giường, tủ, bàn làm việc. WC riêng. Gần ĐH Khoa học Huế.',
+                price: 2200000,
+                area: 26,
+                address: 'Hùng Vương, Phường Phú Nhuận',
+                areaName: 'Phú Nhuận',
+                roomType: 'Phòng trọ',
+                amenities: ['Điều hòa', 'Nóng lạnh', 'WC riêng', 'Giường', 'Tủ', 'Bàn'],
+                sourceId: 'fb5',
+                postedAt: '2025-01-12T08:00:00',
+                collectedAt: '2025-01-12T08:30:00',
+                status: 'complete',
+                image: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600&q=70',
+                floodRisk: 'low',
+                duplicateGroup: null
+            },
+            {
+                id: 'L010',
+                title: 'Phòng trọ gần chợ An Cựu, có gác',
+                excerpt: 'Phòng có gác lửng, WC riêng. Gần chợ An Cựu, thuận tiện mua sắm. Điện 3k, nước 12k.',
+                price: 1200000,
+                area: 18,
+                address: 'Đường An Cựu, Phường An Đông',
+                areaName: 'An Đông',
+                roomType: 'Phòng trọ',
+                amenities: ['Gác lửng', 'WC riêng'],
+                sourceId: 'fb4',
+                postedAt: '2025-01-10T16:45:00',
+                collectedAt: '2025-01-10T17:30:00',
+                status: 'partial',
+                image: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&q=70',
+                floodRisk: 'high',
+                duplicateGroup: null
+            },
+            {
+                id: 'L011',
+                title: 'Phòng trọ full nội thất đường Lý Thường Kiệt',
+                excerpt: 'Phòng full nội thất: điều hòa, nóng lạnh, giường, tủ, bàn, tủ lạnh. WC riêng. Khu vực trung tâm, gần ĐH Khoa học.',
+                price: 3000000,
+                area: 32,
+                address: 'Lý Thường Kiệt, Phường Vĩnh Ninh',
+                areaName: 'Vĩnh Ninh',
+                roomType: 'Phòng trọ',
+                amenities: ['Điều hòa', 'Nóng lạnh', 'WC riêng', 'Giường', 'Tủ', 'Bàn', 'Tủ lạnh'],
+                sourceId: 'web1',
+                postedAt: '2025-01-07T09:00:00',
+                collectedAt: '2025-01-07T10:00:00',
+                status: 'complete',
+                image: 'https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?w=600&q=70',
+                floodRisk: 'low',
+                duplicateGroup: null
+            },
+            {
+                id: 'L012',
+                title: 'Phòng trọ sinh viên giá rẻ đường Tôn Đức Thắng',
+                excerpt: 'Phòng dành cho sinh viên, giá rẻ. WC chung, có chỗ để xe. Gần ĐH Nông Lâm, ĐH Khoa học.',
+                price: 600000,
+                area: 9,
+                address: 'Tôn Đức Thắng, Phường Phú Hòa',
+                areaName: 'Phú Hòa',
+                roomType: 'Phòng trọ',
+                amenities: ['WC chung', 'Chỗ để xe'],
+                sourceId: 'fb2',
+                postedAt: '2025-01-06T14:00:00',
+                collectedAt: '2025-01-06T15:00:00',
+                status: 'partial',
+                image: null,
+                floodRisk: 'medium',
+                duplicateGroup: null
+            },
+            {
+                id: 'L013',
+                title: 'Nhà nguyên căn cho thuê đường Nguyễn Sinh Cung',
+                excerpt: 'Nhà nguyên căn 2 tầng, 3 phòng ngủ, 2 WC. Có sân để xe, phòng khách rộng. Phù hợp gia đình hoặc nhóm 4-5 người.',
+                price: 5000000,
+                area: 80,
+                address: 'Nguyễn Sinh Cung, Phường Vỹ Dạ',
+                areaName: 'Vỹ Dạ',
+                roomType: 'Nhà nguyên căn',
+                amenities: ['Điều hòa', 'Nóng lạnh', 'WC riêng', 'Sân để xe', 'Phòng khách'],
+                sourceId: 'web1',
+                postedAt: '2025-01-05T10:00:00',
+                collectedAt: '2025-01-05T11:00:00',
+                status: 'complete',
+                image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=70',
+                floodRisk: 'low',
+                duplicateGroup: null
+            },
+            {
+                id: 'L014',
+                title: 'Phòng trọ có điều hòa, gần ĐH Khoa học Huế',
+                excerpt: 'Phòng có điều hòa, nóng lạnh, WC riêng. Gần ĐH Khoa học, đi bộ 3 phút. Khu vực an ninh, yên tĩnh.',
+                price: 1400000,
+                area: 20,
+                address: 'Nguyễn Tất Thành, Phường Kim Long',
+                areaName: 'Kim Long',
+                roomType: 'Phòng trọ',
+                amenities: ['Điều hòa', 'Nóng lạnh', 'WC riêng'],
+                sourceId: 'fb1',
+                postedAt: '2025-01-12T10:15:00',
+                collectedAt: '2025-01-12T10:45:00',
+                status: 'complete',
+                image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&q=70',
+                floodRisk: 'low',
+                duplicateGroup: 'D02'
+            },
+            {
+                id: 'L015',
+                title: 'Phòng trọ gần ĐH Khoa học, có điều hòa, nóng lạnh',
+                excerpt: 'Phòng trọ mới, có điều hòa, nóng lạnh, WC riêng. Cách ĐH Khoa học 300m. Điện 3.5k, nước 15k.',
+                price: 1400000,
+                area: 20,
+                address: 'Kiệt Nguyễn Tất Thành, Phường Kim Long',
+                areaName: 'Kim Long',
+                roomType: 'Phòng trọ',
+                amenities: ['Điều hòa', 'Nóng lạnh', 'WC riêng'],
+                sourceId: 'fb4',
+                postedAt: '2025-01-12T11:00:00',
+                collectedAt: '2025-01-12T11:30:00',
+                status: 'complete',
+                image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&q=70',
+                floodRisk: 'low',
+                duplicateGroup: 'D02'
+            },
+            {
+                id: 'L016',
+                title: 'Phòng trọ đường Điện Biên Phủ, gần trung tâm',
+                excerpt: 'Phòng rộng, thoáng, gần trung tâm. Có điều hòa, nóng lạnh. WC riêng. Giá tốt cho sinh viên.',
+                price: null,
+                area: 24,
+                address: 'Điện Biên Phủ, Phường Trường An',
+                areaName: 'Trường An',
+                roomType: 'Phòng trọ',
+                amenities: ['Điều hòa', 'Nóng lạnh', 'WC riêng'],
+                sourceId: 'fb3',
+                postedAt: '2025-01-04T09:00:00',
+                collectedAt: '2025-01-04T10:00:00',
+                status: 'unverified',
+                image: null,
+                floodRisk: 'high',
+                duplicateGroup: null
+            },
+            {
+                id: 'L017',
+                title: 'Phòng trọ mới xây, full nội thất, đường Võ Thị Sáu',
+                excerpt: 'Phòng mới xây, full nội thất, có ban công. Khu vực yên tĩnh, gần chợ. Điện 3.5k, nước 15k.',
+                price: 2000000,
+                area: 25,
+                address: 'Võ Thị Sáu, Phường Xuân Phú',
+                areaName: 'Xuân Phú',
+                roomType: 'Phòng trọ',
+                amenities: ['Điều hòa', 'Nóng lạnh', 'WC riêng', 'Ban công', 'Giường', 'Tủ'],
+                sourceId: 'fb5',
+                postedAt: '2025-01-11T14:00:00',
+                collectedAt: '2025-01-11T14:30:00',
+                status: 'complete',
+                image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&q=70',
+                floodRisk: 'low',
+                duplicateGroup: null
+            },
+            {
+                id: 'L018',
+                title: 'Phòng trọ cũ, giá rẻ đường Nguyễn Trãi',
+                excerpt: 'Phòng cũ, giá rẻ, phù hợp sinh viên. WC chung. Khu vực trung tâm, gần chợ Đông Ba.',
+                price: 650000,
+                area: 10,
+                address: 'Nguyễn Trãi, Phường Phú Hòa',
+                areaName: 'Phú Hòa',
+                roomType: 'Phòng trọ',
+                amenities: ['WC chung'],
+                sourceId: 'fb3',
+                postedAt: '2024-12-20T08:00:00',
+                collectedAt: '2024-12-20T09:00:00',
+                status: 'stale',
+                image: null,
+                floodRisk: 'high',
+                duplicateGroup: null
+            },
+            {
+                id: 'L019',
+                title: 'Phòng trọ có gác, gần ĐH Sư phạm',
+                excerpt: 'Phòng có gác lửng, WC riêng. Gần ĐH Sư phạm, thuận tiện đi học. Điện 3k, nước 12k.',
+                price: 1100000,
+                area: 16,
+                address: 'Lê Lợi, Phường Phú Nhuận',
+                areaName: 'Phú Nhuận',
+                roomType: 'Phòng trọ',
+                amenities: ['Gác lửng', 'WC riêng'],
+                sourceId: 'fb2',
+                postedAt: '2025-01-09T15:00:00',
+                collectedAt: '2025-01-09T16:00:00',
+                status: 'partial',
+                image: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&q=70',
+                floodRisk: 'medium',
+                duplicateGroup: null
+            },
+            {
+                id: 'L020',
+                title: 'Phòng trọ cao cấp đường Lê Huân, full nội thất',
+                excerpt: 'Phòng cao cấp, full nội thất: điều hòa, nóng lạnh, giường, tủ, bàn, tủ lạnh, máy giặt. WC riêng. Khu vực an ninh.',
+                price: 3500000,
+                area: 35,
+                address: 'Lê Huân, Phường Thuận Hòa',
+                areaName: 'Thuận Hòa',
+                roomType: 'Phòng trọ',
+                amenities: ['Điều hòa', 'Nóng lạnh', 'WC riêng', 'Giường', 'Tủ', 'Bàn', 'Tủ lạnh', 'Máy giặt'],
+                sourceId: 'web1',
+                postedAt: '2025-01-10T10:00:00',
+                collectedAt: '2025-01-10T11:00:00',
+                status: 'complete',
+                image: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=600&q=70',
+                floodRisk: 'low',
+                duplicateGroup: null
+            },
+            {
+                id: 'L021',
+                title: 'Phòng trọ gần ĐH Y Dược, có điều hòa',
+                excerpt: 'Phòng có điều hòa, nóng lạnh, WC riêng. Gần ĐH Y Dược, đi bộ 5 phút. Khu vực an ninh.',
+                price: 1600000,
+                area: 22,
+                address: 'Ngô Quyền, Phường Vĩnh Ninh',
+                areaName: 'Vĩnh Ninh',
+                roomType: 'Phòng trọ',
+                amenities: ['Điều hòa', 'Nóng lạnh', 'WC riêng'],
+                sourceId: 'fb1',
+                postedAt: '2025-01-11T09:00:00',
+                collectedAt: '2025-01-11T09:30:00',
+                status: 'complete',
+                image: 'https://images.unsplash.com/photo-1554995207-c18c203602cb?w=600&q=70',
+                floodRisk: 'low',
+                duplicateGroup: null
+            },
+            {
+                id: 'L022',
+                title: 'Phòng trọ đường Bến Nghé, gần chợ',
+                excerpt: 'Phòng gần chợ Bến Ngự, thuận tiện mua sắm. Có gác, WC riêng. Điện 3k, nước 12k.',
+                price: 1000000,
+                area: 15,
+                address: 'Bến Nghé, Phường Phú Hội',
+                areaName: 'Phú Hội',
+                roomType: 'Phòng trọ',
+                amenities: ['Gác', 'WC riêng'],
+                sourceId: 'fb4',
+                postedAt: '2025-01-08T16:00:00',
+                collectedAt: '2025-01-08T17:00:00',
+                status: 'partial',
+                image: null,
+                floodRisk: 'medium',
+                duplicateGroup: null
+            }
+        ];
+
+        const AREAS = [
+            { id: 'kim-long', name: 'Kim Long', count: 2, floodLevel: 'low' },
+            { id: 'phu-nhuan', name: 'Phú Nhuận', count: 4, floodLevel: 'medium' },
+            { id: 'phu-hoa', name: 'Phú Hòa', count: 3, floodLevel: 'high' },
+            { id: 'vinh-ninh', name: 'Vĩnh Ninh', count: 3, floodLevel: 'low' },
+            { id: 'phu-hoi', name: 'Phú Hội', count: 2, floodLevel: 'medium' },
+            { id: 'xuan-phu', name: 'Xuân Phú', count: 2, floodLevel: 'medium' },
+            { id: 'an-dong', name: 'An Đông', count: 1, floodLevel: 'high' },
+            { id: 'vy-da', name: 'Vỹ Dạ', count: 1, floodLevel: 'low' },
+            { id: 'truong-an', name: 'Trường An', count: 1, floodLevel: 'high' },
+            { id: 'thuan-hoa', name: 'Thuận Hòa', count: 1, floodLevel: 'low' }
+        ];
+
+        const FLOOD_DATA = [
+            { street: 'Đường Phan Chu Trinh', level: 'high', note: 'Ngập nặng sau mưa lớn', isDemo: true },
+            { street: 'Đường Nguyễn Trãi', level: 'high', note: 'Ngập sâu 0.5-0.8m', isDemo: true },
+            { street: 'Đường An Cựu', level: 'high', note: 'Ngập cục bộ', isDemo: true },
+            { street: 'Đường Điện Biên Phủ', level: 'medium', note: 'Ngập nhẹ khi triều cường', isDemo: true },
+            { street: 'Đường Bến Nghé', level: 'medium', note: 'Ngập nhẹ', isDemo: true },
+            { street: 'Đường Nguyễn Huệ', level: 'low', note: 'Hiếm khi ngập', isDemo: true },
+            { street: 'Đường Nguyễn Tất Thành', level: 'low', note: 'Thoát nước tốt', isDemo: true }
+        ];
+
+        /* =====================================================================
+           UTILS
+           ===================================================================== */
+        const Storage = {
+            getVisits() {
+                const KEY = 'hue_visit_count';
+                let count = parseInt(localStorage.getItem(KEY), 10);
+                if (!count || isNaN(count)) count = 15820;
+                if (!window.__visitCounted) {
+                    window.__visitCounted = true;
+                    count += 1;
+                    try { localStorage.setItem(KEY, count); } catch { }
+                }
+                return count.toLocaleString('vi-VN');
+            }
+        };
+
+        const Format = {
+            price(v) {
+                if (v == null) return null;
+                if (v >= 1000000) {
+                    const m = v / 1000000;
+                    return (m % 1 === 0 ? m : m.toFixed(1).replace('.', ',')) + ' triệu';
+                }
+                return Math.round(v / 1000) + 'k';
+            },
+            area(v) { return v == null ? null : v + ' m²'; },
+            timeAgo(iso) {
+                if (!iso) return '';
+                const d = new Date(iso);
+                if (isNaN(d.getTime())) return '';
+                const diff = (Date.now() - d.getTime()) / 1000;
+                if (diff < 60) return 'Vừa xong';
+                if (diff < 3600) return Math.max(1, Math.floor(diff / 60)) + ' phút trước';
+                if (diff < 86400) return Math.floor(diff / 3600) + ' giờ trước';
+                const days = Math.floor(diff / 86400);
+                if (days === 1) return 'Hôm qua';
+                if (days < 30) return days + ' ngày trước';
+                const months = Math.floor(days / 30);
+                if (months < 12) return months + ' tháng trước';
+                const years = Math.floor(months / 12);
+                return years + ' năm trước';
+            },
+            date(iso) {
+                const d = new Date(iso);
+                return d.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+            },
+            dateTime(iso) {
+                const d = new Date(iso);
+                return d.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' }) +
+                    ' ' + d.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+            }
+        };
+
+        function escapeHtml(s) {
+            if (s == null) return '';
+            return String(s).replace(/[&<>"']/g, c => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[c]));
+        }
+
+        /* =====================================================================
+           TOAST
+           ===================================================================== */
+        function showToast(message, type = 'default') {
+            const container = document.getElementById('toast-container');
+            const el = document.createElement('div');
+            el.className = 'toast ' + type;
+            const icon = type === 'success' ? Icons.check : type === 'error' ? Icons.alert : Icons.check;
+            el.innerHTML = icon + '<span>' + escapeHtml(message) + '</span>';
+            container.appendChild(el);
+            setTimeout(() => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(8px)';
+                el.style.transition = 'opacity 0.2s, transform 0.2s';
+                setTimeout(() => el.remove(), 200);
+            }, 2600);
+        }
+
+        /* =====================================================================
+           STATE
+           ===================================================================== */
+        const State = {
+            query: '',
+            sort: 'newest',
+            quickFilters: new Set(),
+            roomTypes: new Set(),
+            priceRanges: new Set(),
+            areas: new Set(),
+            page: 1,
+            perPage: 8,
+            loading: false
+        };
+
+        const PRICE_RANGES = {
+            'under-1': { min: 0, max: 1000000, label: 'Dưới 1 triệu' },
+            '1-2': { min: 1000000, max: 2000000, label: '1 – 2 triệu' },
+            '2-3': { min: 2000000, max: 3000000, label: '2 – 3 triệu' },
+            'above-3': { min: 3000000, max: Infinity, label: 'Trên 3 triệu' }
+        };
+
+        const QUICK_FILTERS = [
+            { id: 'under-1', label: 'Dưới 1 triệu', icon: Icons.ruler, type: 'price' },
+            { id: '1-2', label: '1 – 2 triệu', icon: Icons.ruler, type: 'price' },
+            { id: '2-3', label: '2 – 3 triệu', icon: Icons.ruler, type: 'price' },
+            { id: 'ac', label: 'Có điều hòa', icon: Icons.snow, type: 'amenity', amenity: 'Điều hòa' },
+            { id: 'gac', label: 'Có gác', icon: Icons.stairs, type: 'amenity', amenity: 'Gác' },
+            { id: 'wc-rieng', label: 'WC riêng', icon: Icons.bath, type: 'amenity', amenity: 'WC riêng' },
+            { id: 'near-uni', label: 'Gần trường ĐH', icon: Icons.school, type: 'nearUni' },
+            { id: 'new', label: 'Tin mới', icon: Icons.clock, type: 'recent' }
+        ];
+
+        /* =====================================================================
+           FILTER LOGIC
+           ===================================================================== */
+        function applyFilters(listings) {
+            let result = [...listings];
+
+            // Search query
+            if (State.query.trim()) {
+                const q = State.query.toLowerCase().trim();
+                result = result.filter(l =>
+                    l.title.toLowerCase().includes(q) ||
+                    l.excerpt.toLowerCase().includes(q) ||
+                    (l.address || '').toLowerCase().includes(q) ||
+                    (l.areaName || '').toLowerCase().includes(q) ||
+                    (l.roomType || '').toLowerCase().includes(q)
+                );
+            }
+
+            // Quick filters
+            State.quickFilters.forEach(fid => {
+                const qf = QUICK_FILTERS.find(f => f.id === fid);
+                if (!qf) return;
+                if (qf.type === 'price') {
+                    const r = PRICE_RANGES[fid];
+                    result = result.filter(l => l.price != null && l.price >= r.min && l.price < r.max);
+                } else if (qf.type === 'amenity') {
+                    result = result.filter(l => (l.amenities || []).some(a => a.toLowerCase().includes(qf.amenity.toLowerCase())));
+                } else if (qf.type === 'nearUni') {
+                    result = result.filter(l => {
+                        const t = (l.title + ' ' + l.excerpt).toLowerCase();
+                        return t.includes('đh') || t.includes('đại học') || t.includes('trường');
+                    });
+                } else if (qf.type === 'recent') {
+                    const cutoff = Date.now() - 3 * 86400000;
+                    result = result.filter(l => new Date(l.postedAt).getTime() >= cutoff);
+                }
+            });
+
+            // Room type
+            if (State.roomTypes.size > 0) {
+                result = result.filter(l => State.roomTypes.has(l.roomType));
+            }
+
+            // Price ranges (sidebar)
+            if (State.priceRanges.size > 0) {
+                result = result.filter(l => {
+                    if (l.price == null) return false;
+                    return [...State.priceRanges].some(rid => {
+                        const r = PRICE_RANGES[rid];
+                        return l.price >= r.min && l.price < r.max;
+                    });
+                });
+            }
+
+            // Areas
+            if (State.areas.size > 0) {
+                result = result.filter(l => State.areas.has(l.areaName));
+            }
+
+            // Sort
+            switch (State.sort) {
+                case 'newest':
+                    result.sort((a, b) => new Date(b.postedAt) - new Date(a.postedAt));
+                    break;
+                case 'oldest':
+                    result.sort((a, b) => new Date(a.postedAt) - new Date(b.postedAt));
+                    break;
+                case 'price-asc':
+                    result.sort((a, b) => (a.price ?? Infinity) - (b.price ?? Infinity));
+                    break;
+                case 'price-desc':
+                    result.sort((a, b) => (b.price ?? -1) - (a.price ?? -1));
+                    break;
+                case 'relevance':
+                    result.sort((a, b) => new Date(b.postedAt) - new Date(a.postedAt));
+                    break;
+            }
+
+            return result;
+        }
+
+        function countByArea(listings) {
+            const map = {};
+            listings.forEach(l => { map[l.areaName] = (map[l.areaName] || 0) + 1; });
+            return map;
+        }
+
+        function countByRoomType(listings) {
+            const map = {};
+            listings.forEach(l => { map[l.roomType] = (map[l.roomType] || 0) + 1; });
+            return map;
+        }
+
+        function countByPriceRange(listings) {
+            const map = {};
+            Object.keys(PRICE_RANGES).forEach(k => {
+                const r = PRICE_RANGES[k];
+                map[k] = listings.filter(l => l.price != null && l.price >= r.min && l.price < r.max).length;
+            });
+            return map;
+        }
+
+        /* =====================================================================
+           COMPONENTS
+           ===================================================================== */
+        function SourceBadge(sourceId) {
+            const s = SOURCES[sourceId];
+            if (!s) return '';
+            return `<span class="source-info">
+    <span class="tag"><span class="icon" style="width:10px;height:10px">${Icons.layers}</span>${escapeHtml(s.name)}</span>
+  </span>`;
+        }
+
+        function PriceDisplay(price) {
+            if (price == null) {
+                return `<div class="listing-price unknown">Chưa có giá</div>`;
+            }
+            return `<div class="listing-price">${Format.price(price)}<span class="unit">/tháng</span></div>`;
+        }
+
+        function DuplicateNotice(listing) {
+            if (!listing.duplicateGroup) return '';
+            const group = LISTINGS.filter(l => l.duplicateGroup === listing.duplicateGroup && l.id !== listing.id);
+            if (group.length === 0) return '';
+            return `<div class="duplicate-notice">
+    ${Icons.copy}
+    <span>Có ${group.length} tin tương tự có thể cùng một phòng</span>
+    <button type="button" data-action="view-duplicates" data-id="${listing.id}">Xem</button>
+  </div>`;
+        }
+
+        function ListingCard(listing) {
+            const priceHtml = PriceDisplay(listing.price);
+
+            const metaItems = [];
+            if (listing.address) metaItems.push(`<span class="meta-item">${Icons.mapPin}${escapeHtml(listing.address)}</span>`);
+            if (listing.area != null) metaItems.push(`<span class="meta-item">${Icons.ruler}${Format.area(listing.area)}</span>`);
+            if (listing.roomType) metaItems.push(`<span class="meta-item">${Icons.home}${escapeHtml(listing.roomType)}</span>`);
+
+            const amenitiesHtml = (listing.amenities || []).slice(0, 4).map(a =>
+                `<span class="tag">${escapeHtml(a)}</span>`
+            ).join('');
+
+            const source = SOURCES[listing.sourceId];
+
+            return `<article class="listing-card" data-id="${listing.id}">
+    <div class="listing-body">
+      <div class="listing-top">
+        <a href="detail.html?id=${listing.id}" class="listing-title" data-action="open-detail" data-id="${listing.id}">${escapeHtml(listing.title)}</a>
+      </div>
+      ${priceHtml}
+      <div class="listing-meta">${metaItems.join('')}</div>
+      <p class="listing-excerpt" data-excerpt>${escapeHtml(listing.excerpt)}</p>
+      ${amenitiesHtml ? `<div class="listing-tags">${amenitiesHtml}</div>` : ''}
+      ${DuplicateNotice(listing)}
+      <div class="listing-footer">
+        <div class="source-info">
+          <span class="tag" title="Nguồn đăng">${Icons.layers}${escapeHtml(source ? source.name : 'Không rõ')}</span>
+          <span class="meta-time" title="Thời gian đăng: ${Format.dateTime(listing.postedAt)}">${Icons.clock} ${Format.timeAgo(listing.postedAt)}</span>
+        </div>
+        <div class="listing-actions">
+          <a href="detail.html?id=${listing.id}" class="link-btn" data-action="open-detail" data-id="${listing.id}">
+            Chi tiết ${Icons.arrowRight}
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>`;
+        }
+
+        function LoadingSkeleton() {
+            return `<div class="skeleton-list">
+    ${Array.from({ length: 4 }).map(() => `
+      <div class="skeleton-card">
+
+        <div class="skeleton-body">
+          <div class="skeleton-line h-20 w-80"></div>
+          <div class="skeleton-line w-40"></div>
+          <div class="skeleton-line w-60"></div>
+          <div class="skeleton-line w-80"></div>
+          <div class="skeleton-line w-60"></div>
+        </div>
+      </div>
+    `).join('')}
+  </div>`;
+        }
+
+        function EmptyState({ title, message, actionLabel, actionId }) {
+            return `<div class="empty-state">
+    ${Icons.search}
+    <h3>${escapeHtml(title)}</h3>
+    <p>${escapeHtml(message)}</p>
+    ${actionLabel ? `<button type="button" class="btn btn-primary" data-action="${actionId}">${escapeHtml(actionLabel)}</button>` : ''}
+  </div>`;
+        }
+
+        function ListingsSection(listings, totalFiltered) {
+            if (State.loading) return LoadingSkeleton();
+            if (listings.length === 0) {
+                return EmptyState({
+                    title: 'Không tìm thấy tin phù hợp',
+                    message: 'Thử thay đổi từ khóa hoặc xóa bớt bộ lọc để xem thêm kết quả.',
+                    actionLabel: 'Xóa tất cả bộ lọc',
+                    actionId: 'clear-filters'
+                });
+            }
+
+            const shown = listings.slice(0, State.page * State.perPage);
+            const hasMore = shown.length < listings.length;
+
+            return `<div class="listing-list">
+    ${shown.map(ListingCard).join('')}
+  </div>
+  ${hasMore ? `<div style="text-align:center;margin-top:var(--space-6)">
+    <button type="button" class="btn btn-outline" data-action="load-more">
+      Tải thêm tin (${listings.length - shown.length} tin còn lại)
+    </button>
+  </div>` : ''}`;
+        }
+
+
+        /* =====================================================================
+           RENDER & SYNC
+           ===================================================================== */
+        function renderListings() {
+            const filtered = applyFilters(LISTINGS);
+            const total = filtered.length;
+
+            const countVal = document.getElementById('result-count-val');
+            if (countVal) countVal.textContent = total;
+
+            const suffix = document.getElementById('result-query-suffix');
+            if (suffix) {
+                suffix.textContent = State.query ? ' cho “' + escapeHtml(State.query) + '”' : '';
+            }
+
+            const container = document.getElementById('listings-container');
+            if (container) {
+                container.innerHTML = ListingsSection(filtered, total);
+            }
+        }
+
+        function syncFilterUI() {
+            const input = document.getElementById('search-input');
+            if (input) input.value = State.query;
+
+            document.querySelectorAll('.quick-filters .chip').forEach(chip => {
+                const qid = chip.dataset.quick;
+                if (State.quickFilters.has(qid)) chip.classList.add('active');
+                else chip.classList.remove('active');
+            });
+
+            document.querySelectorAll('input[data-filter="roomType"]').forEach(cb => {
+                cb.checked = State.roomTypes.has(cb.value);
+            });
+            document.querySelectorAll('input[data-filter="priceRange"]').forEach(cb => {
+                cb.checked = State.priceRanges.has(cb.value);
+            });
+            document.querySelectorAll('input[data-filter="area"]').forEach(cb => {
+                cb.checked = State.areas.has(cb.value);
+            });
+
+            const sortSelect = document.getElementById('sort-select');
+            if (sortSelect) sortSelect.value = State.sort;
+        }
+
+        
+        /* =====================================================================
+           EVENT HANDLERS
+           ===================================================================== */
+        function handleAction(action, target) {
+            switch (action) {
+                case 'go-home':
+                    State.query = '';
+                    State.page = 1;
+                    State.quickFilters.clear();
+                    State.roomTypes.clear();
+                    State.priceRanges.clear();
+                    State.areas.clear();
+                    syncFilterUI();
+                    renderListings();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    break;
+
+                case 'do-search': {
+                    const input = document.getElementById('search-input');
+                    if (input) {
+                        State.query = input.value;
+                        State.page = 1;
+                        renderListings();
+                    }
+                    break;
+                }
+
+                case 'toggle-quick': {
+                    const qid = target.dataset.quick;
+                    if (State.quickFilters.has(qid)) {
+                        State.quickFilters.delete(qid);
+                        target.classList.remove('active');
+                    } else {
+                        State.quickFilters.add(qid);
+                        target.classList.add('active');
+                    }
+                    State.page = 1;
+                    renderListings();
+                    break;
+                }
+
+
+
+                case 'open-detail': {
+                    const id = target.dataset.id;
+                    if (id) window.location.href = 'detail.html?id=' + encodeURIComponent(id);
+                    break;
+                }
+
+                case 'clear-filters':
+                    State.query = '';
+                    State.quickFilters.clear();
+                    State.roomTypes.clear();
+                    State.priceRanges.clear();
+                    State.areas.clear();
+                    State.page = 1;
+                    syncFilterUI();
+                    renderListings();
+                    showToast('Đã xóa tất cả bộ lọc');
+                    break;
+
+                case 'load-more':
+                    State.page += 1;
+                    renderListings();
+                    break;
+
+                case 'filter-area': {
+                    const area = target.dataset.area;
+                    State.areas.clear();
+                    State.areas.add(area);
+                    State.page = 1;
+                    syncFilterUI();
+                    renderListings();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    break;
+                }
+
+                case 'view-duplicates': {
+                    const id = target.dataset.id;
+                    if (id) window.location.href = 'detail.html?id=' + encodeURIComponent(id) + '#duplicates';
+                    break;
+                }
+
+
+
+                case 'nav-placeholder': {
+                    const name = target.dataset.nav || 'Tính năng';
+                    showToast(name + ' — bản demo chưa hỗ trợ trang này', 'default');
+                    break;
+                }
+            }
+        }
+
+        document.addEventListener('click', (e) => {
+            const target = e.target.closest('[data-action]');
+            if (!target) return;
+            const action = target.dataset.action;
+            if (!action) return;
+            e.preventDefault();
+            handleAction(action, target);
+        });
+
+        document.addEventListener('change', (e) => {
+            const t = e.target;
+
+            if (t.id === 'sort-select') {
+                State.sort = t.value;
+                State.page = 1;
+                renderListings();
+                return;
+            }
+
+            if (t.dataset.filter === 'roomType') {
+                if (t.checked) State.roomTypes.add(t.value);
+                else State.roomTypes.delete(t.value);
+                State.page = 1;
+                renderListings();
+                return;
+            }
+
+            if (t.dataset.filter === 'priceRange') {
+                if (t.checked) State.priceRanges.add(t.value);
+                else State.priceRanges.delete(t.value);
+                State.page = 1;
+                renderListings();
+                return;
+            }
+
+            if (t.dataset.filter === 'area') {
+                if (t.checked) State.areas.add(t.value);
+                else State.areas.delete(t.value);
+                State.page = 1;
+                renderListings();
+                return;
+            }
+        });
+
+        document.addEventListener('input', (e) => {
+            if (e.target.id === 'search-input') {
+                clearTimeout(window.__searchTimer);
+                window.__searchTimer = setTimeout(() => {
+                    State.query = e.target.value;
+                    State.page = 1;
+                    renderListings();
+                }, 250);
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && e.target.id === 'search-input') {
+                e.preventDefault();
+                State.query = e.target.value;
+                State.page = 1;
+                renderListings();
+            }
+        });
+
+        /* =====================================================================
+           INIT
+           ===================================================================== */
+        function initStaticTimes() {
+            document.querySelectorAll('.meta-time[data-posted-at]').forEach(el => {
+                const iso = el.getAttribute('data-posted-at');
+                const textEl = el.querySelector('.time-text');
+                if (textEl) textEl.textContent = Format.timeAgo(iso);
+            });
+        }
+
+        function init() {
+            const visitEl = document.getElementById('visit-count');
+            if (visitEl) visitEl.textContent = Storage.getVisits();
+            initStaticTimes();
+            console.log('[Phòng Huế] Demo loaded:', LISTINGS.length, 'listings,', AREAS.length, 'areas,', FLOOD_DATA.length, 'flood records.');
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+
+</html>
